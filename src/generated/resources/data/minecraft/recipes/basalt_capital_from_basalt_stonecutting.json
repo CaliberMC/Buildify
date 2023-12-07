@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:basalt"
-  },
-  "result": "caliber:basalt_capital",
-  "count": 2
-}

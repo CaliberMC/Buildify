@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:gilded_blackstone"
-  },
-  "result": "caliber:gilded_blackstone_arch",
-  "count": 2
-}
