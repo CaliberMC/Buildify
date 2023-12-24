@@ -17,7 +17,17 @@ import java.util.function.Supplier;
 
 public class BlockPickerMenu extends AbstractContainerMenu {
 
-    protected static final ImmutableMap<Block, Supplier<List<ItemStack>>> BLOCKS_STATES;
+    protected static final ImmutableMap<Block, Supplier<List<ItemStack>>> BLOCK_FAMILIES;
+    protected static final Map<Block, Supplier<List<ItemStack>>> IMPORTED_BLOCK_FAMILIES = new HashMap<>();
+
+    /**
+     * Registers a new block family.
+     * @param block The base block of the block family.
+     * @param itemStackSupplier A supplier that provides a list of ItemStacks for the block family.
+     */
+    public static void registerBlockFamily(Block block, Supplier<List<ItemStack>> itemStackSupplier) {
+        IMPORTED_BLOCK_FAMILIES.put(block, itemStackSupplier);
+    }
 
     static {
         Map<Block, Supplier<List<ItemStack>>> map = new HashMap<>();
@@ -50,7 +60,7 @@ public class BlockPickerMenu extends AbstractContainerMenu {
 
         var builder = new ImmutableMap.Builder<Block, Supplier<List<ItemStack>>>();
         builder.putAll(map);
-        BLOCKS_STATES = builder.build();
+        BLOCK_FAMILIES = builder.build();
     }
 
     public final ItemStack stack;
@@ -69,7 +79,7 @@ public class BlockPickerMenu extends AbstractContainerMenu {
 
 
         // getting from map item stacks that will be displayed in slots
-        Supplier<List<ItemStack>> supplier = BLOCKS_STATES.get(Block.byItem(this.stack.getItem()));
+        Supplier<List<ItemStack>> supplier = BLOCK_FAMILIES.get(Block.byItem(this.stack.getItem()));
         if (supplier != null) {
             List<ItemStack> stacks = supplier.get();
             pContainer = new SimpleContainer(stacks.size());
@@ -77,7 +87,7 @@ public class BlockPickerMenu extends AbstractContainerMenu {
                 pContainer.setItem(i, stacks.get(i));
             }
         } else {
-            for (Map.Entry<Block, Supplier<List<ItemStack>>> e : BLOCKS_STATES.entrySet()) {
+            for (Map.Entry<Block, Supplier<List<ItemStack>>> e : BLOCK_FAMILIES.entrySet()) {
                 Supplier<List<ItemStack>> sup = e.getValue();
                 if (sup.get().stream().anyMatch(i -> i.is(this.stack.getItem()))) {
                     List<ItemStack> stacks = new ArrayList<>(sup.get());

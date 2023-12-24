@@ -1,0 +1,10 @@
+{
+  "main_block": "minecraft:ladder",
+  "blocks": [
+    {
+      "id": "minecraft:diamond",
+      "Count": 32
+    },
+    "minecraft:emerald"
+  ]
+}
