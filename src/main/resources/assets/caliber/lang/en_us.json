@@ -1,9 +1,0 @@
-{
-    "key.categories.buildify": "Buildify Mod",
-    "buildify.key.block_picker_screen": "Block Picker",
-    "buildify.key.copy_block": "Copy BlockState",
-    "buildify.key.adjust_reach": "Adjust Reach Distance",
-    "screen.buildify.block_picker": "Block Picker",
-
-    "message.buildify.no_nails": "You're out of nails"
-}
