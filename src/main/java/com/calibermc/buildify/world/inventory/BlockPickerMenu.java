@@ -1,8 +1,6 @@
 package com.calibermc.buildify.world.inventory;
 
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.data.BlockFamilies;
-import net.minecraft.data.BlockFamily;
+import com.calibermc.buildify.util.BlockPickerStatesJson;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,52 +14,6 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public class BlockPickerMenu extends AbstractContainerMenu {
-
-    protected static final ImmutableMap<Block, Supplier<List<ItemStack>>> BLOCK_FAMILIES;
-    protected static final Map<Block, Supplier<List<ItemStack>>> IMPORTED_BLOCK_FAMILIES = new HashMap<>();
-
-    /**
-     * Registers a new block family.
-     * @param block The base block of the block family.
-     * @param itemStackSupplier A supplier that provides a list of ItemStacks for the block family.
-     */
-    public static void registerBlockFamily(Block block, Supplier<List<ItemStack>> itemStackSupplier) {
-        IMPORTED_BLOCK_FAMILIES.put(block, itemStackSupplier);
-    }
-
-    static {
-        Map<Block, Supplier<List<ItemStack>>> map = new HashMap<>();
-
-        Set<Block> processedBaseBlocks = new HashSet<>();
-
-//        for (ModBlockFamily modBlockFamily : ModBlockFamilies.getAllFamilies().toList()) {
-//            processedBaseBlocks.add(modBlockFamily.getBaseBlock());
-//
-//            // Process modBlockFamily and add it to the map
-//            List<ItemStack> otherVariants = map.containsKey(modBlockFamily.getBaseBlock()) ?
-//                    map.get(modBlockFamily.getBaseBlock()).get() : Lists.newArrayList();
-//            map.put(modBlockFamily.getBaseBlock(), () -> {
-//                List<ItemStack> itemStacks = new ArrayList<>(modBlockFamily.getVariants().values().stream()
-//                        .map(block -> block.asItem().getDefaultInstance()).toList());
-//                itemStacks.addAll(otherVariants);
-//                return itemStacks;
-//            });
-//        }
-
-        for (BlockFamily blockFamily : BlockFamilies.getAllFamilies().toList()) {
-            Block baseBlock = blockFamily.getBaseBlock();
-
-            // Check if baseBlock has already been processed
-            if (!processedBaseBlocks.contains(baseBlock)) {
-                map.put(baseBlock, () -> blockFamily.getVariants().values().stream()
-                        .map(block -> block.asItem().getDefaultInstance()).toList());
-            }
-        }
-
-        var builder = new ImmutableMap.Builder<Block, Supplier<List<ItemStack>>>();
-        builder.putAll(map);
-        BLOCK_FAMILIES = builder.build();
-    }
 
     public final ItemStack stack;
 
@@ -79,7 +31,7 @@ public class BlockPickerMenu extends AbstractContainerMenu {
 
 
         // getting from map item stacks that will be displayed in slots
-        Supplier<List<ItemStack>> supplier = BLOCK_FAMILIES.get(Block.byItem(this.stack.getItem()));
+        Supplier<List<ItemStack>> supplier = BlockPickerStatesJson.getBlockStates().get(Block.byItem(this.stack.getItem()));
         if (supplier != null) {
             List<ItemStack> stacks = supplier.get();
             pContainer = new SimpleContainer(stacks.size());
@@ -87,7 +39,7 @@ public class BlockPickerMenu extends AbstractContainerMenu {
                 pContainer.setItem(i, stacks.get(i));
             }
         } else {
-            for (Map.Entry<Block, Supplier<List<ItemStack>>> e : BLOCK_FAMILIES.entrySet()) {
+            for (Map.Entry<Block, Supplier<List<ItemStack>>> e : BlockPickerStatesJson.getBlockStates().entrySet()) {
                 Supplier<List<ItemStack>> sup = e.getValue();
                 if (sup.get().stream().anyMatch(i -> i.is(this.stack.getItem()))) {
                     List<ItemStack> stacks = new ArrayList<>(sup.get());

@@ -3,6 +3,7 @@ package com.calibermc.buildify.event;
 import com.calibermc.buildify.Buildify;
 
 import com.calibermc.buildify.command.BuildifyCommands;
+import com.calibermc.buildify.util.BlockPickerStatesJson;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -71,5 +73,8 @@ public class ModEventBus {
         BuildifyCommands.register(event.getDispatcher());
     }
 
-
+    @SubscribeEvent
+    public static void addReloadListener(AddReloadListenerEvent event) {
+        event.addListener(new BlockPickerStatesJson());
+    }
 }

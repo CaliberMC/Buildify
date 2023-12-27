@@ -82,7 +82,11 @@ public class BlockPickerStatesJson extends SimpleJsonResourceReloadListener {
         List<ItemStack> otherVariants = BLOCKS_STATES.containsKey(block) ? BLOCKS_STATES.get(block).get() : new ArrayList<>();
         BLOCKS_STATES.put(block, () -> {
             List<ItemStack> itemStacks = new ArrayList<>(items.get());
-            itemStacks.addAll(otherVariants);
+            for (ItemStack itemStack : otherVariants) {
+                if (items.get().stream().noneMatch(stack -> stack.getItem().equals(itemStack.getItem()))) {
+                    itemStacks.add(itemStack);
+                }
+            }
             return itemStacks;
         });
     }
@@ -111,8 +115,9 @@ public class BlockPickerStatesJson extends SimpleJsonResourceReloadListener {
 
             // Check if baseBlock has already been processed
             if (!processedBaseBlocks.contains(baseBlock)) {
-                map.put(baseBlock, () -> blockFamily.getVariants().values().stream()
-                        .map(block -> block.asItem().getDefaultInstance()).toList());
+                map.put(baseBlock, () -> blockFamily.getVariants().entrySet().stream()
+                        .filter(p -> !p.getKey().equals(BlockFamily.Variant.WALL_SIGN))
+                        .map(p -> p.getValue().asItem().getDefaultInstance()).toList());
             }
         }
 
