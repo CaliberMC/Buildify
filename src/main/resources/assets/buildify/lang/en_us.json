@@ -5,5 +5,10 @@
     "buildify.key.adjust_reach": "Adjust Reach Distance",
     "screen.buildify.block_picker": "Block Picker",
 
-    "message.buildify.no_nails": "You're out of nails"
+    "message.buildify.no_nails": "You're out of nails",
+
+    "itemGroup.buildify": "Buildify",
+
+    "item.buildify.hammer": "Hammer",
+    "item.buildify.nail": "Nails"
 }
