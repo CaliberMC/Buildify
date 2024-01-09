@@ -1,7 +1,7 @@
 # Buildify
-**Advanced Builders Tools**
+**Creative tools for builders!**
 
-[![FabricAPI](https://img.shields.io/static/v1?label=modloader&message=forge&color=orange)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+[![FORGE](https://img.shields.io/static/v1?label=modloader&message=forge&color=orange)](https://files.minecraftforge.net/net/minecraftforge/forge/)
 ![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
 [![License](https://img.shields.io/static/v1?label=licence&message=MIT&color=blue)](./LICENSE)
 
