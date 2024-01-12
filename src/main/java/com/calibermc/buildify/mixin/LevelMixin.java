@@ -1,6 +1,8 @@
 package com.calibermc.buildify.mixin;
 
 import com.calibermc.buildify.util.player.IPlayerExtended;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.LevelEntityGetter;
@@ -11,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+
 @Mixin(Level.class)
 public abstract class LevelMixin {
 
@@ -19,7 +23,15 @@ public abstract class LevelMixin {
 
     @Inject(method = "tickBlockEntities", at = @At("TAIL"))
     public void mixin$tick(CallbackInfo ci) {
-        for (Entity entity : this.getEntities().getAll()) {
+        Level level = (Level) (Object) this;
+        Iterable<Entity> list = new ArrayList<>();
+        if (level instanceof ClientLevel l) {
+            list = l.entitiesForRendering();
+        } else if (level instanceof ServerLevel l) {
+            list = l.getAllEntities();
+        }
+
+        for (Entity entity : list) {
             if (entity instanceof IPlayerExtended l) {
                 if (l.buildify$shouldTick() && l.buildify$playersDayTime()) {
                     l.buildify$setDayTime(l.buildify$getDayTime() + 1L, l.buildify$shouldTick());

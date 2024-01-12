@@ -1,2 +1,9 @@
 0.1.0
 - Initial beta release
+
+0.1.1
+- Added Mod Compat for Block Picker
+- Added Data Pack Compat for Block Picker
+
+0.1.2
+- Added survival inventory hot swap feature

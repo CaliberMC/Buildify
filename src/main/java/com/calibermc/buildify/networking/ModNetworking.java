@@ -16,6 +16,7 @@ public class ModNetworking {
         INSTANCE.registerMessage(id++, ServerAdjustReach.class, ServerAdjustReach::toBytes, ServerAdjustReach::new, ServerAdjustReach::handle);
         INSTANCE.registerMessage(id++, ServerSetBlockMenuSlot.class, ServerSetBlockMenuSlot::toBytes, ServerSetBlockMenuSlot::new, ServerSetBlockMenuSlot::handle);
         INSTANCE.registerMessage(id++, ServerPressAdditionalKey.class, ServerPressAdditionalKey::toBytes, ServerPressAdditionalKey::new, ServerPressAdditionalKey::handle);
+        INSTANCE.registerMessage(id++, ServerUpdateSlots.class, ServerUpdateSlots::toBytes, ServerUpdateSlots::new, ServerUpdateSlots::handle);
 
         INSTANCE.registerMessage(id++, ClientSetTime.class, ClientSetTime::toBytes, ClientSetTime::new, ClientSetTime::handle);
         INSTANCE.registerMessage(id++, ClientSetRaining.class, ClientSetRaining::toBytes, ClientSetRaining::new, ClientSetRaining::handle);

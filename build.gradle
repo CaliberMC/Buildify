@@ -18,6 +18,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
+jarJar.enable()
+
 version = '0.1.2-1.18.2'
 group = 'com.calibermc.buildify' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'buildify'
@@ -130,6 +132,7 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -138,6 +141,11 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.18.2-40.2.0'
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.2"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.2")) {
+        jarJar.ranged(it, "[0.3.2,)")
+    }
 //    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
 //    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
 //     implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
@@ -181,13 +189,52 @@ jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 // publish.dependsOn('reobfJar')
 
+tasks.build.dependsOn tasks.jarJar
+
+reobf.create('jarJar')
+
+afterEvaluate {
+    tasks.jarJar {
+        archiveClassifier = ''
+    }
+    jar {
+        archiveClassifier = 'partial'
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+artifacts {
+    archives sourcesJar
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+            artifact tasks.jarJar // to build jar with mixinextras
+            artifact sourcesJar // source jar for better coding
+
+            // Define groupId, artifactId, and version
+            groupId = 'com.calibermc.buildify'
+            artifactId = 'buildify'
+            version = '0.1.2'
         }
     }
+//    publications {
+//        mavenJava(MavenPublication) {
+//            artifact jar
+//        }
+//    }
     repositories {
+        mavenLocal()
         maven {
             url "file://${project.projectDir}/mcmodsrepo"
         }
