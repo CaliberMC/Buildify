@@ -6,6 +6,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.LevelEntityGetter;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 @Mixin(Level.class)
 public abstract class LevelMixin {
@@ -25,8 +28,8 @@ public abstract class LevelMixin {
     public void mixin$tick(CallbackInfo ci) {
         Level level = (Level) (Object) this;
         Iterable<Entity> list = new ArrayList<>();
-        if (level instanceof ClientLevel l) {
-            list = l.entitiesForRendering();
+        if (level.isClientSide) {
+            list = getClientEntities(level);
         } else if (level instanceof ServerLevel l) {
             list = l.getAllEntities();
         }
@@ -51,5 +54,13 @@ public abstract class LevelMixin {
                 cir.setReturnValue(l.buildify$getRainLevel(pDelta));
             }
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private Iterable<Entity> getClientEntities(Level level) {
+        if (level instanceof ClientLevel l) {
+            return l.entitiesForRendering();
+        }
+        return Collections.emptyList();
     }
 }
