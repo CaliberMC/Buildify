@@ -7,10 +7,10 @@
   "client": [
     "AbstractContainerScreenMixin",
     "ClientLevelDataMixin",
+    "LevelMixin",
     "InventoryScreenMixin"
   ],
   "mixins": [
-    "LevelMixin",
     "PlayerMixin"
   ],
   "injectors": {
