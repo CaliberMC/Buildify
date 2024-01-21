@@ -2,7 +2,7 @@ package com.calibermc.buildify.networking;
 
 import com.calibermc.buildify.world.inventory.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraftforge.network.NetworkEvent;
@@ -24,9 +24,9 @@ public class ServerOpenBlockPickerMenu {
         ctx.get().enqueueWork(() -> {
             ServerPlayer sender = ctx.get().getSender();
             if (sender != null) {
-                NetworkHooks.openGui(sender, new SimpleMenuProvider((id, playerInventory, entity) ->
+                NetworkHooks.openScreen(sender, new SimpleMenuProvider((id, playerInventory, entity) ->
                         ModMenuTypes.BLOCK_TYPE.get().create(id, playerInventory),
-                        new TranslatableComponent("screen.buildify.block_picker")));
+                        Component.translatable("screen.buildify.block_picker")));
             }
         });
         ctx.get().setPacketHandled(true);

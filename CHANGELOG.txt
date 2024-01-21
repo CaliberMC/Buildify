@@ -12,4 +12,6 @@
 - Bugfix: fixed error that was causing dedicated servers to not be able to start
 
 0.1.4
-- Added 1.20.1 support
+- Added Minecraft 1.20.1 support
+- Added Inventory Sorting feature
+- Added Custom Creative Tabs feature

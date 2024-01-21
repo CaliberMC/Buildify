@@ -6,8 +6,8 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.TimeArgument;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -61,10 +61,10 @@ public class BuildifyCommands {
         if (pSource.getPlayerOrException() instanceof IPlayerExtended ex) {
             if (weather) {
                 ex.buildify$clearRaining();
-                pSource.sendSuccess(new TextComponent("Using server weather"), true);
+                pSource.sendSuccess(() -> Component.literal("Using server weather"), true);
             } else {
                 ex.buildify$resetDayTime();
-                pSource.sendSuccess(new TextComponent("Using server day time"), true);
+                pSource.sendSuccess(() -> Component.literal("Using server day time"), true);
             }
         }
         return 0;
@@ -74,9 +74,9 @@ public class BuildifyCommands {
         if (pSource.getPlayerOrException() instanceof IPlayerExtended ex) {
             ex.buildify$setRaining(isRaining);
             if (isRaining) {
-                pSource.sendSuccess(new TranslatableComponent("commands.weather.set.rain"), true);
+                pSource.sendSuccess(() -> Component.translatable("commands.weather.set.rain"), true);
             } else {
-                pSource.sendSuccess(new TranslatableComponent("commands.weather.set.clear"), true);
+                pSource.sendSuccess(() -> Component.translatable("commands.weather.set.clear"), true);
             }
         }
         return 0;
@@ -86,20 +86,22 @@ public class BuildifyCommands {
         if (serverPlayer instanceof IPlayerExtended ex) {
             return (int) (ex.buildify$getDayTime() % 24000L);
         }
-        return (int) (serverPlayer.level.getDayTime() % 24000L);
+        return (int) (serverPlayer.getCommandSenderWorld().getDayTime() % 24000L);
     }
 
     private static int queryTime(CommandSourceStack pSource, boolean day) throws CommandSyntaxException {
         ServerPlayer player = pSource.getPlayerOrException();
-        int pTime = 0;
+        int pTime;
         if (player instanceof IPlayerExtended ex) {
             if (day) {
                 pTime = (int) (ex.buildify$getDayTime() / 24000L % 2147483647L);
             } else {
                 pTime = (int) (ex.buildify$getDayTime() % 24000L);
             }
+        } else {
+            pTime = 0;
         }
-        pSource.sendSuccess(new TranslatableComponent("commands.time.query", pTime), false);
+        pSource.sendSuccess(() -> Component.translatable("commands.time.query", pTime), false);
         return pTime;
     }
 
@@ -108,7 +110,7 @@ public class BuildifyCommands {
         if (player instanceof IPlayerExtended ex) {
             ex.buildify$setDayTime(pTime, tickable);
         }
-        pSource.sendSuccess(new TranslatableComponent("commands.time.set", pTime), true);
+        pSource.sendSuccess(() -> Component.translatable("commands.time.set", pTime), true);
         return getDayTime(player);
     }
 
@@ -118,7 +120,7 @@ public class BuildifyCommands {
             ex.buildify$setDayTime(ex.buildify$getDayTime() + pAmount, tickable);
         }
         int i = getDayTime(player);
-        pSource.sendSuccess(new TranslatableComponent("commands.time.set", i), true);
+        pSource.sendSuccess(() -> Component.translatable("commands.time.set", i), true);
         return i;
     }
 }

@@ -4,6 +4,7 @@ package com.calibermc.buildify.event;
 import com.calibermc.buildify.Buildify;
 import com.calibermc.buildify.client.AdjustReachOverlay;
 import com.calibermc.buildify.client.BlockPickerScreen;
+import com.calibermc.buildify.mixin.MinecraftAccessor;
 import com.calibermc.buildify.networking.ModNetworking;
 import com.calibermc.buildify.networking.ServerOpenBlockPickerMenu;
 import com.calibermc.buildify.world.inventory.ModMenuTypes;
@@ -22,12 +23,11 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.OverlayRegistry;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -55,18 +55,21 @@ public class ModClientEventBus {
 
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
-        ClientRegistry.registerKeyBinding(BLOCK_PICKER);
-        ClientRegistry.registerKeyBinding(ADJUST_REACH);
-        ClientRegistry.registerKeyBinding(COPY_BLOCK);
-        MenuScreens.register(ModMenuTypes.BLOCK_TYPE.get(), BlockPickerScreen::new);
 
-        OverlayRegistry.registerOverlayAbove(ForgeIngameGui.HELMET_ELEMENT, "%s Adjust Distance".formatted(MOD_ID), new AdjustReachOverlay());
+        MenuScreens.register(ModMenuTypes.BLOCK_TYPE.get(), BlockPickerScreen::new);
 
     }
 
     @SubscribeEvent
-    public static void registerParticleFactories(final ParticleFactoryRegisterEvent event) {
+    public static void registerKeyBinding(final RegisterKeyMappingsEvent event) {
+        event.register(BLOCK_PICKER);
+        event.register(ADJUST_REACH);
+        event.register(COPY_BLOCK);
+    }
 
+    @SubscribeEvent
+    public static void registerGuiOverlay(final RegisterGuiOverlaysEvent event) {
+        event.registerAbove(VanillaGuiOverlay.HELMET.id(), "adjust_distance", new AdjustReachOverlay());
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
@@ -76,7 +79,7 @@ public class ModClientEventBus {
          * LEFT_CONTROL + MIDDLE CLICK instead of or in addition to the keybind.
          */
         @SubscribeEvent
-        public static void mouseInput(final InputEvent.RawMouseEvent event) {
+        public static void mouseInput(final InputEvent.MouseButton.Pre event) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null || mc.screen != null) return;
             if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_MIDDLE && event.getModifiers() == GLFW.GLFW_MOD_CONTROL) {
@@ -88,7 +91,7 @@ public class ModClientEventBus {
         }
 
         @SubscribeEvent
-        public static void keyInput(final InputEvent.KeyInputEvent event) {
+        public static void keyInput(final InputEvent.Key event) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null || mc.screen != null) return;
             if (BLOCK_PICKER.consumeClick() && !mc.player.getMainHandItem().isEmpty() && mc.player.isCreative()) {
@@ -131,7 +134,7 @@ public class ModClientEventBus {
                     compoundTag3.putString(property.getName(), serialize(state, property)));
 
             if (te != null)
-                Minecraft.getInstance().addCustomNbtData(result, te);
+                ((MinecraftAccessor) Minecraft.getInstance()).addCustomNbtData(result, te);
 
             player.getInventory().setPickedItem(result);
             assert Minecraft.getInstance().gameMode != null;

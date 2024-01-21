@@ -74,8 +74,13 @@ public class BlockPickerMenu extends AbstractContainerMenu {
     }
 
     @Override
+    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+        return this.slots.get(pIndex).getItem();
+    }
+
+    @Override
     public boolean stillValid(Player pPlayer) {
-        return !this.stack.isEmpty() && ItemStack.isSame(pPlayer.getMainHandItem(), this.stack);
+        return !this.stack.isEmpty() && ItemStack.isSameItem(pPlayer.getMainHandItem(), this.stack);
     }
 
 

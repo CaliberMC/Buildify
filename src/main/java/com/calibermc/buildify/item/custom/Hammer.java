@@ -5,7 +5,7 @@ import com.calibermc.buildify.item.ModItems;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ChatType;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -44,7 +44,7 @@ public class Hammer extends Item {
         if (player instanceof ServerPlayer serverPlayer) {
             // Check if the player has nails before interacting
             if (!hasNails(serverPlayer)) {
-                serverPlayer.sendMessage(new TranslatableComponent("message.buildify.no_nails"), ChatType.GAME_INFO, Util.NIL_UUID);
+                serverPlayer.sendSystemMessage(Component.translatable("message.buildify.no_nails"), true);
                 level.playSound(null, currentPos, SoundEvents.SHIELD_BLOCK, SoundSource.BLOCKS, 1.0F, 1.0F);
                 return InteractionResult.FAIL;
             }

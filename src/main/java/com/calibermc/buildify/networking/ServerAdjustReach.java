@@ -34,7 +34,7 @@ public class ServerAdjustReach {
         ctx.get().enqueueWork(() -> {
             ServerPlayer sender = ctx.get().getSender();
             if (sender != null) {
-                ServerAdjustReach.setModifier(sender, this.distance, ForgeMod.ATTACK_RANGE.get(), ForgeMod.REACH_DISTANCE.get());
+                ServerAdjustReach.setModifier(sender, this.distance, ForgeMod.ENTITY_REACH.get(), ForgeMod.BLOCK_REACH.get());
             }
         });
         ctx.get().setPacketHandled(true);

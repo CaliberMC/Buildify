@@ -3,7 +3,7 @@ package com.calibermc.buildify;
 
 import com.calibermc.buildify.config.ClientConfigs;
 import com.calibermc.buildify.config.CommonConfigs;
-import com.calibermc.buildify.item.CreativeTabs;
+import com.calibermc.buildify.item.ModCreativeTabs;
 import com.calibermc.buildify.item.ModItems;
 import com.calibermc.buildify.networking.ModNetworking;
 import com.calibermc.buildify.world.inventory.ModMenuTypes;
@@ -30,6 +30,7 @@ public class Buildify {
 
         ModItems.register(eventBus);
         ModMenuTypes.register(eventBus);
+        ModCreativeTabs.register(eventBus);
 
         eventBus.addListener(this::setup);
 

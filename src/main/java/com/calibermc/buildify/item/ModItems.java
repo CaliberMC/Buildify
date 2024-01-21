@@ -13,11 +13,10 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, Buildify.MOD_ID);
 
     public static final RegistryObject<Hammer> HAMMER = ITEMS.register("hammer",
-            () -> new Hammer(new Item.Properties().tab(CreativeTabs.BUILDIFY_TAB)));
+            () -> new Hammer(new Item.Properties()));
 
-    public static final RegistryObject<Hammer> NAILS = ITEMS.register("nails",
-            () -> new Hammer(new Item.Properties().tab(CreativeTabs.BUILDIFY_TAB)));
-
+    public static final RegistryObject<Item> NAILS = ITEMS.register("nails",
+            () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

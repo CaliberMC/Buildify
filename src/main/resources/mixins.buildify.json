@@ -7,10 +7,12 @@
   "client": [
     "AbstractContainerScreenMixin",
     "ClientLevelDataMixin",
+    "InventoryScreenMixin",
     "LevelMixin",
-    "InventoryScreenMixin"
+    "MinecraftAccessor"
   ],
   "mixins": [
+    "CreativeModeTabRegistryMixin",
     "PlayerMixin"
   ],
   "injectors": {

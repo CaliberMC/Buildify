@@ -4,21 +4,20 @@ import com.calibermc.buildify.config.ClientConfigs;
 import com.calibermc.buildify.event.ModClientEventBus;
 import com.calibermc.buildify.networking.ModNetworking;
 import com.calibermc.buildify.networking.ServerAdjustReach;
-import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.IIngameOverlay;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.common.ForgeMod;
 
-public class AdjustReachOverlay implements IIngameOverlay {
+public class AdjustReachOverlay implements IGuiOverlay {
 
     @Override
-    public void render(ForgeIngameGui gui, PoseStack poseStack, float partialTick, int width, int height) {
+    public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int width, int height) {
         Minecraft mc = Minecraft.getInstance();
         if (!(mc.getCameraEntity() instanceof Player player) || !player.isCreative() || mc.screen != null) return;
         if (ModClientEventBus.ADJUST_REACH.isDown()) {
@@ -30,15 +29,14 @@ public class AdjustReachOverlay implements IIngameOverlay {
             distance = Math.max(Math.ceil(distance), 2);
 
             boolean sendPacket = true;
-            AttributeInstance attributeInstance = player.getAttribute(ForgeMod.REACH_DISTANCE.get());
+            AttributeInstance attributeInstance = player.getAttribute(ForgeMod.BLOCK_REACH.get());
             if (attributeInstance != null) {
                 AttributeModifier modifier = attributeInstance.getModifier(ServerAdjustReach.MODIFIER_UUID);
                 if (modifier != null) {
                     sendPacket = distance != modifier.getAmount();
                 }
             }
-            mc.font.drawShadow(poseStack, new TextComponent(String.valueOf((int)distance)), width / 2F + 2, height / 2F + 2, -1);
-
+            guiGraphics.drawString(mc.font, String.valueOf((int)distance), (int) (width / 2F + 2), (int) (height / 2F + 2), -1);
             if (sendPacket) {
                 ModNetworking.INSTANCE.sendToServer(new ServerAdjustReach(distance));
             }

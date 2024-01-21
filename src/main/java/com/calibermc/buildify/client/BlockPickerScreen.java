@@ -12,13 +12,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -27,7 +27,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
-import net.minecraftforge.client.RenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -94,22 +94,17 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
         }
     }
 
-    private void renderFloatingItem(ItemStack pStack, int pX, int pY) {
-        PoseStack posestack = RenderSystem.getModelViewStack();
-        posestack.translate(0.0D, 0.0D, 32.0D);
-        RenderSystem.applyModelViewMatrix();
-        this.setBlitOffset(200);
-        this.itemRenderer.blitOffset = 200.0F;
-        Font font = RenderProperties.get(pStack).getFont(pStack);
+    private void renderFloatingItem(@NotNull GuiGraphics guiGraphics, ItemStack pStack, int pX, int pY) {
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0, 0, 232.0F);
+        guiGraphics.renderItem(pStack, pX, pY);
+        Font font = IClientItemExtensions.of(pStack).getFont(pStack, IClientItemExtensions.FontContext.ITEM_COUNT);
         if (font == null) font = this.font;
-        this.itemRenderer.renderAndDecorateItem(pStack, pX, pY);
-        this.itemRenderer.renderGuiItemDecorations(font, pStack, pX, pY - (this.draggingItem.isEmpty() ? 0 : 8));
-        this.setBlitOffset(0);
-        this.itemRenderer.blitOffset = 0.0F;
-
+        guiGraphics.renderItemDecorations(font, pStack, pX, pY - (this.draggingItem.isEmpty() ? 0 : 8));
+        guiGraphics.pose().popPose();
     }
 
-    private void renderSlot(PoseStack pPoseStack, Slot pSlot, boolean renderShadow, double mouseX, double mouseY) {
+    private void renderSlot(GuiGraphics guiGraphics, Slot pSlot, boolean renderShadow, double mouseX, double mouseY) {
         Vec2 slotPos = this.slotPositions.get(pSlot);
         int x = (int) slotPos.x;
         int y = (int) slotPos.y;
@@ -118,9 +113,8 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
             itemstack = itemstack.copy();
             itemstack.setCount(itemstack.getCount() / 2);
         }
-
-        this.setBlitOffset(100);
-        this.itemRenderer.blitOffset = 100.0F;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0, 0, 100);
 
         float scale = 1;
         if (pSlot instanceof BlockPickerSlot slot) {
@@ -136,39 +130,36 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                 double f = (twoRad - distance) / twoRad;
                 float zoomingVal = 1;
                 if (f > 0) {
-                    scale += Math.max((f * f) * zoomingVal, 0);
+                    scale += (float) Math.max((f * f) * zoomingVal, 0);
                 }
             }
         }
 
 
-        PoseStack posestack = RenderSystem.getModelViewStack();
-        posestack.pushPose();
-        posestack.translate(x + 8, y + 8, 0.0D);
-        posestack.scale(scale, scale, 1F); // scaling with pivot
-        posestack.translate(-(x + 8), -(y + 8), 0.0D);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(x + 8, y + 8, 0.0D);
+        guiGraphics.pose().scale(scale, scale, 1F); // scaling with pivot
+        guiGraphics.pose().translate(-(x + 8), -(y + 8), 0.0D);
         RenderSystem.applyModelViewMatrix();
         {
             // render shadow
             if (renderShadow) {
                 RenderSystem.enableBlend();
                 RenderSystem.defaultBlendFunc();
-                RenderSystem.setShaderTexture(0, SLOT_SHADOW);
-                blit(pPoseStack, x, y + 2, 0, 0, 0, 16, 16, 16, 16);
+                guiGraphics.blit(SLOT_SHADOW, x, y + 2, 0, 0, 0, 16, 16, 16, 16);
             }
 
             //fill(pPoseStack, x, y, x + 16, y + 16, -2130706433); // to see a position and size of slot
             // render item
             RenderSystem.enableDepthTest();
-            this.itemRenderer.renderAndDecorateItem(this.minecraft.player, itemstack, x, y, (int) (slotPos.x + slotPos.y * this.imageWidth));
-            this.itemRenderer.renderGuiItemDecorations(this.font, itemstack, x, y, null);
+
+            guiGraphics.renderItem(itemstack, x, y, pSlot.x + pSlot.y * this.imageWidth);
+            guiGraphics.renderItemDecorations(this.font, itemstack, x, y, null);
         }
 
-        posestack.popPose();
+        guiGraphics.pose().popPose();
         RenderSystem.applyModelViewMatrix();
-
-        this.itemRenderer.blitOffset = 0.0F;
-        this.setBlitOffset(0);
+        guiGraphics.pose().popPose();
     }
 
     @Nullable
@@ -187,7 +178,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         if (!super.mouseClicked(pMouseX, pMouseY, pButton)) {
             InputConstants.Key mouseKey = InputConstants.Type.MOUSE.getOrCreate(pButton);
-            boolean flag = this.minecraft.options.keyPickItem.isActiveAndMatches(mouseKey);
+            boolean flag = this.getMinecraft().options.keyPickItem.isActiveAndMatches(mouseKey);
             Slot slot = this.findSlot(pMouseX, pMouseY);
             long i = Util.getMillis();
             this.doubleclick = this.lastClickSlot == slot && i - this.lastClickTime < 250L && this.lastClickButton == pButton;
@@ -195,14 +186,12 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
             if (pButton != 0 && pButton != 1 && !flag) {
                 if (this.hoveredSlot != null && this.menu.getCarried().isEmpty()) {
                     for (int j = 0; j < 9; ++j) {
-                        if (this.minecraft.options.keyHotbarSlots[j].matchesMouse(pButton)) {
+                        if (this.getMinecraft().options.keyHotbarSlots[j].matchesMouse(pButton)) {
                             this.slotClicked(this.hoveredSlot, this.hoveredSlot.index, j, ClickType.SWAP);
                         }
                     }
                 }
             } else {
-                int j = this.leftPos;
-                int k = this.topPos;
                 boolean flag1 = this.hasClickedOutside;
                 if (slot != null)
                     flag1 = false; // Forge, prevent dropping of items through slots outside of GUI boundaries
@@ -215,13 +204,13 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                     l = -999;
                 }
 
-                if (this.minecraft.options.touchscreen && flag1 && this.menu.getCarried().isEmpty()) {
-                    this.minecraft.setScreen(null);
+                if (this.getMinecraft().options.touchscreen().get() && flag1 && this.menu.getCarried().isEmpty()) {
+                    this.getMinecraft().setScreen(null);
                     return true;
                 }
 
                 if (l != -1) {
-                    if (this.minecraft.options.touchscreen) {
+                    if (this.getMinecraft().options.touchscreen().get()) {
                         if (slot != null && slot.hasItem()) {
                             this.clickedSlot = slot;
                             this.draggingItem = ItemStack.EMPTY;
@@ -231,7 +220,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                         }
                     } else {
                         if (this.menu.getCarried().isEmpty()) {
-                            if (this.minecraft.options.keyPickItem.isActiveAndMatches(mouseKey)) {
+                            if (this.getMinecraft().options.keyPickItem.isActiveAndMatches(mouseKey)) {
                                 this.slotClicked(slot, l, pButton, ClickType.CLONE);
                             } else {
                                 boolean flag2 = l != -999 && (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), 340) || InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), 344));
@@ -265,7 +254,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         Slot slot = this.findSlot(pMouseX, pMouseY);
-        if (this.clickedSlot != null && this.minecraft.options.touchscreen) {
+        if (this.clickedSlot != null && this.getMinecraft().options.touchscreen().get()) {
             if (pButton == 0 || pButton == 1) {
                 if (this.draggingItem.isEmpty()) {
                     if (slot != this.clickedSlot && !this.clickedSlot.getItem().isEmpty()) {
@@ -295,8 +284,6 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
     public boolean mouseReleased(double pMouseX, double pMouseY, int pButton) {
         super.mouseReleased(pMouseX, pMouseY, pButton); //Forge, Call parent to release buttons
         Slot slot = this.findSlot(pMouseX, pMouseY);
-        int i = this.leftPos;
-        int j = this.topPos;
         boolean flag = this.hasClickedOutside;
         if (slot != null) flag = false; // Forge, prevent dropping of items through slots outside of GUI boundaries
         InputConstants.Key mouseKey = InputConstants.Type.MOUSE.getOrCreate(pButton);
@@ -314,7 +301,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
             if (hasShiftDown()) {
                 if (!lastQuickMoved.isEmpty()) {
                     for (Slot slot2 : this.menu.slots) {
-                        if (slot2 != null && slot2.mayPickup(this.minecraft.player) && slot2.hasItem() && slot2.isSameInventory(slot) && AbstractContainerMenu.canItemQuickReplace(slot2, lastQuickMoved, true)) {
+                        if (this.getMinecraft().player != null && slot2 != null && slot2.mayPickup(this.getMinecraft().player) && slot2.hasItem() && slot2.isSameInventory(slot) && AbstractContainerMenu.canItemQuickReplace(slot2, lastQuickMoved, true)) {
                             this.slotClicked(slot2, slot2.index, pButton, ClickType.QUICK_MOVE);
                         }
                     }
@@ -331,7 +318,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                 return true;
             }
 
-            if (this.clickedSlot != null && this.minecraft.options.touchscreen) {
+            if (this.clickedSlot != null && this.getMinecraft().options.touchscreen().get()) {
                 if (pButton == 0 || pButton == 1) {
                     if (this.draggingItem.isEmpty() && slot != this.clickedSlot) {
                         this.draggingItem = this.clickedSlot.getItem();
@@ -393,7 +380,8 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                 }
             }
         } else {
-            if (pSlot != null && !pSlot.mayPickup(this.minecraft.player)) {
+            if (this.getMinecraft().player != null && pSlot != null
+                    && !pSlot.mayPickup(this.getMinecraft().player)) {
                 return;
             }
 
@@ -431,7 +419,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                     return;
                 }
 
-                if (!itemstack4.isEmpty() && !itemstack7.isEmpty() && itemstack4.sameItem(itemstack7) && ItemStack.tagMatches(itemstack4, itemstack7)) {
+                if (!itemstack4.isEmpty() && !itemstack7.isEmpty() && ItemStack.isSameItemSameTags(itemstack4, itemstack7)) {
                     if (pMouseButton == 0) {
                         if (flag) {
                             itemstack4.setCount(itemstack4.getMaxStackSize());
@@ -454,7 +442,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                 }
             } else if (this.menu != null) {
                 ItemStack itemstack3 = pSlot == null ? ItemStack.EMPTY : this.menu.getSlot(pSlot.index).getItem();
-                this.menu.clicked(pSlot == null ? pSlotId : pSlot.index, pMouseButton, pType, this.minecraft.player);
+                this.menu.clicked(pSlot == null ? pSlotId : pSlot.index, pMouseButton, pType, this.getMinecraft().player);
                 if (AbstractContainerMenu.getQuickcraftHeader(pMouseButton) == 2) {
                     for (int k = 0; k < 9; ++k) {
                         addItem(this.menu.getSlot(20 + k).getItem(), 20 + k);
@@ -470,7 +458,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                         dropItem(itemstack2);
                     }
 
-                    this.minecraft.player.inventoryMenu.broadcastChanges();
+                    this.getMinecraft().player.inventoryMenu.broadcastChanges();
                 }
             }
         }
@@ -482,8 +470,8 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
     }
 
     public void dropItem(ItemStack pStack) {
-        if (!pStack.isEmpty()) {
-            this.minecraft.player.drop(pStack, true);
+        if (!pStack.isEmpty() && this.getMinecraft().player != null) {
+            this.getMinecraft().player.drop(pStack, true);
             ModNetworking.INSTANCE.sendToServer(new ServerSetBlockMenuSlot(-1, pStack));
         }
     }
@@ -493,7 +481,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
         InputConstants.Key mouseKey = InputConstants.getKey(pKeyCode, pScanCode);
         if (super.keyPressed(pKeyCode, pScanCode, pModifiers)) {
             return true;
-        } else if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
+        } else if (this.getMinecraft().options.keyInventory.isActiveAndMatches(mouseKey)) {
             this.onClose();
             return true;
         } else {
@@ -502,23 +490,23 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                 // interacting with hotbar
                 if (this.menu.getCarried().isEmpty()) {
                     for (int i = 0; i < 9; ++i) {
-                        if (this.minecraft.options.keyHotbarSlots[i].isActiveAndMatches(InputConstants.getKey(pKeyCode, pScanCode))) {
+                        if (this.getMinecraft().options.keyHotbarSlots[i].isActiveAndMatches(InputConstants.getKey(pKeyCode, pScanCode))) {
                             this.slotClicked(this.hoveredSlot, this.hoveredSlot.index, i, ClickType.SWAP);
                             handled = true;
                         }
                     }
                 }
                 if (this.hoveredSlot.hasItem()) {
-                    if (this.minecraft.options.keyPickItem.isActiveAndMatches(mouseKey)) {
+                    if (this.getMinecraft().options.keyPickItem.isActiveAndMatches(mouseKey)) {
                         this.slotClicked(this.hoveredSlot, this.hoveredSlot.index, 0, ClickType.CLONE);
                         handled = true;
-                    } else if (this.minecraft.options.keyDrop.isActiveAndMatches(mouseKey)) {
+                    } else if (this.getMinecraft().options.keyDrop.isActiveAndMatches(mouseKey)) {
                         this.slotClicked(this.hoveredSlot, this.hoveredSlot.index, hasControlDown() ? 1 : 0, ClickType.THROW);
                         handled = true;
                     }
                 } else {
                     // if slot has no item, don't drop
-                    if (this.minecraft.options.keyDrop.isActiveAndMatches(mouseKey)) {
+                    if (this.getMinecraft().options.keyDrop.isActiveAndMatches(mouseKey)) {
                         handled = true;
                     }
                 }
@@ -530,8 +518,8 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
 
     @Override
     public void removed() {
-        if (this.minecraft != null && this.minecraft.player != null) {
-            this.menu.removed(this.minecraft.player);
+        if (this.getMinecraft().player != null) {
+            this.menu.removed(this.getMinecraft().player);
         }
     }
 
@@ -543,44 +531,40 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
 
     @Override
     public void onClose() {
-        if (this.minecraft != null && this.minecraft.player != null) {
-            this.minecraft.player.closeContainer();
+        if (this.getMinecraft().player != null) {
+            this.getMinecraft().player.closeContainer();
         }
         super.onClose();
     }
 
     @Override
-    public void render(@NotNull PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void render(@NotNull GuiGraphics guiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         this.hasClickedOutside = this.hasClickedOutside(pMouseX, pMouseY, this.leftPos, this.topPos);
 
         int width = this.width / 2;
         int height = this.height / 2;
 
-        this.renderBackground(pPoseStack);
+        this.renderBackground(guiGraphics);
 
         // Rendering hotbar
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, AbstractWidget.WIDGETS_LOCATION);
-        int blitOffset = this.getBlitOffset();
-        this.setBlitOffset(-90);
-        this.blit(pPoseStack, width - 91, this.height - 22, 0, 0, 182, 22);
-        this.setBlitOffset(blitOffset);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0, 0, 90);
+        guiGraphics.blit(AbstractWidget.WIDGETS_LOCATION, width - 91, this.height - 22, 0, 0, 182, 22);
+        guiGraphics.pose().popPose();
 
         // Rendering image
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        blit(pPoseStack, width - 95, height - 95, 190, 190, 0, 0, 380, 380, 380, 380);
+        guiGraphics.blit(TEXTURE, width - 95, height - 95, 190, 190, 0, 0, 380, 380, 380, 380);
 
-        super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        super.render(guiGraphics, pMouseX, pMouseY, pPartialTick);
 
         int i = this.leftPos;
         int j = this.topPos;
         RenderSystem.disableDepthTest();
-        PoseStack posestack = RenderSystem.getModelViewStack();
-        posestack.pushPose();
-        posestack.translate(i, j, 0.0D);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(i, j, 0.0D);
         RenderSystem.applyModelViewMatrix();
         this.hoveredSlot = null; // reset so as not to have problems with the hovered slot
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -588,7 +572,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
         for (Slot slot : this.menu.slots) {
             if (slot.isActive()) {
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                this.renderSlot(pPoseStack, slot, !slot.container.equals(this.playerInventory), pMouseX, pMouseY);
+                this.renderSlot(guiGraphics, slot, !slot.container.equals(this.playerInventory), pMouseX, pMouseY);
                 if (this.isHoveringSlot(slot, pMouseX, pMouseY)) {
                     this.hoveredSlot = slot;
                 }
@@ -603,24 +587,24 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
                 itemstack.setCount(Mth.ceil((float) itemstack.getCount() / 2.0F));
             }
 
-            this.renderFloatingItem(itemstack, pMouseX - i - 8, pMouseY - j - i2);
+            this.renderFloatingItem(guiGraphics, itemstack, pMouseX - i - 8, pMouseY - j - i2);
         }
 
-        posestack.popPose();
+        guiGraphics.pose().popPose();
         RenderSystem.applyModelViewMatrix();
         RenderSystem.enableDepthTest();
 
         // render tooltip above hotbar
         if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
             ItemStack stack = this.hoveredSlot.getItem();
-            MutableComponent mutablecomponent = (new TextComponent("")).append(stack.getHoverName()).withStyle(stack.getRarity().getStyleModifier());
+            MutableComponent mutablecomponent = (Component.literal("")).append(stack.getHoverName()).withStyle(stack.getRarity().getStyleModifier());
             if (stack.hasCustomHoverName()) {
                 mutablecomponent.withStyle(ChatFormatting.ITALIC);
             }
             Component highlightTip = stack.getHighlightTip(mutablecomponent);
             int w = width - this.font.width(highlightTip) / 2;
             int h = this.height - 22 - 10;
-            this.font.drawShadow(pPoseStack, highlightTip, (float) w, (float) h, 16777215);
+            guiGraphics.drawString(this.font, highlightTip, w, h, 16777215);
         }
         // default minecraft tooltip in guis
         /*if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
