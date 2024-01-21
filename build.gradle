@@ -20,7 +20,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 jarJar.enable()
 
-version = "0.1.4-${mc_version}"
+version = "0.2.0-${mc_version}"
 group = 'com.calibermc.buildify' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'buildify'
 
@@ -225,7 +225,7 @@ publishing {
             // Define groupId, artifactId, and version
             groupId = 'com.calibermc.buildify'
             artifactId = 'buildify'
-            version = '0.1.4'
+            version = '0.2.0'
         }
     }
 //    publications {
