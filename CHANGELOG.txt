@@ -12,4 +12,4 @@
 - Bugfix: fixed error that was causing dedicated servers to not be able to start
 
 0.1.4
-- Added 1.20.1 support
+- Updated Dependency for CaliberMod to 0.1.4
