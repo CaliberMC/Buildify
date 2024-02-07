@@ -8,8 +8,7 @@
     "AbstractContainerScreenMixin",
     "ClientLevelDataMixin",
     "InventoryScreenMixin",
-    "LevelMixin",
-    "MinecraftAccessor"
+    "LevelMixin"
   ],
   "mixins": [
     "CreativeModeTabRegistryMixin",

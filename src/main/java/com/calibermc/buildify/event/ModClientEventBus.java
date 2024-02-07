@@ -4,7 +4,6 @@ package com.calibermc.buildify.event;
 import com.calibermc.buildify.Buildify;
 import com.calibermc.buildify.client.AdjustReachOverlay;
 import com.calibermc.buildify.client.BlockPickerScreen;
-import com.calibermc.buildify.mixin.MinecraftAccessor;
 import com.calibermc.buildify.networking.ModNetworking;
 import com.calibermc.buildify.networking.ServerOpenBlockPickerMenu;
 import com.calibermc.buildify.world.inventory.ModMenuTypes;
@@ -13,9 +12,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PlayerHeadItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -82,7 +85,7 @@ public class ModClientEventBus {
         public static void mouseInput(final InputEvent.MouseButton.Pre event) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null || mc.screen != null) return;
-            if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_MIDDLE && event.getModifiers() == GLFW.GLFW_MOD_CONTROL) {
+            if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_MIDDLE && event.getAction() == GLFW.GLFW_PRESS && event.getModifiers() == GLFW.GLFW_MOD_CONTROL) {
                 if (mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.BLOCK && mc.player.isCreative()) {
                     onPickBlock(mc.hitResult, mc.player, mc.level);
                     event.setCanceled(true);
@@ -94,11 +97,11 @@ public class ModClientEventBus {
         public static void keyInput(final InputEvent.Key event) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null || mc.screen != null) return;
-            if (BLOCK_PICKER.consumeClick() && !mc.player.getMainHandItem().isEmpty() && mc.player.isCreative()) {
-                ModNetworking.INSTANCE.sendToServer(new ServerOpenBlockPickerMenu());
-            }
-            if (COPY_BLOCK.consumeClick()) {
-                if (mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.BLOCK && mc.player.isCreative()) {
+            if (event.getAction() == GLFW.GLFW_PRESS && mc.player.isCreative()) {
+                if (event.getKey() == BLOCK_PICKER.getKey().getValue() && !mc.player.getMainHandItem().isEmpty()) {
+                    ModNetworking.INSTANCE.sendToServer(new ServerOpenBlockPickerMenu());
+                }
+                if (event.getKey() == COPY_BLOCK.getKey().getValue() && mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.BLOCK) {
                     onPickBlock(mc.hitResult, mc.player, mc.level);
                 }
             }
@@ -134,11 +137,32 @@ public class ModClientEventBus {
                     compoundTag3.putString(property.getName(), serialize(state, property)));
 
             if (te != null)
-                ((MinecraftAccessor) Minecraft.getInstance()).addCustomNbtData(result, te);
+                ModClientEventBus.addCustomNbtData(result, te);
 
             player.getInventory().setPickedItem(result);
             assert Minecraft.getInstance().gameMode != null;
             Minecraft.getInstance().gameMode.handleCreativeModeItemAdd(player.getItemInHand(InteractionHand.MAIN_HAND), 36 + player.getInventory().selected);
+        }
+    }
+
+    private static void addCustomNbtData(ItemStack pStack, BlockEntity pBe) {
+        CompoundTag compoundtag = pBe.saveWithFullMetadata();
+        BlockItem.setBlockEntityData(pStack, pBe.getType(), compoundtag);
+        if (pStack.getItem() instanceof PlayerHeadItem && compoundtag.contains("SkullOwner")) {
+            CompoundTag compoundtag3 = compoundtag.getCompound("SkullOwner");
+            CompoundTag compoundtag4 = pStack.getOrCreateTag();
+            compoundtag4.put("SkullOwner", compoundtag3);
+            CompoundTag compoundtag2 = compoundtag4.getCompound("BlockEntityTag");
+            compoundtag2.remove("SkullOwner");
+            compoundtag2.remove("x");
+            compoundtag2.remove("y");
+            compoundtag2.remove("z");
+        } else {
+            CompoundTag compoundtag1 = new CompoundTag();
+            ListTag listtag = new ListTag();
+            listtag.add(StringTag.valueOf("\"(+NBT)\""));
+            compoundtag1.put("Lore", listtag);
+            pStack.addTagElement("display", compoundtag1);
         }
     }
 

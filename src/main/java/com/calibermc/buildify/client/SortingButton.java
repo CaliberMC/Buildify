@@ -44,4 +44,10 @@ public class SortingButton extends ImageButton {
         });
         this.initX = pX;
     }
+
+    @Override
+    public void setFocused(boolean pFocused) {
+        super.setFocused(pFocused);
+        super.setFocused(false);
+    }
 }
