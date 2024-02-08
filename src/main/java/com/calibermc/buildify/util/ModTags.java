@@ -6,7 +6,14 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITagManager;
+
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class ModTags {
 
@@ -24,6 +31,7 @@ public class ModTags {
     }
 
     public static class Items {
+
         /* Creative Tab Tags */
         public static final TagKey<Item> armorTab = tag("creative_tabs/armor_tab");
         public static final TagKey<Item> brewingTab = tag("creative_tabs/brewing_tab");
@@ -59,6 +67,16 @@ public class ModTags {
         private static TagKey<Item> forgeTag(String name) {
             return ItemTags.create(new ResourceLocation("forge", name));
         }
+    }
+
+    public static Set<TagKey<Item>> getCreativeTabTags() {
+        return ForgeRegistries.ITEMS.getValues().stream()
+                // FlatMap to get all distinct tags of items
+                .flatMap(item -> item.builtInRegistryHolder().tags().toList().stream())
+                // Filter tags by a specific path segment (e.g., starts with 'creative_tabs/')
+                .filter(tagKey -> tagKey.location().getPath().startsWith("creative_tabs/"))
+                // Collect into a set to eliminate duplicates
+                .collect(Collectors.toSet());
     }
 
 }

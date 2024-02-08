@@ -8,6 +8,34 @@
     "message.buildify.no_nails": "You're out of nails",
 
     "itemGroup.buildify": "Buildify",
+    "itemGroup.stone": "Stone",
+    "itemGroup.cobble_brick": "Cobble & Brick",
+    "itemGroup.planks_beams": "Planks & Beams",
+    "itemGroup.roofing": "Roofing",
+
+    "itemGroup.plaster_stucco": "Plaster & Stucco",
+    "itemGroup.half_timbered_walls": "Half-Timbered Walls",
+    "itemGroup.tiles_flooring": "Tiles & Flooring",
+    "itemGroup.glass_windows": "Glass & Windows",
+    "itemGroup.lighting": "Lighting",
+
+    "itemGroup.decor": "Decor",
+    "itemGroup.furniture": "Furniture",
+    "itemGroup.food": "Food",
+    "itemGroup.storage": "Storage",
+    "itemGroup.redstone": "Redstone",
+
+    "itemGroup.sand_gravel": "Sand & Gravel",
+    "itemGroup.grass_dirt": "Grass & Dirt",
+    "itemGroup.metals_ores": "Metals & Ores",
+    "itemGroup.logs": "Logs",
+    "itemGroup.leaves": "Leaves",
+
+    "itemGroup.flowers_plants": "Flowers & Plants",
+    "itemGroup.crops": "Crops",
+    "itemGroup.crafting": "Crafting, Etc",
+    "itemGroup.tools_weapons": "Tools & Weapons",
+    "itemGroup.armor": "Armor",
 
     "item.buildify.hammer": "Hammer",
     "item.buildify.nails": "Nails"
