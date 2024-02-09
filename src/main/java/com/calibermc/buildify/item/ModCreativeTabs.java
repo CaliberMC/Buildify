@@ -630,14 +630,29 @@ public class ModCreativeTabs {
         } catch (Throwable e) {
             removeMCTabs = false;
         }
-        List<CreativeModeTab> tabs = tabsOld.stream().filter(tab -> !BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab).getNamespace().equals("minecraft")
-                || CreativeModeTabRegistry.getDefaultTabs().contains(tab)).collect(Collectors.toList());
+        List<CreativeModeTab> tabs = tabsOld.stream().filter(tab -> {
+            boolean baseTabs = CreativeModeTabRegistry.getDefaultTabs().contains(tab);
+            ResourceLocation name = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
+            if (name != null) {
+                return name.getNamespace().equals("buildify")
+                        && !name.getPath().equals("buildify") || baseTabs; // copy default mc tabs and our buildify tag tabs
+            }
+            return baseTabs;
+        }).collect(Collectors.toList());
 
-        // copy mc tabs
-        if (!removeMCTabs) {
-            for (CreativeModeTab tab : BuiltInRegistries.CREATIVE_MODE_TAB) {
-                if (!CreativeModeTabRegistry.getDefaultTabs().contains(tab) && BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab).getNamespace().equals("minecraft")) {
-                    tabs.add(tab);
+        for (CreativeModeTab tab : tabsOld) {
+            ResourceLocation name = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
+            if (name != null && !CreativeModeTabRegistry.getDefaultTabs().contains(tab)) {
+                // copy mc tabs
+                if (name.getNamespace().equals("minecraft")) {
+                    if (!removeMCTabs) {
+                        tabs.add(tab);
+                    }
+                } else {
+                    // copy other tabs
+                    if (!name.getNamespace().equals("buildify") || name.getPath().equals("buildify")) {
+                        tabs.add(tab);
+                    }
                 }
             }
         }
