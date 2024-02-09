@@ -5,31 +5,29 @@ import com.calibermc.buildify.config.CommonConfigs;
 import com.calibermc.buildify.util.ModTags;
 import com.google.common.collect.Lists;
 import net.minecraft.core.Holder;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.tags.ITagManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
-import static com.calibermc.buildify.util.ModTags.getCreativeTabTags;
-
 
 public class ModCreativeTabs {
     private static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
@@ -74,7 +72,7 @@ public class ModCreativeTabs {
 
                 Map<String, List<Item>> groupedItems = items.stream()
                         .collect(Collectors.groupingBy(item -> {
-                            ItemStack itemStack = new ItemStack((ItemLike) item);
+                            ItemStack itemStack = new ItemStack(item);
                             String itemName = itemStack.getItem().getName(itemStack).toString();
                             if (itemName.contains("granite")) {
                                 return "granite";
@@ -95,47 +93,98 @@ public class ModCreativeTabs {
                             entry.getValue().stream()
                                     // Sort based on itemName within groups
                                     .sorted(Comparator.comparing(item -> {
-                                        ItemStack itemStack = new ItemStack((ItemLike) item);
+                                        ItemStack itemStack = new ItemStack(item);
                                         return itemStack.getItem().getName(itemStack).getString();
                                     }))
                                     // Add sorted items to the tab
-                                    .forEach(item -> pOutput.accept(new ItemStack((ItemLike) item)));
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
                         });
             }
         });
 
+//        beforeTab = createTab(beforeTab, "planks_beams", () -> new ItemStack(Blocks.OAK_PLANKS), (pParameters, pOutput) -> {
+//            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
+//            if (tags != null) {
+//                for (Item item : tags.getTag(ModTags.Items.planksBeamsTab)) {
+//                    pOutput.accept(new ItemStack(item));
+//                }
+//            }
+//        });
+
         beforeTab = createTab(beforeTab, "planks_beams", () -> new ItemStack(Blocks.OAK_PLANKS), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
+                List<Item> items = new ArrayList<>();
                 for (Item item : tags.getTag(ModTags.Items.planksBeamsTab)) {
-                    pOutput.accept(new ItemStack(item));
+                    items.add(item);
+                }
+
+                Map<String, List<Item>> groupedItems = items.stream()
+                        .collect(Collectors.groupingBy(item -> {
+                            ItemStack itemStack = new ItemStack(item);
+                            String itemName = itemStack.getItem().getName(itemStack).toString();
+                            if (itemName.contains("planks")
+                                    || itemName.contains("boards")){
+                                return "aplanks";
+                            } else {
+                                return itemName;
+                            }
+                        }));
+
+                groupedItems.entrySet().stream()
+                        // Sort groups alphabetically by key
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(entry -> {
+                            entry.getValue().stream()
+                                    // Sort based on itemName within groups
+                                    .sorted(Comparator.comparing(item -> {
+                                        ItemStack itemStack = new ItemStack(item);
+                                        return itemStack.getItem().getName(itemStack).getString();
+                                    }))
+                                    // Add sorted items to the tab
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
+                        });
+            }
+        });
+
+//        beforeTab = createTab(beforeTab, "roofing", caliberBlocks.apply("acacia_shingle_roof_45", Blocks.ACACIA_STAIRS), (pParameters, pOutput) -> {
+//            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
+//            if (tags != null) {
+//                for (Item item : tags.getTag(ModTags.Items.roofingTab)) {
+//                    pOutput.accept(new ItemStack(item));
+//                }
+//            }
+//        });
+
+        beforeTab = createTab(beforeTab, "roofing", caliberBlocks.apply("acacia_shingle_roof_45", Blocks.ACACIA_STAIRS), (pParameters, pOutput) -> {
+            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
+            if (tags != null) {
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.roofingTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
 
-        beforeTab = createTab(beforeTab, "roofing", caliberBlocks.apply("acacia_shingle_roof_45", Blocks.ACACIA_PLANKS), (pParameters, pOutput) -> {
+        beforeTab = createTab(beforeTab, "plaster_stucco", caliberBlocks.apply("beige_plaster", Blocks.WHITE_CONCRETE_POWDER), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.roofingTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.plasterStuccoTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
 
-        beforeTab = createTab(beforeTab, "plaster_stucco", caliberBlocks.apply("beige_plaster", Blocks.SAND), (pParameters, pOutput) -> {
+        beforeTab = createTab(beforeTab, "half_timbered_walls", caliberBlocks.apply("tudor_acacia_beige_plaster_left", Blocks.WHITE_TERRACOTTA), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.plasterStuccoTab)) {
-                    pOutput.accept(new ItemStack(item));
-                }
-            }
-        });
-
-        beforeTab = createTab(beforeTab, "half_timbered_walls", caliberBlocks.apply("tudor_acacia_beige_plaster_left", Blocks.ACACIA_SLAB), (pParameters, pOutput) -> {
-            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
-            if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.halfTimberedWallTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.halfTimberedWallTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -143,8 +192,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "tiles_flooring", () -> new ItemStack(Blocks.BROWN_GLAZED_TERRACOTTA), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.tilesFlooringTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.tilesFlooringTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -152,8 +203,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "glass_windows", () -> new ItemStack(Blocks.GLASS), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.glassWindowsTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.glassWindowsTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -161,8 +214,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "lighting", () -> new ItemStack(Blocks.LANTERN), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.lightingTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.lightingTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -170,8 +225,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "crafting", () -> new ItemStack(Items.CRAFTING_TABLE), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.craftingTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.craftingTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -186,7 +243,7 @@ public class ModCreativeTabs {
 
                 Map<String, List<Item>> groupedItems = items.stream()
                         .collect(Collectors.groupingBy(item -> {
-                            ItemStack itemStack = new ItemStack((ItemLike) item);
+                            ItemStack itemStack = new ItemStack(item);
                             String itemName = itemStack.getItem().getName(itemStack).toString();
                             if (itemName.contains("granite")) {
                                 return "granite";
@@ -235,11 +292,11 @@ public class ModCreativeTabs {
                             entry.getValue().stream()
                                     // Sort based on itemName within groups
                                     .sorted(Comparator.comparing(item -> {
-                                        ItemStack itemStack = new ItemStack((ItemLike) item);
+                                        ItemStack itemStack = new ItemStack(item);
                                         return itemStack.getItem().getName(itemStack).getString();
                                     }))
                                     // Add sorted items to the tab
-                                    .forEach(item -> pOutput.accept(new ItemStack((ItemLike) item)));
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
                         });
             }
         });
@@ -247,17 +304,47 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "sand_gravel", () -> new ItemStack(Blocks.SAND), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
+                List<Item> items = new ArrayList<>();
                 for (Item item : tags.getTag(ModTags.Items.sandGravelTab)) {
-                    pOutput.accept(new ItemStack(item));
+                    items.add(item);
                 }
+
+                Map<String, List<Item>> groupedItems = items.stream()
+                        .collect(Collectors.groupingBy(item -> {
+                            ItemStack itemStack = new ItemStack(item);
+                            String itemName = itemStack.getItem().getName(itemStack).toString();
+                            if (itemName.contains("gravel")) {
+                                return "gravel";
+                            } else if (itemName.contains("sand")) {
+                                return "sand";
+                            } else {
+                                return itemName;
+                            }
+                        }));
+
+                groupedItems.entrySet().stream()
+                        // Sort groups alphabetically by key
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(entry -> {
+                            entry.getValue().stream()
+                                    // Sort based on itemName within groups
+                                    .sorted(Comparator.comparing(item -> {
+                                        ItemStack itemStack = new ItemStack(item);
+                                        return itemStack.getItem().getName(itemStack).getString();
+                                    }))
+                                    // Add sorted items to the tab
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
+                        });
             }
         });
 
         beforeTab = createTab(beforeTab, "grass_dirt", () -> new ItemStack(Blocks.GRASS_BLOCK), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.grassDirtTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.grassDirtTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -265,8 +352,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "metals_ores", () -> new ItemStack(Blocks.GOLD_ORE), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.metalsOresTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.metalsOresTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -274,8 +363,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "logs", () -> new ItemStack(Blocks.OAK_LOG), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.logsTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.logsTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -283,8 +374,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "leaves", () -> new ItemStack(Blocks.ACACIA_LEAVES), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.leavesTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.leavesTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -292,8 +385,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "flowers_plants", () -> new ItemStack(Blocks.POPPY), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.flowersPlantsTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.flowersPlantsTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -301,8 +396,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "crops", () -> new ItemStack(Blocks.WHEAT), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.cropsTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.cropsTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -310,8 +407,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "decor", () -> new ItemStack(Blocks.BLUE_BANNER), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.decorTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.decorTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -319,17 +418,71 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "furniture", () -> new ItemStack(Blocks.BROWN_BED), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
+                List<Item> items = new ArrayList<>();
                 for (Item item : tags.getTag(ModTags.Items.furnitureTab)) {
-                    pOutput.accept(new ItemStack(item));
+                    items.add(item);
                 }
+
+                Map<String, List<Item>> groupedItems = items.stream()
+                        .collect(Collectors.groupingBy(item -> {
+                            ItemStack itemStack = new ItemStack(item);
+                            String itemName = itemStack.getItem().getName(itemStack).toString();
+                            if (itemName.contains("armoire")) {
+                                return "armoire";
+                            } else if (itemName.contains("desk")) {
+                                return "desk";
+                            } else if (itemName.contains("chair")) {
+                                return "chair";
+                            } else if (itemName.contains("table")) {
+                                return "table";
+                            } else if (itemName.contains("cabinet")) {
+                                return "cabinet";
+                            } else if (itemName.contains("shelf")) {
+                                return "shelf";
+                            } else if (itemName.contains("couch")) {
+                                return "couch";
+                            } else if (itemName.contains("bench")) {
+                                return "bench";
+                            } else if (itemName.contains("stool")) {
+                                return "stool";
+                            } else if (itemName.contains("bed")) {
+                                return "bed";
+                            } else if (itemName.contains("nightstand")) {
+                                return "nightstand";
+                            } else if (itemName.contains("dresser")) {
+                                return "dresser";
+                            } else if (itemName.contains("wardrobe")) {
+                                return "wardrobe";
+                            } else if (itemName.contains("mirror")) {
+                                return "mirror";
+                            } else {
+                                return itemName;
+                            }
+                        }));
+
+                groupedItems.entrySet().stream()
+                        // Sort groups alphabetically by key
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(entry -> {
+                            entry.getValue().stream()
+                                    // Sort based on itemName within groups
+                                    .sorted(Comparator.comparing(item -> {
+                                        ItemStack itemStack = new ItemStack(item);
+                                        return itemStack.getItem().getName(itemStack).getString();
+                                    }))
+                                    // Add sorted items to the tab
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
+                        });
             }
         });
 
         beforeTab = createTab(beforeTab, "storage", () -> new ItemStack(Blocks.CHEST), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.storageTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.storageTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -337,8 +490,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "redstone", () -> new ItemStack(Items.REDSTONE), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.redstoneTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.redstoneTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -346,8 +501,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "food", () -> new ItemStack(Items.APPLE), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.foodTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.foodTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -362,7 +519,7 @@ public class ModCreativeTabs {
 
                 Map<String, List<Item>> groupedItems = items.stream()
                         .collect(Collectors.groupingBy(item -> {
-                            ItemStack itemStack = new ItemStack((ItemLike) item);
+                            ItemStack itemStack = new ItemStack(item);
                             String itemName = itemStack.getItem().getName(itemStack).toString();
                             if (itemName.contains("sword")
                                     || itemName.contains("axe")
@@ -405,11 +562,11 @@ public class ModCreativeTabs {
                             entry.getValue().stream()
                                     // Sort based on itemName within groups
                                     .sorted(Comparator.comparing(item -> {
-                                                ItemStack itemStack = new ItemStack((ItemLike) item);
-                                                return itemStack.getItem().getName(itemStack).getString();
-                                            }))
+                                        ItemStack itemStack = new ItemStack(item);
+                                        return itemStack.getItem().getName(itemStack).getString();
+                                    }))
                                     // Add sorted items to the tab
-                                    .forEach(item -> pOutput.accept(new ItemStack((ItemLike) item)));
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
                         });
             }
         });
@@ -417,8 +574,10 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "armor", () -> new ItemStack(Items.IRON_CHESTPLATE), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : tags.getTag(ModTags.Items.armorTab)) {
-                    pOutput.accept(new ItemStack(item));
+                for (Item item : getSortedItems()) {
+                    if (tags.getTag(ModTags.Items.armorTab).contains(item)) {
+                        pOutput.accept(new ItemStack(item));
+                    }
                 }
             }
         });
@@ -471,12 +630,14 @@ public class ModCreativeTabs {
         } catch (Throwable e) {
             removeMCTabs = false;
         }
-        List<CreativeModeTab> tabs = Lists.newArrayList(tabsOld);
+        List<CreativeModeTab> tabs = tabsOld.stream().filter(tab -> !BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab).getNamespace().equals("minecraft")
+                || CreativeModeTabRegistry.getDefaultTabs().contains(tab)).collect(Collectors.toList());
+
         // copy mc tabs
-        if (removeMCTabs) {
+        if (!removeMCTabs) {
             for (CreativeModeTab tab : BuiltInRegistries.CREATIVE_MODE_TAB) {
-                if (BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab).getNamespace().equals("minecraft")) {
-                    tabs.remove(tab);
+                if (!CreativeModeTabRegistry.getDefaultTabs().contains(tab) && BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab).getNamespace().equals("minecraft")) {
+                    tabs.add(tab);
                 }
             }
         }
