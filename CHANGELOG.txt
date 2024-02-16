@@ -27,6 +27,7 @@
 
 0.2.2
 - Further improved custom tab sorting
+- Added 1.20.1 blocks to custom tabs
 - Bugfix: tools_weapons tab and armor tab were not displaying until after other mods tabs
 
 0.2.3 (in progress)
