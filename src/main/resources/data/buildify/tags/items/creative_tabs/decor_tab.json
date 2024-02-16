@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "minecraft:bookshelf",
+    "minecraft:chiseled_bookshelf",
     "minecraft:painting",
     "minecraft:item_frame",
     "minecraft:glow_item_frame",

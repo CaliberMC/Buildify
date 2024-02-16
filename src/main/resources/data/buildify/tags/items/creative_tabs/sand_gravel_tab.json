@@ -4,6 +4,8 @@
     "minecraft:sand",
     "minecraft:red_sand",
     "minecraft:soul_sand",
-    "minecraft:gravel"
+    "minecraft:gravel",
+    "minecraft:suspicious_sand",
+    "minecraft:suspicious_gravel"
   ]
 }
