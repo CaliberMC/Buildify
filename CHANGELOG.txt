@@ -25,7 +25,9 @@
 - Bugfix: fixed Vanilla Tabs showing when Custom Tabs are enabled
 - Bugfix: fixed sorting button click not clearing
 
-0.2.2 (in progress)
+0.2.2
 - Further improved custom tab sorting
 - Bugfix: tools_weapons tab and armor tab were not displaying until after other mods tabs
+
+0.2.3 (in progress)
 
