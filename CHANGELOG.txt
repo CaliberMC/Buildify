@@ -30,5 +30,8 @@
 - Added 1.20.1 blocks to custom tabs
 - Bugfix: tools_weapons tab and armor tab were not displaying until after other mods tabs
 
-0.2.3 (in progress)
+0.2.3
+- Bugfix: fixed mixin refmap not generating correctly
+
+0.2.4 (in progress)
 
