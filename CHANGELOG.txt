@@ -34,4 +34,5 @@
 - Bugfix: fixed mixin refmap not generating correctly
 
 0.2.4 (in progress)
+- Further improved custom tab sorting
 

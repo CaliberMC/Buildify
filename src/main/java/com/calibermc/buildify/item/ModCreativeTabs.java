@@ -156,14 +156,71 @@ public class ModCreativeTabs {
 //            }
 //        });
 
+//        beforeTab = createTab(beforeTab, "roofing", caliberBlocks.apply("acacia_shingle_roof_45", Blocks.ACACIA_STAIRS), (pParameters, pOutput) -> {
+//            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
+//            if (tags != null) {
+//                for (Item item : getSortedItems()) {
+//                    if (tags.getTag(ModTags.Items.roofingTab).contains(item)) {
+//                        pOutput.accept(new ItemStack(item));
+//                    }
+//                }
+//            }
+//        });
+
         beforeTab = createTab(beforeTab, "roofing", caliberBlocks.apply("acacia_shingle_roof_45", Blocks.ACACIA_STAIRS), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : getSortedItems()) {
-                    if (tags.getTag(ModTags.Items.roofingTab).contains(item)) {
-                        pOutput.accept(new ItemStack(item));
-                    }
+                List<Item> items = new ArrayList<>();
+                for (Item item : tags.getTag(ModTags.Items.roofingTab)) {
+                    items.add(item);
                 }
+
+                Map<String, List<Item>> groupedItems = items.stream()
+                        .collect(Collectors.groupingBy(item -> {
+                            ItemStack itemStack = new ItemStack(item);
+                            String itemName = itemStack.getItem().getName(itemStack).toString();
+                            if (itemName.contains("terracotta")) {
+                                return "terracotta";
+                            } else if (itemName.contains("acacia")) {
+                                return "acacia";
+                            } else if (itemName.contains("bamboo")) {
+                                return "bamboo";
+                            } else if (itemName.contains("birch")) {
+                                return "birch";
+                            } else if (itemName.contains("cherry")) {
+                                return "cherry";
+                            } else if (itemName.contains("dark_oak")) {
+                                return "dark_oak";
+                            } else if (itemName.contains("jungle")) {
+                                return "jungle";
+                            } else if (itemName.contains("mangrove")) {
+                                return "mangrove";
+                            } else if (itemName.contains("oak") && !itemName.contains("dark")) {
+                                return "oak";
+                            } else if (itemName.contains("spruce")) {
+                                return "spruce";
+                            } else if (itemName.contains("warped")) {
+                                return "warped";
+                            } else if (itemName.contains("crimson")) {
+                                return "crimson";
+                            } else {
+                                return itemName;
+                            }
+                        }));
+
+                groupedItems.entrySet().stream()
+                        // Sort groups alphabetically by key
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(entry -> {
+                            entry.getValue().stream()
+                                    // Sort based on itemName within groups
+                                    .sorted(Comparator.comparing(item -> {
+                                        ItemStack itemStack = new ItemStack(item);
+                                        return itemStack.getItem().getName(itemStack).getString();
+                                    }))
+                                    // Add sorted items to the tab
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
+                        });
             }
         });
 
