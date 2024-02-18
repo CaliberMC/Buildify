@@ -35,4 +35,4 @@
 
 0.2.4 (in progress)
 - Further improved custom tab sorting
-
+- Added Bamboo, Cherry and Mangrove planks, logs and wood.  Added Mud and Mud Bricks blocks to custom tabs

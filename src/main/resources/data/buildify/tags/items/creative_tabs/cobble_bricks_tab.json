@@ -34,6 +34,7 @@
     "minecraft:end_stone_bricks",
     "minecraft:nether_bricks",
     "minecraft:red_nether_bricks",
-    "minecraft:prismarine_bricks"
+    "minecraft:prismarine_bricks",
+    "minecraft:mud_bricks"
   ]
 }
