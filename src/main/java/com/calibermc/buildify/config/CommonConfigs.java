@@ -11,7 +11,7 @@ public class CommonConfigs {
 
     static {
         BUILDER.push("Configs for Buildify Mod");
-        USE_CUSTOM_CREATIVE_TABS = BUILDER.comment("Use Custom Creative Inventory Tabs?").translation("config.caliber.custom_creative_inventory").define("custom_creative_inventory", true);
+        USE_CUSTOM_CREATIVE_TABS = BUILDER.comment("Use Custom Creative Inventory Tabs?").translation("config.caliber.use_custom_creative_tabs").define("use_custom_creative_tabs", true);
         REMOVE_VANILLA_TABS = BUILDER.comment("Remove all Vanilla Tabs?").translation("config.caliber.remove_vanilla_tabs").define("remove_vanilla_tabs", true);
 
         BUILDER.pop();
