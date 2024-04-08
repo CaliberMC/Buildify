@@ -1,5 +1,6 @@
 package com.calibermc.buildify.mixin;
 
+import com.calibermc.buildify.config.CommonConfigs;
 import com.calibermc.buildify.item.ModCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.CreativeModeTabRegistry;

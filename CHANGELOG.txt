@@ -37,4 +37,8 @@
 - Downgraded Forge Version <- 47.1.3 to allow NeoForge 1.20.1 support
 - Further improved custom tab sorting
 - Added Bamboo, Cherry and Mangrove planks, logs and wood to custom tabs.  Added Mud and Mud Bricks blocks to custom tabs.
+- Added additional config option to properly disable the custom inventory tabs
+- Refactored and clarified description for config option to remove vanilla tabs
+- Removed unused client config option
+- Bugfix: fixed crash when searching other mod's built in creative search menus
 

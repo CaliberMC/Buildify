@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.CreativeModeTabRegistry;
@@ -102,15 +101,6 @@ public class ModCreativeTabs {
             }
         });
 
-//        beforeTab = createTab(beforeTab, "planks_beams", () -> new ItemStack(Blocks.OAK_PLANKS), (pParameters, pOutput) -> {
-//            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
-//            if (tags != null) {
-//                for (Item item : tags.getTag(ModTags.Items.planksBeamsTab)) {
-//                    pOutput.accept(new ItemStack(item));
-//                }
-//            }
-//        });
-
         beforeTab = createTab(beforeTab, "planks_beams", () -> new ItemStack(Blocks.OAK_PLANKS), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
@@ -146,26 +136,6 @@ public class ModCreativeTabs {
                         });
             }
         });
-
-//        beforeTab = createTab(beforeTab, "roofing", caliberBlocks.apply("acacia_shingle_roof_45", Blocks.ACACIA_STAIRS), (pParameters, pOutput) -> {
-//            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
-//            if (tags != null) {
-//                for (Item item : tags.getTag(ModTags.Items.roofingTab)) {
-//                    pOutput.accept(new ItemStack(item));
-//                }
-//            }
-//        });
-
-//        beforeTab = createTab(beforeTab, "roofing", caliberBlocks.apply("acacia_shingle_roof_45", Blocks.ACACIA_STAIRS), (pParameters, pOutput) -> {
-//            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
-//            if (tags != null) {
-//                for (Item item : getSortedItems()) {
-//                    if (tags.getTag(ModTags.Items.roofingTab).contains(item)) {
-//                        pOutput.accept(new ItemStack(item));
-//                    }
-//                }
-//            }
-//        });
 
         beforeTab = createTab(beforeTab, "roofing", caliberBlocks.apply("acacia_shingle_roof_45", Blocks.ACACIA_STAIRS), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
@@ -666,31 +636,6 @@ public class ModCreativeTabs {
         });
     }
 
-
-    //original
-//        beforeTab = createTab(beforeTab, "tools_weapons", () -> new ItemStack(Items.IRON_SWORD), (pParameters, pOutput) -> {
-//            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
-//            if (tags != null) {
-//                for (Item item : tags.getTag(ModTags.Items.toolsWeaponsTab)) {
-//                    pOutput.accept(new ItemStack(item));
-//                }
-//            }
-//        });
-
-    //alphabetical
-//        beforeTab = createTab(beforeTab, "tools_weapons", () -> new ItemStack(Items.IRON_SWORD), (pParameters, pOutput) -> {
-//            ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
-//            if (tags != null) {
-//                for (Item item : getSortedItems()) {
-//                    if (tags.getTag(ModTags.Items.toolsWeaponsTab).contains(item)) {
-//                        pOutput.accept(new ItemStack(item));
-//                    }
-//                }
-//            }
-//        });
-
-
-
     public static List<Item> getItems() {
         return ForgeRegistries.ITEMS.getEntries().stream()
                 .map(Map.Entry::getValue)
@@ -707,16 +652,21 @@ public class ModCreativeTabs {
     }
 
     public static List<CreativeModeTab> setupCreativeTabs(List<CreativeModeTab> tabsOld) {
-        boolean removeMCTabs;
+        boolean displayCustomTabs, removeMCTabs;
+
         try {
-            removeMCTabs = CommonConfigs.CUSTOM_CREATIVE_INVENTORY.get();
+            displayCustomTabs = CommonConfigs.USE_CUSTOM_CREATIVE_TABS.get();
+            removeMCTabs = CommonConfigs.REMOVE_VANILLA_TABS.get();
         } catch (Throwable e) {
+            displayCustomTabs = true;
             removeMCTabs = false;
         }
+
+        boolean finalDisplayCustomTabs = displayCustomTabs;
         List<CreativeModeTab> tabs = tabsOld.stream().filter(tab -> {
             boolean baseTabs = CreativeModeTabRegistry.getDefaultTabs().contains(tab);
             ResourceLocation name = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
-            if (name != null) {
+            if (name != null && finalDisplayCustomTabs) {
                 return name.getNamespace().equals("buildify")
                         && !name.getPath().equals("buildify") || baseTabs; // copy default mc tabs and our buildify tag tabs
             }
@@ -740,9 +690,16 @@ public class ModCreativeTabs {
             }
         }
 
+//        for (CreativeModeTab tab : Lists.newArrayList(tabs)) {
+//            if (tab.getDisplayItems().isEmpty()) {
+//                tabs.remove(tab); // remove tabs that are empty
+//            }
+//        }
+
         for (CreativeModeTab tab : Lists.newArrayList(tabs)) {
-            if (tab.getDisplayItems().isEmpty()) {
-                tabs.remove(tab); // remove tabs that are empty
+            ResourceLocation name = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
+            if (name != null && name.getNamespace().equals("buildify") && tab.getDisplayItems().isEmpty()) {
+                tabs.remove(tab); // remove buildify tabs that are empty
             }
         }
 

@@ -5,12 +5,14 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class CommonConfigs {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
-    public static final ForgeConfigSpec.BooleanValue CUSTOM_CREATIVE_INVENTORY;
+    public static final ForgeConfigSpec.BooleanValue USE_CUSTOM_CREATIVE_TABS;
+    public static final ForgeConfigSpec.BooleanValue REMOVE_VANILLA_TABS;
 
 
     static {
         BUILDER.push("Configs for Buildify Mod");
-        CUSTOM_CREATIVE_INVENTORY = BUILDER.comment("Use Custom Creative Inventory?").translation("config.caliber.custom_creative_inventory").define("custom_creative_inventory", true);
+        USE_CUSTOM_CREATIVE_TABS = BUILDER.comment("Use Custom Creative Inventory Tabs?").translation("config.caliber.custom_creative_inventory").define("custom_creative_inventory", true);
+        REMOVE_VANILLA_TABS = BUILDER.comment("Remove all Vanilla Tabs?").translation("config.caliber.remove_vanilla_tabs").define("remove_vanilla_tabs", true);
 
         BUILDER.pop();
         SPEC = BUILDER.build();
