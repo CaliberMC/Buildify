@@ -1,6 +1,7 @@
 package com.calibermc.buildify.util;
 
 import com.calibermc.buildify.Buildify;
+import com.calibermc.buildify.config.CommonConfigs;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
@@ -55,7 +56,7 @@ public class BlockPickerStatesJson extends SimpleJsonResourceReloadListener {
                 Buildify.LOGGER.error("Parsing error loading blockstates for {}", resourcelocation, e);
             }
         }
-        Buildify.LOGGER.info("Loaded {} blockstates for block-picker", this.registeredBlockStates.size());
+        Buildify.LOGGER.info("Loaded {} custom blockstates for block-picker", this.registeredBlockStates.size());
     }
 
     public static Map<Block, Supplier<List<ItemStack>>> getBlockStates() {
@@ -93,8 +94,8 @@ public class BlockPickerStatesJson extends SimpleJsonResourceReloadListener {
 
     static {
         Map<Block, Supplier<List<ItemStack>>> map = new HashMap<>();
-
         Set<Block> processedBaseBlocks = new HashSet<>();
+        boolean useVanillaBlockFamilies = CommonConfigs.USE_VANILLA_BLOCK_FAMILIES.get();
 
 //        for (ModBlockFamily modBlockFamily : ModBlockFamilies.getAllFamilies().toList()) {
 //            processedBaseBlocks.add(modBlockFamily.getBaseBlock());
@@ -110,14 +111,16 @@ public class BlockPickerStatesJson extends SimpleJsonResourceReloadListener {
 //            });
 //        }
 
-        for (BlockFamily blockFamily : BlockFamilies.getAllFamilies().toList()) {
-            Block baseBlock = blockFamily.getBaseBlock();
+        if (useVanillaBlockFamilies) {
+            for (BlockFamily blockFamily : BlockFamilies.getAllFamilies().toList()) {
+                Block baseBlock = blockFamily.getBaseBlock();
 
-            // Check if baseBlock has already been processed
-            if (!processedBaseBlocks.contains(baseBlock)) {
-                map.put(baseBlock, () -> blockFamily.getVariants().entrySet().stream()
-                        .filter(p -> !p.getKey().equals(BlockFamily.Variant.WALL_SIGN))
-                        .map(p -> p.getValue().asItem().getDefaultInstance()).toList());
+                // Check if baseBlock has already been processed
+                if (!processedBaseBlocks.contains(baseBlock)) {
+                    map.put(baseBlock, () -> blockFamily.getVariants().entrySet().stream()
+                            .filter(p -> !p.getKey().equals(BlockFamily.Variant.WALL_SIGN))
+                            .map(p -> p.getValue().asItem().getDefaultInstance()).toList());
+                }
             }
         }
 

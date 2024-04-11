@@ -38,7 +38,9 @@
 - Further improved custom tab sorting
 - Added Bamboo, Cherry and Mangrove planks, logs and wood to custom tabs.  Added Mud and Mud Bricks blocks to custom tabs.
 - Added additional config option to properly disable the custom inventory tabs
+- Added config option for use of vanilla block families in Blockpicker
 - Refactored and clarified description for config option to remove vanilla tabs
-- Removed unused client config option
+- Removed unused client config options
+- Added alphabetical sorting to Blockpicker so that items always display in the same order
 - Bugfix: fixed crash when searching other mod's built in creative search menus
 

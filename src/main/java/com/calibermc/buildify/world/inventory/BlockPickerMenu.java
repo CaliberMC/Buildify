@@ -34,6 +34,9 @@ public class BlockPickerMenu extends AbstractContainerMenu {
         Supplier<List<ItemStack>> supplier = BlockPickerStatesJson.getBlockStates().get(Block.byItem(this.stack.getItem()));
         if (supplier != null) {
             List<ItemStack> stacks = supplier.get();
+            // Sort the stacks alphabetically by item name
+            stacks.sort(Comparator.comparing(stack -> stack.getItem().getDescriptionId()));
+
             pContainer = new SimpleContainer(stacks.size());
             for (int i = 0; i < stacks.size(); i++) {
                 pContainer.setItem(i, stacks.get(i));
@@ -45,6 +48,9 @@ public class BlockPickerMenu extends AbstractContainerMenu {
                     List<ItemStack> stacks = new ArrayList<>(sup.get());
                     stacks.removeIf(p -> p.is(this.stack.getItem()));
                     stacks.add(new ItemStack(e.getKey()));
+
+                    // Sort the stacks alphabetically by item name
+                    stacks.sort(Comparator.comparing(stack -> stack.getItem().getDescriptionId()));
 
                     pContainer = new SimpleContainer(stacks.size());
                     for (int i = 0; i < stacks.size(); i++) {
