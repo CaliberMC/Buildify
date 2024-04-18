@@ -1,0 +1,120 @@
+{
+  "values": [
+    {
+      "id": "minecraft:activator_rail",
+      "required": false
+    },
+    {
+      "id": "minecraft:chain_command_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:command_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:comparator",
+      "required": false
+    },
+    {
+      "id": "minecraft:daylight_detector",
+      "required": false
+    },
+    {
+      "id": "minecraft:detector_rail",
+      "required": false
+    },
+    {
+      "id": "minecraft:dispenser",
+      "required": false
+    },
+    {
+      "id": "minecraft:dropper",
+      "required": false
+    },
+    {
+      "id": "minecraft:hopper",
+      "required": false
+    },
+    {
+      "id": "minecraft:jukebox",
+      "required": false
+    },
+    {
+      "id": "minecraft:lever",
+      "required": false
+    },
+    {
+      "id": "minecraft:note_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:observer",
+      "required": false
+    },
+    {
+      "id": "minecraft:piston",
+      "required": false
+    },
+    {
+      "id": "minecraft:powered_rail",
+      "required": false
+    },
+    {
+      "id": "minecraft:rail",
+      "required": false
+    },
+    {
+      "id": "minecraft:redstone_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:redstone_lamp",
+      "required": false
+    },
+    {
+      "id": "minecraft:redstone_torch",
+      "required": false
+    },
+    {
+      "id": "minecraft:repeater",
+      "required": false
+    },
+    {
+      "id": "minecraft:repeating_command_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:slime_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:sticky_piston",
+      "required": false
+    },
+    {
+      "id": "minecraft:target",
+      "required": false
+    },
+    {
+      "id": "minecraft:tnt",
+      "required": false
+    },
+    {
+      "id": "minecraft:trapped_chest",
+      "required": false
+    },
+    {
+      "id": "minecraft:tripwire",
+      "required": false
+    },
+    {
+      "id": "minecraft:tripwire_hook",
+      "required": false
+    },
+    {
+      "id": "minecraft:redstone",
+      "required": false
+    }
+  ]
+}

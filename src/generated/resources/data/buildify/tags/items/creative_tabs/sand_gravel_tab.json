@@ -1,0 +1,44 @@
+{
+  "values": [
+    {
+      "id": "minecraft:clay",
+      "required": false
+    },
+    {
+      "id": "minecraft:gravel",
+      "required": false
+    },
+    {
+      "id": "minecraft:red_sand",
+      "required": false
+    },
+    {
+      "id": "minecraft:sand",
+      "required": false
+    },
+    {
+      "id": "minecraft:suspicious_gravel",
+      "required": false
+    },
+    {
+      "id": "minecraft:suspicious_sand",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:black_sand",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:mossy_black_sand",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:orange_sand",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:white_sand",
+      "required": false
+    }
+  ]
+}

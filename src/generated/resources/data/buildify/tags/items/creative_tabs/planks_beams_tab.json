@@ -1,0 +1,404 @@
+{
+  "values": [
+    {
+      "id": "minecraft:acacia_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:bamboo_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:birch_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:cherry_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:crimson_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:dark_oak_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:jungle_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:mangrove_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:oak_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:spruce_planks",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_acacia_wood",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_birch_wood",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_cherry_wood",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_crimson_hyphae",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_dark_oak_wood",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_jungle_wood",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_mangrove_wood",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_oak_wood",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_spruce_wood",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_warped_hyphae",
+      "required": false
+    },
+    {
+      "id": "minecraft:warped_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:dead_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:fir_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:hellbark_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:jacaranda_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:magic_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:mahogany_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:palm_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:redwood_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_dead_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_fir_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_hellbark_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_jacaranda_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_magic_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_mahogany_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_palm_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_redwood_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_umbran_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_willow_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:umbran_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:willow_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:alpha_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:baobab_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:black_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blackwood_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blue_bioshroom_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blue_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:brimwood_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:brown_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:cobalt_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:cyan_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:cypress_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:dead_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:eucalyptus_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:gray_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:green_bioshroom_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:green_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:joshua_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:kapok_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:light_blue_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:light_gray_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:lime_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:magenta_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:magnolia_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:maple_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:mauve_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:orange_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:palm_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pine_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pink_bioshroom_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pink_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:purple_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:red_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:redwood_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:socotra_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_baobab_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_blackwood_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_blue_bioshroom_hyphae",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_brimwood_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_cobalt_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_cypress_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_dead_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_eucalyptus_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_green_bioshroom_hyphae",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_joshua_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_kapok_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_magnolia_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_maple_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_mauve_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_palm_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_pine_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_pink_bioshroom_hyphae",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_redwood_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_socotra_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_willow_wood",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_yellow_bioshroom_hyphae",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:white_painted_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:willow_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:yellow_bioshroom_planks",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:yellow_painted_planks",
+      "required": false
+    }
+  ]
+}

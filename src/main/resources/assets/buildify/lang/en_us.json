@@ -10,10 +10,11 @@
     "itemGroup.buildify": "Buildify",
     "itemGroup.stone": "Stone",
     "itemGroup.cobble_brick": "Cobble & Brick",
+    "itemGroup.doors_gates": "Doors & Gates",
     "itemGroup.planks_beams": "Planks & Beams",
     "itemGroup.roofing": "Roofing",
 
-    "itemGroup.plaster_stucco": "Plaster & Stucco",
+    "itemGroup.concrete_plaster_stucco": "Concrete, Plaster & Stucco",
     "itemGroup.half_timbered_walls": "Half-Timbered Walls",
     "itemGroup.tiles_flooring": "Tiles & Flooring",
     "itemGroup.glass_windows": "Glass & Windows",
@@ -36,6 +37,7 @@
     "itemGroup.crafting": "Crafting, Etc",
     "itemGroup.tools_weapons": "Tools & Weapons",
     "itemGroup.armor": "Armor",
+    "itemGroup.spawn_eggs": "Spawn Eggs",
 
     "item.buildify.hammer": "Hammer",
     "item.buildify.nails": "Nails"

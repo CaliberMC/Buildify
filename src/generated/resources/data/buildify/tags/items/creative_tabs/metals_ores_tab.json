@@ -1,0 +1,96 @@
+{
+  "values": [
+    {
+      "id": "minecraft:amethyst_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:budding_amethyst",
+      "required": false
+    },
+    {
+      "id": "minecraft:coal_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:coal_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:copper_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:copper_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:deepslate_coal_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:deepslate_copper_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:deepslate_diamond_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:deepslate_emerald_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:deepslate_gold_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:deepslate_iron_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:deepslate_lapis_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:diamond_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:diamond_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:emerald_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:emerald_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:gold_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:gold_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:iron_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:iron_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:lapis_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:lapis_ore",
+      "required": false
+    }
+  ]
+}

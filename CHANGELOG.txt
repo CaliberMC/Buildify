@@ -36,6 +36,8 @@
 0.2.4 (in progress)
 - Downgraded Forge Version <- 47.1.3 to allow NeoForge 1.20.1 support
 - Further improved custom tab sorting
+- Added Mod Compatibility for custom tabs to include Biomes O' Plenty blocks
+- Added Mod Compatibility for custom tabs to include Regions Unexplored blocks
 - Added Bamboo, Cherry and Mangrove planks, logs and wood to custom tabs.  Added Mud and Mud Bricks blocks to custom tabs.
 - Added additional config option to properly disable the custom inventory tabs
 - Added config option for use of vanilla block families in Blockpicker

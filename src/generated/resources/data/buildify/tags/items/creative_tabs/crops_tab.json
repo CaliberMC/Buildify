@@ -1,0 +1,44 @@
+{
+  "values": [
+    {
+      "id": "minecraft:beetroots",
+      "required": false
+    },
+    {
+      "id": "minecraft:carrots",
+      "required": false
+    },
+    {
+      "id": "minecraft:potatoes",
+      "required": false
+    },
+    {
+      "id": "minecraft:torchflower_crop",
+      "required": false
+    },
+    {
+      "id": "minecraft:wheat",
+      "required": false
+    },
+    {
+      "id": "minecraft:beetroot_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:melon_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:pumpkin_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:torchflower_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:wheat_seeds",
+      "required": false
+    }
+  ]
+}
