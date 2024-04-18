@@ -1,0 +1,68 @@
+# Change Log
+
+### 0.2.5 (in progress)
+
+
+### 0.2.4
+- Downgraded Forge Version <- 47.1.3 to allow NeoForge 1.20.1 support
+- Further improved custom tab sorting
+- Added Mod Compatibility for custom tabs to include Biomes O' Plenty blocks
+- Added Mod Compatibility for custom tabs to include Regions Unexplored blocks
+- Added Bamboo, Cherry and Mangrove planks, logs and wood to custom tabs.  Added Mud and Mud Bricks blocks to custom tabs.
+- Added additional config option to properly disable the custom inventory tabs
+- Added config option for use of vanilla block families in Blockpicker
+- Refactored and clarified description for config option to remove vanilla tabs
+- Removed unused client config options
+- Added alphabetical sorting to Blockpicker so that items always display in the same order
+- Bugfix: fixed crash when searching other mod's built in creative search menus
+
+### 0.2.3
+- Bugfix: fixed mixin refmap not generating correctly
+
+### 0.2.2
+- Further improved custom tab sorting
+- Added 1.20.1 blocks to custom tabs
+- Bugfix: tools_weapons tab and armor tab were not displaying until after other mods tabs
+
+### 0.2.1
+- Added most Vanilla blocks to custom tabs, still needs a little bit of work.  Let me know if you notice any missing.
+- Added custom sorting algorithm for custom tabs.  This will be improved in future updates.
+- Rolled back Forge Version to 47.2.0 due to many launchers not supporting 47.2.20 yet.
+- Bugfix: fixed Block Picker not working with some other mods blocks
+- Bugfix: fixed Sorting Buttons not displaying when used without CaliberMod
+- Bugfix: fixed Vanilla Tabs showing when Custom Tabs are enabled
+- Bugfix: fixed sorting button click not clearing
+
+### 0.2.0
+- Added Minecraft 1.20.1 support
+- Added Inventory Sorting feature
+- Added Custom Creative Tabs feature
+
+### 0.1.3
+- Bugfix: fixed error that was causing dedicated servers to not be able to start
+
+### 0.1.2
+- Added survival inventory hot swap feature
+
+### 0.1.1
+- Added Mod Compat for Block Picker
+- Added Data Pack Compat for Block Picker
+
+### 0.1.0
+- Initial beta release
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
