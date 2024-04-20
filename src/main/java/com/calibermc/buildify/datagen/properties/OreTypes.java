@@ -8,6 +8,7 @@ public enum OreTypes {
     COAL_ORE("coal_ore"),
     DEEPSLATE_COAL_ORE("deepslate_coal_ore"),
     COPPER_BLOCK("copper_block"),
+    RAW_COPPER_BLOCK("raw_copper_block"),
     COOPER_ORE("copper_ore"),
     DEEPSLATE_COPPER_ORE("deepslate_copper_ore"),
     DIAMOND_BLOCK("diamond_block"),
@@ -17,11 +18,14 @@ public enum OreTypes {
     EMERALD_ORE("emerald_ore"),
     DEEPSLATE_EMERALD_ORE("deepslate_emerald_ore"),
     GOLD_BLOCK("gold_block"),
+    RAW_GOLD_BLOCK("raw_gold_block"),
     GOLD_ORE("gold_ore"),
     DEEPSLATE_GOLD_ORE("deepslate_gold_ore"),
     IRON_BLOCK("iron_block"),
+    RAW_IRON_BLOCK("raw_iron_block"),
     IRON_ORE("iron_ore"),
     DEEPSLATE_IRON_ORE("deepslate_iron_ore"),
+    INDUSTRIAL_IRON_BLOCK("industrial_iron_block"),
     LAPIS_BLOCK("lapis_block"),
     LAPIS_ORE("lapis_ore"),
     DEEPSLATE_LAPIS_ORE("deepslate_lapis_ore"),
@@ -33,8 +37,10 @@ public enum OreTypes {
     SILVER_ORE("silver_ore"),
     DEEPSLATE_SILVER_ORE("deepslate_silver_ore"),
     ZINC_BLOCK("zinc_block"),
+    RAW_ZINC_BLOCK("raw_zinc_block"),
     ZINC_ORE("zinc_ore"),
-    DEEPSLATE_ZINC_ORE("deepslate_zinc_ore");
+    DEEPSLATE_ZINC_ORE("deepslate_zinc_ore"),
+    ANDESITE_ALLOY_BLOCK("andesite_alloy_block");
 
     private final String name;
 

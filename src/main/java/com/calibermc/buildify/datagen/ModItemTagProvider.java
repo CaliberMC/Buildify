@@ -57,7 +57,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             && !itemName.contains("window")) {
 //                    if (block instanceof Block) {
 
-                        if (       (!itemName.contains("cutter") && !itemName.contains("bookshelf") && !itemName.contains("copper"))
+                        if (       (!itemName.contains("cutter") && !itemName.contains("bookshelf") && !itemName.contains("copper")
+                                && !itemName.contains("infested"))
                                 && (itemName.contains("cobble")  || itemName.contains("brick")   || itemName.contains("tiles")
                                 || itemName.contains("chiseled") || itemName.contains("cracked") || itemName.contains("polished")
                                 || itemName.contains("smooth")   || itemName.contains("cut"))) {
@@ -123,7 +124,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
                         if (block instanceof AspenLogBlock       || block instanceof BambooLogBlock   || block instanceof MagmaLogBlock
                                 || block instanceof PineLogBlock || block instanceof SmallOakLogBlock || block instanceof StrippedBambooLogBlock
-                                || itemName.contains("log")      || itemName.contains("stripped_log")) {
+                                || itemName.contains("log")      || itemName.contains("stripped_log") || itemName.contains("stem")) {
                             this.tag(ModTags.Items.logsTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 

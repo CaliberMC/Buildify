@@ -441,11 +441,61 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "flowers_plants", () -> new ItemStack(Blocks.POPPY), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : getSortedItems()) {
-                    if (tags.getTag(ModTags.Items.flowersPlantsTab).contains(item)) {
-                        pOutput.accept(new ItemStack(item));
-                    }
+                List<Item> items = new ArrayList<>();
+                for (Item item : tags.getTag(ModTags.Items.flowersPlantsTab)) {
+                    items.add(item);
                 }
+
+                Map<String, List<Item>> groupedItems = items.stream()
+                        .collect(Collectors.groupingBy(item -> {
+                            ItemStack itemStack = new ItemStack(item);
+                            String itemName = itemStack.getItem().getName(itemStack).toString();
+                            if (itemName.contains("sapling") || itemName.contains("propagule")) {
+                                return "sapling";
+                            } else if (itemName.contains("flower") || itemName.contains("rose") || itemName.contains("allium") || itemName.contains("dandelion")
+                                    || itemName.contains("aster") || itemName.contains("tulip") || itemName.contains("lily") || itemName.contains("orchid") || itemName.contains("pansy")
+                                    || itemName.contains("poppy") || itemName.contains("bluebell") || itemName.contains("daisy") || itemName.contains("daffodil") || itemName.contains("iris")
+                                    || itemName.contains("lupine") || itemName.contains("marigold") || itemName.contains("peony") || itemName.contains("sunflower") || itemName.contains("snowbelle")
+                                    || itemName.contains("violet") || itemName.contains("zinnia") || itemName.contains("buttercup") || itemName.contains("cosmos") || itemName.contains("dahlia")
+                                    || itemName.contains("foxglove") || itemName.contains("hydrangea") || itemName.contains("lavender") || itemName.contains("lilac") || itemName.contains("magnolia")
+                                    || itemName.contains("mimosa") || itemName.contains("narcissus") || itemName.contains("poinsettia") || itemName.contains("rhododendron") || itemName.contains("snapdragon")
+                                    || itemName.contains("thistle") || itemName.contains("wisteria") || itemName.contains("bleeding_heart") || itemName.contains("blossom") || itemName.contains("bloom")
+                                    || itemName.contains("fireweed") || itemName.contains("hibiscus") || itemName.contains("carnation") || itemName.contains("hyssop") || itemName.contains("mallow")
+                                    || itemName.contains("moonflower") || itemName.contains("tsubaki") || itemName.contains("waratah") || itemName.contains("trillium") || itemName.contains("tansy")) {
+                                return "flower";
+                            } else if (itemName.contains("mushroom") || itemName.contains("wart") ||itemName.contains("fungus")
+                                    || itemName.contains("shroom") || itemName.contains("spore") || itemName.contains("toadstool")) {
+                                return "mushroom";
+                            } else if (itemName.contains("fern")) {
+                                return "fern";
+                            } else if (itemName.contains("bush") || itemName.contains("shrub") || itemName.contains("grass")) {
+                                return "bush";
+                            } else if (itemName.contains("cactus")) {
+                                return "cactus";
+                            } else if (itemName.contains("pot")) {
+                                return "pot";
+                            } else if (itemName.contains("vine")) {
+                                return "vine";
+                            } else if (itemName.contains("coral") || itemName.contains("sea")) {
+                                return "xcoral";
+                            } else {
+                                return itemName;
+                            }
+                        }));
+
+                groupedItems.entrySet().stream()
+                        // Sort groups alphabetically by key
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(entry -> {
+                            entry.getValue().stream()
+                                    // Sort based on itemName within groups
+                                    .sorted(Comparator.comparing(item -> {
+                                        ItemStack itemStack = new ItemStack(item);
+                                        return itemStack.getItem().getName(itemStack).getString();
+                                    }))
+                                    // Add sorted items to the tab
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
+                        });
             }
         });
 

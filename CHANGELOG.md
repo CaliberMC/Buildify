@@ -1,6 +1,10 @@
 # Change Log
 
+
 ### 0.2.5 (in progress)
+- Adjusted sorting of Flowers tab
+- Removed Infested Blocks from creative tabs
+- Added Mod Compatibility for custom tabs to include Create blocks
 
 
 ### 0.2.4

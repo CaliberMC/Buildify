@@ -1,6 +1,6 @@
-// 1.20.1	2024-04-17T20:18:17.4149495	Tags for minecraft:item mod id buildify
+// 1.20.1	2024-04-18T12:56:11.8953276	Tags for minecraft:item mod id buildify
 51a17b8cee3da863a54a362fa9da22eb1c08f190 data/buildify/tags/items/creative_tabs/armor_tab.json
-f6fdbc06b07bc0e99ff7856f173d9e6f618baeee data/buildify/tags/items/creative_tabs/cobble_bricks_tab.json
+6b146ee157cc25b9d427e882c5f901f1658fe530 data/buildify/tags/items/creative_tabs/cobble_bricks_tab.json
 80a33b550968ddf0ddf69aa9b08ac9477e8419c8 data/buildify/tags/items/creative_tabs/concrete_plaster_stucco_tab.json
 6fb12220c771ce66c3702dfa20e18a0b097fd2bf data/buildify/tags/items/creative_tabs/crafting_tab.json
 6fd31db96c5629cc72c2023eafde00c52323bcda data/buildify/tags/items/creative_tabs/crops_tab.json

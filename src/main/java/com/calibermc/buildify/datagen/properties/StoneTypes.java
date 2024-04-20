@@ -23,7 +23,7 @@ public enum StoneTypes {
     ORANGE_SANDSTONE("orange_sandstone"),
     QUARTZ("quartz"),
     RED_SANDSTONE("red_sandstone"),
-    ROSE_QUARTZ("rose_quartz"),
+    ROSE_QUARTZ_BLOCK("rose_quartz_block"),
     SANDSTONE("sandstone"),
     SCORCHIA("scorchia"),
     SCORIA("scoria"),
