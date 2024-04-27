@@ -211,6 +211,30 @@
     {
       "id": "buildify:nails",
       "required": false
+    },
+    {
+      "id": "create:chocolate_bucket",
+      "required": false
+    },
+    {
+      "id": "create:extendo_grip",
+      "required": false
+    },
+    {
+      "id": "create:honey_bucket",
+      "required": false
+    },
+    {
+      "id": "create:potato_cannon",
+      "required": false
+    },
+    {
+      "id": "create:wand_of_symmetry",
+      "required": false
+    },
+    {
+      "id": "create:wrench",
+      "required": false
     }
   ]
 }

@@ -53,6 +53,10 @@
       "required": false
     },
     {
+      "id": "minecraft:deepslate_redstone_ore",
+      "required": false
+    },
+    {
       "id": "minecraft:diamond_block",
       "required": false
     },
@@ -90,6 +94,54 @@
     },
     {
       "id": "minecraft:lapis_ore",
+      "required": false
+    },
+    {
+      "id": "minecraft:raw_copper_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:raw_gold_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:raw_iron_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:redstone_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:redstone_ore",
+      "required": false
+    },
+    {
+      "id": "create:andesite_alloy_block",
+      "required": false
+    },
+    {
+      "id": "create:brass_block",
+      "required": false
+    },
+    {
+      "id": "create:deepslate_zinc_ore",
+      "required": false
+    },
+    {
+      "id": "create:industrial_iron_block",
+      "required": false
+    },
+    {
+      "id": "create:raw_zinc_block",
+      "required": false
+    },
+    {
+      "id": "create:zinc_block",
+      "required": false
+    },
+    {
+      "id": "create:zinc_ore",
       "required": false
     }
   ]

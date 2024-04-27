@@ -40,7 +40,10 @@ public enum OreTypes {
     RAW_ZINC_BLOCK("raw_zinc_block"),
     ZINC_ORE("zinc_ore"),
     DEEPSLATE_ZINC_ORE("deepslate_zinc_ore"),
-    ANDESITE_ALLOY_BLOCK("andesite_alloy_block");
+    ANDESITE_ALLOY_BLOCK("andesite_alloy_block"),
+    REDSTONE_BLOCK("redstone_block"),
+    REDSTONE_ORE("redstone_ore"),
+    DEEPSLATE_REDSTONE_ORE("deepslate_redstone_ore");
 
     private final String name;
 

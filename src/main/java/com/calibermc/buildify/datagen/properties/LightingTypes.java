@@ -1,14 +1,17 @@
 package com.calibermc.buildify.datagen.properties;
 
 public enum LightingTypes {
-    CANDLE("candle"),
-    HYACINTH_LAMP("hyacinth_lamp"),
-    LANTERN("lantern"),
-    SEA_LANTERN("sea_lantern"),
-    SEA_PICKLE("sea_pickle"),
-    SOUL_LANTERN("soul_lantern"),
-    SOUL_TORCH("soul_torch"),
-    TORCH("torch");
+
+    CANDLE("minecraft:candle"),
+    LANTERN("minecraft:lantern"),
+    SEA_LANTERN("minecraft:sea_lantern"),
+    SEA_PICKLE("minecraft:sea_pickle"),
+    SOUL_LANTERN("minecraft:soul_lantern"),
+    SOUL_TORCH("minecraft:soul_torch"),
+    TORCH("minecraft:torch"),
+
+    // Regions Unexplored
+    RU_HYACINTH_LAMP("regions_unexplored:hyacinth_lamp"),;
 
 
     private final String name;

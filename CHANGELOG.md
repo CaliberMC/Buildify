@@ -2,11 +2,16 @@
 
 
 ### 0.2.5 (in progress)
+#### Features
 - Adjusted sorting of Flowers tab
 - Removed Infested Blocks from creative tabs
+- Added Missing Blocks from BOP and RU to custom tabs
 - Added Mod Compatibility for custom tabs to include Create blocks
+- Refined Creative Tabs Tags
 
+#### Bugfixes
 
+___
 ### 0.2.4
 - Downgraded Forge Version <- 47.1.3 to allow NeoForge 1.20.1 support
 - Further improved custom tab sorting
@@ -20,14 +25,17 @@
 - Added alphabetical sorting to Blockpicker so that items always display in the same order
 - Bugfix: fixed crash when searching other mod's built in creative search menus
 
+___
 ### 0.2.3
 - Bugfix: fixed mixin refmap not generating correctly
 
+___
 ### 0.2.2
 - Further improved custom tab sorting
 - Added 1.20.1 blocks to custom tabs
 - Bugfix: tools_weapons tab and armor tab were not displaying until after other mods tabs
 
+___
 ### 0.2.1
 - Added most Vanilla blocks to custom tabs, still needs a little bit of work.  Let me know if you notice any missing.
 - Added custom sorting algorithm for custom tabs.  This will be improved in future updates.
@@ -37,21 +45,26 @@
 - Bugfix: fixed Vanilla Tabs showing when Custom Tabs are enabled
 - Bugfix: fixed sorting button click not clearing
 
+___
 ### 0.2.0
 - Added Minecraft 1.20.1 support
 - Added Inventory Sorting feature
 - Added Custom Creative Tabs feature
 
+___
 ### 0.1.3
 - Bugfix: fixed error that was causing dedicated servers to not be able to start
 
+___
 ### 0.1.2
 - Added survival inventory hot swap feature
 
+___
 ### 0.1.1
 - Added Mod Compat for Block Picker
 - Added Data Pack Compat for Block Picker
 
+___
 ### 0.1.0
 - Initial beta release
 

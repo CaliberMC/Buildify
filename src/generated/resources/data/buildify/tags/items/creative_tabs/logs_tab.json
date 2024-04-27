@@ -5,11 +5,27 @@
       "required": false
     },
     {
+      "id": "minecraft:attached_melon_stem",
+      "required": false
+    },
+    {
+      "id": "minecraft:attached_pumpkin_stem",
+      "required": false
+    },
+    {
+      "id": "minecraft:big_dripleaf_stem",
+      "required": false
+    },
+    {
       "id": "minecraft:birch_log",
       "required": false
     },
     {
       "id": "minecraft:cherry_log",
+      "required": false
+    },
+    {
+      "id": "minecraft:crimson_stem",
       "required": false
     },
     {
@@ -25,7 +41,19 @@
       "required": false
     },
     {
+      "id": "minecraft:melon_stem",
+      "required": false
+    },
+    {
+      "id": "minecraft:mushroom_stem",
+      "required": false
+    },
+    {
       "id": "minecraft:oak_log",
+      "required": false
+    },
+    {
+      "id": "minecraft:pumpkin_stem",
       "required": false
     },
     {
@@ -42,6 +70,10 @@
     },
     {
       "id": "minecraft:stripped_cherry_log",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_crimson_stem",
       "required": false
     },
     {
@@ -62,6 +94,14 @@
     },
     {
       "id": "minecraft:stripped_spruce_log",
+      "required": false
+    },
+    {
+      "id": "minecraft:stripped_warped_stem",
+      "required": false
+    },
+    {
+      "id": "minecraft:warped_stem",
       "required": false
     },
     {
@@ -165,6 +205,10 @@
       "required": false
     },
     {
+      "id": "regions_unexplored:blue_bioshroom_stem",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:brimwood_log",
       "required": false
     },
@@ -186,6 +230,10 @@
     },
     {
       "id": "regions_unexplored:eucalyptus_log",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:green_bioshroom_stem",
       "required": false
     },
     {
@@ -217,6 +265,10 @@
       "required": false
     },
     {
+      "id": "regions_unexplored:pink_bioshroom_stem",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:redwood_log",
       "required": false
     },
@@ -245,6 +297,10 @@
       "required": false
     },
     {
+      "id": "regions_unexplored:stripped_blue_bioshroom_stem",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:stripped_brimwood_log",
       "required": false
     },
@@ -262,6 +318,10 @@
     },
     {
       "id": "regions_unexplored:stripped_eucalyptus_log",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stripped_green_bioshroom_stem",
       "required": false
     },
     {
@@ -293,6 +353,10 @@
       "required": false
     },
     {
+      "id": "regions_unexplored:stripped_pink_bioshroom_stem",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:stripped_redwood_log",
       "required": false
     },
@@ -309,7 +373,15 @@
       "required": false
     },
     {
+      "id": "regions_unexplored:stripped_yellow_bioshroom_stem",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:willow_log",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:yellow_bioshroom_stem",
       "required": false
     }
   ]

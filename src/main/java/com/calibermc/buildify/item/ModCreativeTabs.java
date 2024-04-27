@@ -75,27 +75,60 @@ public class ModCreativeTabs {
                             String itemName = itemStack.getItem().getName(itemStack).toString();
                             if (itemName.contains("granite")) {
                                 return "granite";
-                            } else if ((itemName.contains("stone_bricks") && !itemName.contains("blackstone"))
+                            } else if ((itemName.contains("stone_bricks") && !itemName.contains("blackstone") && !itemName.contains("endstone")
+                                    && !itemName.contains("dripstone") && !itemName.contains("brimstone") && !itemName.contains("limestone"))
                                     || itemName.contains("cobblestone") || itemName.contains("smooth_stone")) {
                                 return "stone";
+                            } else if (itemName.contains("andesite")) {
+                                return "andesite";
+                            } else if (itemName.contains("asurine")) {
+                                return "asurine";
                             } else if (itemName.contains("basalt")) {
                                 return "basalt";
                             } else if (itemName.contains("blackstone")) {
                                 return "blackstone";
+                            } else if (itemName.contains("brimstone")) {
+                                return "brimstone";
+                            } else if (itemName.contains("calcite")) {
+                                return "calcite";
+                            } else if (itemName.contains("chalk")) {
+                                return "chalk";
+                            } else if (itemName.contains("crimsite")) {
+                                return "crimsite";
                             } else if (itemName.contains("deepslate")) {
                                 return "deepslate";
+                            } else if (itemName.contains("diorite")) {
+                                return "diorite";
+                            } else if (itemName.contains("dripstone")) {
+                                return "dripstone";
                             } else if (itemName.contains("limestone")) {
                                 return "limestone";
                             } else if (itemName.contains("sandstone")) {
                                 return "sandstone";
                             } else if (itemName.contains("marble")) {
                                 return "marble";
+                            } else if (itemName.contains("mud")) {
+                                return "mud";
                             } else if (itemName.contains("nether")) {
                                 return "nether";
-                            } else if (itemName.contains("brimstone")) {
-                                return "brimstone";
+                            } else if (itemName.contains("ochrum")) {
+                                return "ochrum";
                             } else if (itemName.contains("purpur")) {
                                 return "purpur";
+                            } else if (itemName.contains("prismarine")) {
+                                return "prismarine";
+                            } else if (itemName.contains("quartz") && !itemName.contains("rose")) {
+                                return "quartz";
+                            } else if (itemName.contains("rose_quartz")) {
+                                return "rose_quartz";
+                            } else if (itemName.contains("scorchia")) {
+                                return "scorchia";
+                            } else if (itemName.contains("scoria")) {
+                                return "scoria";
+                            } else if (itemName.contains("tuff")) {
+                                return "tuff";
+                            } else if (itemName.contains("viridium")) {
+                                return "viridium";
                             } else {
                                 return itemName;
                             }
@@ -246,11 +279,61 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "glass_windows", () -> new ItemStack(Blocks.GLASS), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : getSortedItems()) {
-                    if (tags.getTag(ModTags.Items.glassWindowsTab).contains(item)) {
-                        pOutput.accept(new ItemStack(item));
-                    }
+                List<Item> items = new ArrayList<>();
+                for (Item item : tags.getTag(ModTags.Items.glassWindowsTab)) {
+                    items.add(item);
                 }
+
+                Map<String, List<Item>> groupedItems = items.stream()
+                        .collect(Collectors.groupingBy(item -> {
+                            ItemStack itemStack = new ItemStack(item);
+                            String itemName = itemStack.getItem().getName(itemStack).toString();
+                            if (itemName.contains("acacia")) {
+                                return "acacia";
+                            } else if (itemName.contains("bamboo")) {
+                                return "bamboo";
+                            } else if (itemName.contains("birch")) {
+                                return "birch";
+                            } else if (itemName.contains("cherry")) {
+                                return "cherry";
+                            } else if (itemName.contains("crimson")) {
+                                return "crimson";
+                            } else if (itemName.contains("dark_oak")) {
+                                return "dark_oak";
+                            } else if (itemName.contains("iron")) {
+                                return "iron";
+                            } else if (itemName.contains("jungle")) {
+                                return "jungle";
+                            } else if (itemName.contains("mangrove")) {
+                                return "mangrove";
+                            } else if (itemName.contains("oak") && !itemName.contains("dark")) {
+                                return "oak";
+                            } else if (itemName.contains("spruce")) {
+                                return "spruce";
+                            } else if (itemName.contains("warped")) {
+                                return "warped";
+                            } else if (itemName.contains("stained")) {
+                                return "xstained";
+                            } else if (itemName.contains("tinted")) {
+                                return "xtinted";
+                            } else {
+                                return itemName;
+                            }
+                        }));
+
+                groupedItems.entrySet().stream()
+                        // Sort groups alphabetically by key
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(entry -> {
+                            entry.getValue().stream()
+                                    // Sort based on itemName within groups
+                                    .sorted(Comparator.comparing(item -> {
+                                        ItemStack itemStack = new ItemStack(item);
+                                        return itemStack.getItem().getName(itemStack).getString();
+                                    }))
+                                    // Add sorted items to the tab
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
+                        });
             }
         });
 
@@ -408,13 +491,62 @@ public class ModCreativeTabs {
         beforeTab = createTab(beforeTab, "metals_ores", () -> new ItemStack(Blocks.GOLD_ORE), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();
             if (tags != null) {
-                for (Item item : getSortedItems()) {
-                    if (tags.getTag(ModTags.Items.metalsOresTab).contains(item)) {
-                        pOutput.accept(new ItemStack(item));
-                    }
+                List<Item> items = new ArrayList<>();
+                for (Item item : tags.getTag(ModTags.Items.metalsOresTab)) {
+                    items.add(item);
                 }
+
+                Map<String, List<Item>> groupedItems = items.stream()
+                        .collect(Collectors.groupingBy(item -> {
+                            ItemStack itemStack = new ItemStack(item);
+                            String itemName = itemStack.getItem().getName(itemStack).toString();
+                            if (itemName.contains("amethyst")) {
+                                return "amethyst";
+                            } else if (itemName.contains("coal")) {
+                                return "coal";
+                            } else if (itemName.contains("copper")) {
+                                return "copper";
+                            } else if (itemName.contains("diamond")) {
+                                return "diamond";
+                            } else if (itemName.contains("emerald")) {
+                                return "emerald";
+                            } else if (itemName.contains("gold")) {
+                                return "gold";
+                            } else if (itemName.contains("iron")) {
+                                return "iron";
+                            } else if (itemName.contains("lapis")) {
+                                return "lapis";
+                            } else if (itemName.contains("quartz")) {
+                                return "quartz";
+                            } else if (itemName.contains("redstone")) {
+                                return "redstone";
+                            } else if (itemName.contains("sapphire")) {
+                                return "sapphire";
+                            } else if (itemName.contains("silver")) {
+                                return "silver";
+                            } else if (itemName.contains("zinc")) {
+                                return "zinc";
+                            } else {
+                                return itemName;
+                            }
+                        }));
+
+                groupedItems.entrySet().stream()
+                        // Sort groups alphabetically by key
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(entry -> {
+                            entry.getValue().stream()
+                                    // Sort based on itemName within groups
+                                    .sorted(Comparator.comparing(item -> {
+                                        ItemStack itemStack = new ItemStack(item);
+                                        return itemStack.getItem().getName(itemStack).getString();
+                                    }))
+                                    // Add sorted items to the tab
+                                    .forEach(item -> pOutput.accept(new ItemStack(item)));
+                        });
             }
         });
+
 
         beforeTab = createTab(beforeTab, "logs", () -> new ItemStack(Blocks.OAK_LOG), (pParameters, pOutput) -> {
             ITagManager<Item> tags = ForgeRegistries.ITEMS.tags();

@@ -1,6 +1,10 @@
 {
   "values": [
     {
+      "id": "minecraft:coarse_dirt",
+      "required": false
+    },
+    {
       "id": "minecraft:dirt",
       "required": false
     },
@@ -9,15 +13,51 @@
       "required": false
     },
     {
-      "id": "minecraft:grass",
-      "required": false
-    },
-    {
       "id": "minecraft:grass_block",
       "required": false
     },
     {
+      "id": "minecraft:mycelium",
+      "required": false
+    },
+    {
+      "id": "minecraft:podzol",
+      "required": false
+    },
+    {
+      "id": "minecraft:rooted_dirt",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:origin_grass_block",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:alpha_grass_block",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:argillite_grass_block",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:chalk_grass_block",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:deepslate_grass_block",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:peat_grass_block",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:silt_grass_block",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:stone_grass_block",
       "required": false
     }
   ]

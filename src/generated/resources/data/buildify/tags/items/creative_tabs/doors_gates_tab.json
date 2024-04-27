@@ -261,6 +261,26 @@
       "required": false
     },
     {
+      "id": "create:andesite_door",
+      "required": false
+    },
+    {
+      "id": "create:brass_door",
+      "required": false
+    },
+    {
+      "id": "create:copper_door",
+      "required": false
+    },
+    {
+      "id": "create:train_door",
+      "required": false
+    },
+    {
+      "id": "create:train_trapdoor",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:baobab_door",
       "required": false
     },

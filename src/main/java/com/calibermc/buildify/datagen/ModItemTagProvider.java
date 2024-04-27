@@ -41,6 +41,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .sorted(Comparator.comparing(block -> (ForgeRegistries.BLOCKS.getKey(block)).getPath()))
                 .forEach(block -> {
                     String itemName = (ForgeRegistries.BLOCKS.getKey(block)).getPath();
+                    String fullItemName = ForgeRegistries.BLOCKS.getKey(block).toString();
 
                     if (       !itemName.contains("arch")           && !itemName.contains("arrowslit")
                             && !itemName.contains("balustrade")     && !itemName.contains("beam")
@@ -55,31 +56,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             && !itemName.contains("slab")           && !itemName.contains("stairs")
                             && !itemName.contains("trapdoor")       && !itemName.contains("wall")
                             && !itemName.contains("window")) {
-//                    if (block instanceof Block) {
-
-                        if (       (!itemName.contains("cutter") && !itemName.contains("bookshelf") && !itemName.contains("copper")
-                                && !itemName.contains("infested"))
-                                && (itemName.contains("cobble")  || itemName.contains("brick")   || itemName.contains("tiles")
-                                || itemName.contains("chiseled") || itemName.contains("cracked") || itemName.contains("polished")
-                                || itemName.contains("smooth")   || itemName.contains("cut"))) {
-                            this.tag(ModTags.Items.cobbleBricksTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
-
-                        if (itemName.contains("concrete") || itemName.contains("plaster") || itemName.contains("stucco")) {
-                            this.tag(ModTags.Items.concretePlasterStuccoTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
-
-                        if (Arrays.stream(CraftingTableTypes.values()).anyMatch(p -> itemName.equals(p.getName()))) {
-                            this.tag(ModTags.Items.craftingTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
-
-                        if (block instanceof CropBlock) {
-                            this.tag(ModTags.Items.cropsTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
-
-                        if (block instanceof ChiseledBookShelfBlock) {
-                            this.tag(ModTags.Items.decorTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
 
                         if (       block instanceof FlowerBlock        || block instanceof FlowerBlockBOP      || block instanceof CoralBlock
                                 || block instanceof CoralFanBlock      || block instanceof SeaPickleBlock      || block instanceof SaplingBlock
@@ -99,15 +75,6 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             this.tag(ModTags.Items.furnitureTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 
-                        if (       block instanceof GlassBlock || block instanceof StainedGlassBlock || block instanceof StainedGlassPaneBlock
-                                || itemName.contains("glass")  || itemName.contains("pane")          || itemName.contains("window")){
-                            this.tag(ModTags.Items.glassWindowsTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
-
-                        if (block instanceof GrassBlock || block instanceof DirtPathBlock || itemName.equals("dirt") || itemName.equals("grass")) {
-                            this.tag(ModTags.Items.grassDirtTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
-
                         if (       block instanceof LeavesBlock             || block instanceof BrambleLeavesBlock           || block instanceof JacarandaLeavesBlock
                                 || block instanceof MapleLeavesBlock        || block instanceof OrangeAutumnLeavesBlock      || block instanceof SnowblossomLeavesBlock
                                 || block instanceof YellowAutumnLeavesBlock || block instanceof AppleLeavesBlock             || block instanceof BlueMagnoliaLeavesBlock
@@ -118,13 +85,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             this.tag(ModTags.Items.leavesTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 
-                        if (Arrays.stream(LightingTypes.values()).anyMatch(p -> itemName.equals(p.getName()))) {
-                            this.tag(ModTags.Items.lightingTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
-
-                        if (block instanceof AspenLogBlock       || block instanceof BambooLogBlock   || block instanceof MagmaLogBlock
+                        if (      (block instanceof AspenLogBlock       || block instanceof BambooLogBlock   || block instanceof MagmaLogBlock
                                 || block instanceof PineLogBlock || block instanceof SmallOakLogBlock || block instanceof StrippedBambooLogBlock
-                                || itemName.contains("log")      || itemName.contains("stripped_log") || itemName.contains("stem")) {
+                                || itemName.contains("log")      || itemName.contains("stripped_log") || itemName.contains("stem")) && !itemName.contains("lever")) {
                             this.tag(ModTags.Items.logsTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 
@@ -132,7 +95,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             this.tag(ModTags.Items.metalsOresTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 
-                        if (       (itemName.contains("plank") || itemName.contains("beam"))
+                        if (       (itemName.contains("plank") || itemName.contains("beam")|| itemName.contains("boards"))
                                 || (itemName.contains("stripped") && !itemName.contains("log") && (itemName.contains("wood")  || itemName.contains("hyphae")))) {
                             this.tag(ModTags.Items.planksBeamsTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
@@ -146,27 +109,51 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             this.tag(ModTags.Items.sandGravelTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 
-                        if (    Arrays.stream(StoneTypes.values()).anyMatch(p -> itemName.equals(p.getName()))
-                                && !itemName.contains("brick")  && !itemName.contains("chiseled")
-                                && !itemName.contains("cobble")   && !itemName.contains("polished") && !itemName.contains("smooth")
-                                && !itemName.contains("cut")      && !itemName.contains("ore")      && !itemName.contains("bulb")
-                                && !itemName.contains("lamp")     && !itemName.contains("torch")    && !itemName.contains("redstone")
-                                && !itemName.contains("bud")      && !itemName.contains("grindstone")) {
-                            this.tag(ModTags.Items.stoneTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
-
                         if (block instanceof ChestBlock || block instanceof EnderChestBlock || block instanceof BarrelBlock || block instanceof ShulkerBoxBlock){
                             this.tag(ModTags.Items.storageTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 
-                        if (block instanceof CarpetBlock || itemName.contains("glazed_terracotta") || itemName.contains("flooring")){
-                            this.tag(ModTags.Items.tilesFlooringTab).addOptional(new ResourceLocation(this.modid, itemName));
-                        }
+                    }
+                    if (Arrays.stream(CobbleBricksTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))) {
+                        this.tag(ModTags.Items.cobbleBricksTab).addOptional(new ResourceLocation(this.modid, itemName));
+                    }
 
+                    if (Arrays.stream(ConcretePlasterTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))) {
+                        this.tag(ModTags.Items.concretePlasterStuccoTab).addOptional(new ResourceLocation(this.modid, itemName));
+                    }
+
+                    if (Arrays.stream(CraftingTableTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))) {
+                        this.tag(ModTags.Items.craftingTab).addOptional(new ResourceLocation(this.modid, itemName));
+                    }
+
+                    if (Arrays.stream(DecorTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))) {
+                        this.tag(ModTags.Items.decorTab).addOptional(new ResourceLocation(this.modid, itemName));
+                    }
+
+                    if ((Arrays.stream(GlassWindowTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))
+                            || block instanceof GlassBlock || block instanceof StainedGlassBlock || block instanceof StainedGlassPaneBlock
+                            || itemName.contains("glass")  || itemName.contains("pane"))) {
+                        this.tag(ModTags.Items.glassWindowsTab).addOptional(new ResourceLocation(this.modid, itemName));
+                    }
+
+                    if (Arrays.stream(GrassDirtTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))) {
+                        this.tag(ModTags.Items.grassDirtTab).addOptional(new ResourceLocation(this.modid, itemName));
+                    }
+
+                    if (Arrays.stream(LightingTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))) {
+                        this.tag(ModTags.Items.lightingTab).addOptional(new ResourceLocation(this.modid, itemName));
                     }
 
                     if (itemName.contains("roof")) {
                         this.tag(ModTags.Items.roofingTab).addOptional(new ResourceLocation(this.modid, itemName));
+                    }
+
+                    if (    Arrays.stream(StoneTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))) {
+                        this.tag(ModTags.Items.stoneTab).addOptional(new ResourceLocation(this.modid, itemName));
+                    }
+
+                    if (    Arrays.stream(TilesFlooringTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))) {
+                        this.tag(ModTags.Items.tilesFlooringTab).addOptional(new ResourceLocation(this.modid, itemName));
                     }
                 });
 
@@ -191,7 +178,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             || item instanceof NameTagItem        || item instanceof PickaxeItem         || item instanceof ShieldItem
                             || item instanceof ShearsItem         || item instanceof ShovelItem          || item instanceof SpectralArrowItem
                             || item instanceof SpyglassItem       || item instanceof SwordItem           || item instanceof TridentItem
-                            || itemName.equals("nails")          || itemName.equals("clock")){
+                            || itemName.equals("nails")           || itemName.equals("clock")            || itemName.equals("wrench")
+                            || itemName.equals("potato_cannon")   || itemName.equals("extendo_grip")     || itemName.equals("wand_of_symmetry")                                   || itemName.contains("staff")) {
                         this.tag(ModTags.Items.toolsWeaponsTab).addOptional(new ResourceLocation(this.modid, itemName));
                     }
 

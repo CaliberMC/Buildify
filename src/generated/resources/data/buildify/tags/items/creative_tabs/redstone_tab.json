@@ -5,6 +5,10 @@
       "required": false
     },
     {
+      "id": "minecraft:calibrated_sculk_sensor",
+      "required": false
+    },
+    {
       "id": "minecraft:chain_command_block",
       "required": false
     },
@@ -85,6 +89,14 @@
       "required": false
     },
     {
+      "id": "minecraft:sculk_sensor",
+      "required": false
+    },
+    {
+      "id": "minecraft:sculk_shrieker",
+      "required": false
+    },
+    {
       "id": "minecraft:slime_block",
       "required": false
     },
@@ -114,6 +126,22 @@
     },
     {
       "id": "minecraft:redstone",
+      "required": false
+    },
+    {
+      "id": "create:chute",
+      "required": false
+    },
+    {
+      "id": "create:redstone_contact",
+      "required": false
+    },
+    {
+      "id": "create:redstone_link",
+      "required": false
+    },
+    {
+      "id": "create:smart_chute",
       "required": false
     }
   ]

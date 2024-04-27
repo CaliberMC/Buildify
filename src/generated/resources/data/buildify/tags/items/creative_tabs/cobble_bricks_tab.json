@@ -53,10 +53,6 @@
       "required": false
     },
     {
-      "id": "minecraft:cracked_polished_blackstone_bricks",
-      "required": false
-    },
-    {
       "id": "minecraft:cracked_stone_bricks",
       "required": false
     },
@@ -69,15 +65,15 @@
       "required": false
     },
     {
+      "id": "minecraft:dark_prismarine",
+      "required": false
+    },
+    {
       "id": "minecraft:deepslate_bricks",
       "required": false
     },
     {
       "id": "minecraft:deepslate_tiles",
-      "required": false
-    },
-    {
-      "id": "minecraft:end_stone_bricks",
       "required": false
     },
     {
@@ -129,6 +125,14 @@
       "required": false
     },
     {
+      "id": "minecraft:purpur_block",
+      "required": false
+    },
+    {
+      "id": "minecraft:purpur_pillar",
+      "required": false
+    },
+    {
       "id": "minecraft:quartz_bricks",
       "required": false
     },
@@ -138,10 +142,6 @@
     },
     {
       "id": "minecraft:smooth_basalt",
-      "required": false
-    },
-    {
-      "id": "minecraft:smooth_quartz",
       "required": false
     },
     {
@@ -205,11 +205,347 @@
       "required": false
     },
     {
+      "id": "create:andesite_pillar",
+      "required": false
+    },
+    {
+      "id": "create:asurine_pillar",
+      "required": false
+    },
+    {
+      "id": "create:calcite_pillar",
+      "required": false
+    },
+    {
+      "id": "create:crimsite_pillar",
+      "required": false
+    },
+    {
+      "id": "create:cut_andesite",
+      "required": false
+    },
+    {
+      "id": "create:cut_andesite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_asurine",
+      "required": false
+    },
+    {
+      "id": "create:cut_asurine_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_calcite",
+      "required": false
+    },
+    {
+      "id": "create:cut_calcite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_crimsite",
+      "required": false
+    },
+    {
+      "id": "create:cut_crimsite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_deepslate",
+      "required": false
+    },
+    {
+      "id": "create:cut_deepslate_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_diorite",
+      "required": false
+    },
+    {
+      "id": "create:cut_diorite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_dripstone",
+      "required": false
+    },
+    {
+      "id": "create:cut_dripstone_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_granite",
+      "required": false
+    },
+    {
+      "id": "create:cut_granite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_limestone",
+      "required": false
+    },
+    {
+      "id": "create:cut_limestone_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_ochrum",
+      "required": false
+    },
+    {
+      "id": "create:cut_ochrum_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_scorchia",
+      "required": false
+    },
+    {
+      "id": "create:cut_scorchia_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_scoria",
+      "required": false
+    },
+    {
+      "id": "create:cut_scoria_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_tuff",
+      "required": false
+    },
+    {
+      "id": "create:cut_tuff_bricks",
+      "required": false
+    },
+    {
+      "id": "create:cut_veridium",
+      "required": false
+    },
+    {
+      "id": "create:cut_veridium_bricks",
+      "required": false
+    },
+    {
+      "id": "create:deepslate_pillar",
+      "required": false
+    },
+    {
+      "id": "create:diorite_pillar",
+      "required": false
+    },
+    {
+      "id": "create:dripstone_pillar",
+      "required": false
+    },
+    {
+      "id": "create:granite_pillar",
+      "required": false
+    },
+    {
+      "id": "create:layered_andesite",
+      "required": false
+    },
+    {
+      "id": "create:layered_asurine",
+      "required": false
+    },
+    {
+      "id": "create:layered_calcite",
+      "required": false
+    },
+    {
+      "id": "create:layered_crimsite",
+      "required": false
+    },
+    {
+      "id": "create:layered_deepslate",
+      "required": false
+    },
+    {
+      "id": "create:layered_diorite",
+      "required": false
+    },
+    {
+      "id": "create:layered_dripstone",
+      "required": false
+    },
+    {
+      "id": "create:layered_granite",
+      "required": false
+    },
+    {
+      "id": "create:layered_limestone",
+      "required": false
+    },
+    {
+      "id": "create:layered_ochrum",
+      "required": false
+    },
+    {
+      "id": "create:layered_scorchia",
+      "required": false
+    },
+    {
+      "id": "create:layered_scoria",
+      "required": false
+    },
+    {
+      "id": "create:layered_tuff",
+      "required": false
+    },
+    {
+      "id": "create:layered_veridium",
+      "required": false
+    },
+    {
+      "id": "create:limestone_pillar",
+      "required": false
+    },
+    {
+      "id": "create:ochrum_pillar",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_andesite",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_asurine",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_calcite",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_crimsite",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_deepslate",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_diorite",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_dripstone",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_granite",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_limestone",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_ochrum",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_scorchia",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_scoria",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_tuff",
+      "required": false
+    },
+    {
+      "id": "create:polished_cut_veridium",
+      "required": false
+    },
+    {
+      "id": "create:scorchia_pillar",
+      "required": false
+    },
+    {
+      "id": "create:scoria_pillar",
+      "required": false
+    },
+    {
+      "id": "create:small_andesite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_asurine_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_calcite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_crimsite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_deepslate_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_diorite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_dripstone_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_granite_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_limestone_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_ochrum_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_scorchia_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_scoria_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_tuff_bricks",
+      "required": false
+    },
+    {
+      "id": "create:small_veridium_bricks",
+      "required": false
+    },
+    {
+      "id": "create:tuff_pillar",
+      "required": false
+    },
+    {
+      "id": "create:veridium_pillar",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:chalk_bricks",
       "required": false
     },
     {
-      "id": "regions_unexplored:polished_chalk",
+      "id": "regions_unexplored:chalk_pillar",
       "required": false
     }
   ]
