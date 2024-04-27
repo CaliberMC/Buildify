@@ -45,60 +45,65 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
     }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderLabels(Lnet/minecraft/client/gui/GuiGraphics;II)V"))
-    public void mixin$renderLineStuff(GuiGraphics guiGraphics, int pMouseX, int pMouseY, float pPartialTick, CallbackInfo ci) {
-        if (!(this instanceof IInvScreenExtended s)) return;
-        int i = this.leftPos;
-        int j = this.topPos;
-        for (int k = 0; k < 4; k++) {
-            if (s.buildify$lineOfSlots() != k) {
-                int y = 83 + k * 19 - 1;
-                if (k == 3) {
-                    y = 142;
-                }
-                guiGraphics.blit(INV, 176, y, 0, 0, 18, 19, 18, 38);
-            }
-        }
+        public void mixin$renderLineStuff (GuiGraphics guiGraphics,int pMouseX, int pMouseY, float pPartialTick, CallbackInfo ci) {
 
-        if (s.buildify$lineOfSlots() != -1) {
-            int blitOffset = 500;
-            int y1 = 83 + s.buildify$lineOfSlots() * 18 - 1;
-            if (s.buildify$lineOfSlots() == 3) {
-                y1 = 140;
-            }
-            int x = (pMouseX - i) - 176 - 2;
-            int y = (pMouseY - j) - y1 - 8;
-            y += y1;
-            guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0, 0, blitOffset);
-            RenderSystem.setShaderTexture(0, INVENTORY_LOCATION);
-            guiGraphics.blit(INVENTORY_LOCATION, 7, y1 + 1, 162, 18, 3, 83, 4, 18, 256, 256);
+        boolean renderHotSwapSliders = ClientConfigs.DISPLAY_HOT_SWAP_SLIDERS.get();
+        if (renderHotSwapSliders) {
 
-            RenderSystem.setShaderTexture(0, INV);
-            guiGraphics.blit(INV, x + 169, y, 0, 19, 18, 19, 18, 38);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, INVENTORY_LOCATION);
-            guiGraphics.blit(INVENTORY_LOCATION, x + 7, y, 7, 83, 162, 18, 256, 256);
-            guiGraphics.fill(x + 7, y + 18, x + 169, y + 18 + 1, -16777216);
-
-            y -= y1;
-            for (Slot slot : s.buildify$hoveredSlots()) {
-                int xSlot = slot.x + x;
-                int ySlot = slot.y + y;
-                ItemStack pStack = slot.getItem();
-                if (slot.isActive()) {
-                    PoseStack posestack = RenderSystem.getModelViewStack();
-                    posestack.translate(0.0D, 0.0D, 32.0D);
-                    RenderSystem.applyModelViewMatrix();
-                    guiGraphics.pose().pushPose();
-                    guiGraphics.pose().translate(0, 0, blitOffset);
-                    net.minecraft.client.gui.Font font = IClientItemExtensions.of(pStack).getFont(pStack, IClientItemExtensions.FontContext.ITEM_COUNT);
-                    if (font == null) font = this.font;
-                    guiGraphics.renderItem(pStack, xSlot, ySlot, 0 ,500);
-                    guiGraphics.renderItemDecorations(font, pStack, xSlot, ySlot, null);
-                    guiGraphics.pose().popPose();
+            if (!(this instanceof IInvScreenExtended s)) return;
+            int i = this.leftPos;
+            int j = this.topPos;
+            for (int k = 0; k < 4; k++) {
+                if (s.buildify$lineOfSlots() != k) {
+                    int y = 83 + k * 19 - 1;
+                    if (k == 3) {
+                        y = 142;
+                    }
+                    guiGraphics.blit(INV, 176, y, 0, 0, 18, 19, 18, 38);
                 }
             }
-            guiGraphics.pose().popPose();
+
+            if (s.buildify$lineOfSlots() != -1) {
+                int blitOffset = 500;
+                int y1 = 83 + s.buildify$lineOfSlots() * 18 - 1;
+                if (s.buildify$lineOfSlots() == 3) {
+                    y1 = 140;
+                }
+                int x = (pMouseX - i) - 176 - 2;
+                int y = (pMouseY - j) - y1 - 8;
+                y += y1;
+                guiGraphics.pose().pushPose();
+                guiGraphics.pose().translate(0, 0, blitOffset);
+                RenderSystem.setShaderTexture(0, INVENTORY_LOCATION);
+                guiGraphics.blit(INVENTORY_LOCATION, 7, y1 + 1, 162, 18, 3, 83, 4, 18, 256, 256);
+
+                RenderSystem.setShaderTexture(0, INV);
+                guiGraphics.blit(INV, x + 169, y, 0, 19, 18, 19, 18, 38);
+                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                RenderSystem.setShaderTexture(0, INVENTORY_LOCATION);
+                guiGraphics.blit(INVENTORY_LOCATION, x + 7, y, 7, 83, 162, 18, 256, 256);
+                guiGraphics.fill(x + 7, y + 18, x + 169, y + 18 + 1, -16777216);
+
+                y -= y1;
+                for (Slot slot : s.buildify$hoveredSlots()) {
+                    int xSlot = slot.x + x;
+                    int ySlot = slot.y + y;
+                    ItemStack pStack = slot.getItem();
+                    if (slot.isActive()) {
+                        PoseStack posestack = RenderSystem.getModelViewStack();
+                        posestack.translate(0.0D, 0.0D, 32.0D);
+                        RenderSystem.applyModelViewMatrix();
+                        guiGraphics.pose().pushPose();
+                        guiGraphics.pose().translate(0, 0, blitOffset);
+                        net.minecraft.client.gui.Font font = IClientItemExtensions.of(pStack).getFont(pStack, IClientItemExtensions.FontContext.ITEM_COUNT);
+                        if (font == null) font = this.font;
+                        guiGraphics.renderItem(pStack, xSlot, ySlot, 0, 500);
+                        guiGraphics.renderItemDecorations(font, pStack, xSlot, ySlot, null);
+                        guiGraphics.pose().popPose();
+                    }
+                }
+                guiGraphics.pose().popPose();
+            }
         }
     }
 

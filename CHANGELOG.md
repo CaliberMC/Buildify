@@ -8,6 +8,7 @@
 - Added Missing Blocks from BOP and RU to custom tabs
 - Added Mod Compatibility for custom tabs to include Create blocks
 - Refined Creative Tabs Tags
+- Added Config Option to Disable Survival Inventory Hot Swap Feature
 
 #### Bugfixes
 
