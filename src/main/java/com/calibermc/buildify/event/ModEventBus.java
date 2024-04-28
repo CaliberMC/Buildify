@@ -3,6 +3,7 @@ package com.calibermc.buildify.event;
 import com.calibermc.buildify.Buildify;
 
 import com.calibermc.buildify.command.BuildifyCommands;
+import com.calibermc.buildify.config.CommonConfigs;
 import com.calibermc.buildify.util.BlockPickerStatesJson;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -70,7 +71,10 @@ public class ModEventBus {
 
     @SubscribeEvent
     public static void registerCommands(RegisterCommandsEvent event) {
-        BuildifyCommands.register(event.getDispatcher());
+        boolean disbaleCommands = CommonConfigs.DISABLE_ALL_ADDED_OP_COMMANDS.get();
+        if (!disbaleCommands) {
+            BuildifyCommands.register(event.getDispatcher());
+        }
     }
 
     @SubscribeEvent

@@ -65,6 +65,7 @@ Use this command to toggle flying on or off.  This command will allow the player
 ### TP All Command _(op only)_:
 Use this command to teleport all players to the specified player.  This command will teleport all players to the player specified.
 
+ALL COMMANDS ARE OP ONLY.  ALL COMMANDS CAN BE DISABLED IN THE COMMON-CONFIG IF DESIRED.
 
 ## **INSTALLATION**
 - **Server and Client** installation are required to use this mod
