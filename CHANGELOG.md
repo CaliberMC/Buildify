@@ -9,8 +9,15 @@
 - Added Mod Compatibility for custom tabs to include Create blocks
 - Refined Creative Tabs Tags
 - Added Config Option to Disable Survival Inventory Hot Swap Feature
+- Added Config Option for logging commands to server console
+- Added /gm command to change GameMode
+- Added /repair command to repair items
+- Added /time command to change server time
+- Added /weather command to change player time
+- Adjusted /ptime to simplify command
 
 #### Bugfixes
+- Fixed sorting buttons displaying on non inventory screens
 
 ___
 ### 0.2.4
