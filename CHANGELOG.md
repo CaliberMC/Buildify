@@ -14,6 +14,9 @@
 - Added /repair command to repair items
 - Added /time command to change server time
 - Added /weather command to change player time
+- Added /fly command to toggle flying
+- Added /heal command to heal player
+- Added /tpall command to teleport all players to specified player
 - Adjusted /ptime to simplify command
 
 #### Bugfixes
