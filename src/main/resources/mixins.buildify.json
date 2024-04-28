@@ -2,17 +2,17 @@
   "required": true,
   "package": "com.calibermc.buildify.mixin",
   "refmap": "mixins.buildify.refmap.json",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
   "client": [
     "AbstractContainerScreenMixin",
     "ClientLevelDataMixin",
-    "InventoryScreenMixin",
-    "LevelMixin"
+    "InventoryScreenMixin"
   ],
   "mixins": [
     "CreativeModeTabRegistryMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "LevelMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -39,66 +39,70 @@ public abstract class InventoryScreenMixin extends EffectRenderingInventoryScree
     @Inject(method = "mouseReleased", at = @At("HEAD"), cancellable = true)
     public void mixin$mouseReleased(double pMouseX, double pMouseY, int pButton, CallbackInfoReturnable<Boolean> cir) {
         boolean renderHotSwapSliders = ClientConfigs.DISPLAY_HOT_SWAP_SLIDERS.get();
-        if (renderHotSwapSliders) {
-            try {
-                if (pButton == 0 && this.buildify$lineOfSlots != -1) {
-                    boolean b = false;
-                    for (int i = 0; i < 4; i++) {
-                        int y = 83 + i * 19 - 1;
-                        if (i == 3) {
-                            y = 142;
-                        }
-                        if (this.isHovering(176, y, 13, 19, pMouseX, pMouseY)) {
-                            var oldSlots = this.buildify$hoveredSlots();
-                            this.buildify$lineOfSlots = i;
-                            var newSlots = this.buildify$hoveredSlots();
-                            List<ItemStack> list = com.google.common.collect.Lists.newArrayListWithCapacity(this.menu.slots.size());
-
-                            for (Slot slot : this.menu.slots) {
-                                list.add(slot.getItem().copy());
-                            }
-                            Int2ObjectMap<ItemStack> map = new Int2ObjectOpenHashMap<>();
-                            for (int k = 0; k < newSlots.size(); k++) {
-                                ItemStack newStack = newSlots.get(k).getItem();
-                                newSlots.get(k).set(oldSlots.get(k).getItem());
-                                oldSlots.get(k).set(newStack);
-                            }
-                            for (int j = 0; j < list.size(); ++j) {
-                                ItemStack itemstack = list.get(j);
-                                ItemStack itemstack1 = this.menu.slots.get(j).getItem();
-                                if (!ItemStack.matches(itemstack, itemstack1)) {
-                                    map.put(j, itemstack1.copy());
-                                }
-                            }
-                            this.buildify$lineOfSlots = -1;
-                            ModNetworking.INSTANCE.sendToServer(new ServerUpdateSlots(this.menu.containerId, this.menu.getStateId(), map));
-                            cir.setReturnValue(true);
-                        } else {
-                            b = true;
-                        }
-                    }
-                    if (b) {
-                        this.buildify$lineOfSlots = -1;
-                    }
-                }
-            } catch (Exception ignored) {
-            }
+        if (!renderHotSwapSliders) {
+            return;
         }
-    }
-
-    @Inject(method = "mouseClicked", at = @At("HEAD"))
-    public void mixin$mouseClicked(double pMouseX, double pMouseY, int pButton, CallbackInfoReturnable<Boolean> cir) {
-        boolean renderHotSwapSliders = ClientConfigs.DISPLAY_HOT_SWAP_SLIDERS.get();
-        if (renderHotSwapSliders) {
-            if (pButton == 0) {
+        try {
+            if (pButton == 0 && this.buildify$lineOfSlots != -1) {
+                boolean b = false;
                 for (int i = 0; i < 4; i++) {
                     int y = 83 + i * 19 - 1;
                     if (i == 3) {
                         y = 142;
                     }
                     if (this.isHovering(176, y, 13, 19, pMouseX, pMouseY)) {
+                        var oldSlots = this.buildify$hoveredSlots();
                         this.buildify$lineOfSlots = i;
+                        var newSlots = this.buildify$hoveredSlots();
+                        List<ItemStack> list = com.google.common.collect.Lists.newArrayListWithCapacity(this.menu.slots.size());
+
+                        for (Slot slot : this.menu.slots) {
+                            list.add(slot.getItem().copy());
+                        }
+                        Int2ObjectMap<ItemStack> map = new Int2ObjectOpenHashMap<>();
+                        for (int k = 0; k < newSlots.size(); k++) {
+                            ItemStack newStack = newSlots.get(k).getItem();
+                            newSlots.get(k).set(oldSlots.get(k).getItem());
+                            oldSlots.get(k).set(newStack);
+                        }
+                        for (int j = 0; j < list.size(); ++j) {
+                            ItemStack itemstack = list.get(j);
+                            ItemStack itemstack1 = this.menu.slots.get(j).getItem();
+                            if (!ItemStack.matches(itemstack, itemstack1)) {
+                                map.put(j, itemstack1.copy());
+                            }
+                        }
+                        this.buildify$lineOfSlots = -1;
+                        ModNetworking.INSTANCE.sendToServer(new ServerUpdateSlots(this.menu.containerId, this.menu.getStateId(), map));
+                        cir.setReturnValue(true);
+                    } else {
+                        b = true;
                     }
+                }
+                if (b) {
+                    this.buildify$lineOfSlots = -1;
+                }
+            }
+        } catch (Exception ignored) {
+
+        }
+
+    }
+
+    @Inject(method = "mouseClicked", at = @At("HEAD"))
+    public void mixin$mouseClicked(double pMouseX, double pMouseY, int pButton, CallbackInfoReturnable<Boolean> cir) {
+        boolean renderHotSwapSliders = ClientConfigs.DISPLAY_HOT_SWAP_SLIDERS.get();
+        if (!renderHotSwapSliders) {
+            return;
+        }
+        if (pButton == 0) {
+            for (int i = 0; i < 4; i++) {
+                int y = 83 + i * 19 - 1;
+                if (i == 3) {
+                    y = 142;
+                }
+                if (this.isHovering(176, y, 13, 19, pMouseX, pMouseY)) {
+                    this.buildify$lineOfSlots = i;
                 }
             }
         }

@@ -48,63 +48,64 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
         public void mixin$renderLineStuff (GuiGraphics guiGraphics,int pMouseX, int pMouseY, float pPartialTick, CallbackInfo ci) {
 
         boolean renderHotSwapSliders = ClientConfigs.DISPLAY_HOT_SWAP_SLIDERS.get();
-        if (renderHotSwapSliders) {
-
-            if (!(this instanceof IInvScreenExtended s)) return;
-            int i = this.leftPos;
-            int j = this.topPos;
-            for (int k = 0; k < 4; k++) {
-                if (s.buildify$lineOfSlots() != k) {
-                    int y = 83 + k * 19 - 1;
-                    if (k == 3) {
-                        y = 142;
-                    }
-                    guiGraphics.blit(INV, 176, y, 0, 0, 18, 19, 18, 38);
+        if (!renderHotSwapSliders) {
+            return;
+        }
+        if (!(this instanceof IInvScreenExtended s)) return;
+        int i = this.leftPos;
+        int j = this.topPos;
+        for (int k = 0; k < 4; k++) {
+            if (s.buildify$lineOfSlots() != k) {
+                int y = 83 + k * 19 - 1;
+                if (k == 3) {
+                    y = 142;
                 }
-            }
-
-            if (s.buildify$lineOfSlots() != -1) {
-                int blitOffset = 500;
-                int y1 = 83 + s.buildify$lineOfSlots() * 18 - 1;
-                if (s.buildify$lineOfSlots() == 3) {
-                    y1 = 140;
-                }
-                int x = (pMouseX - i) - 176 - 2;
-                int y = (pMouseY - j) - y1 - 8;
-                y += y1;
-                guiGraphics.pose().pushPose();
-                guiGraphics.pose().translate(0, 0, blitOffset);
-                RenderSystem.setShaderTexture(0, INVENTORY_LOCATION);
-                guiGraphics.blit(INVENTORY_LOCATION, 7, y1 + 1, 162, 18, 3, 83, 4, 18, 256, 256);
-
-                RenderSystem.setShaderTexture(0, INV);
-                guiGraphics.blit(INV, x + 169, y, 0, 19, 18, 19, 18, 38);
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                RenderSystem.setShaderTexture(0, INVENTORY_LOCATION);
-                guiGraphics.blit(INVENTORY_LOCATION, x + 7, y, 7, 83, 162, 18, 256, 256);
-                guiGraphics.fill(x + 7, y + 18, x + 169, y + 18 + 1, -16777216);
-
-                y -= y1;
-                for (Slot slot : s.buildify$hoveredSlots()) {
-                    int xSlot = slot.x + x;
-                    int ySlot = slot.y + y;
-                    ItemStack pStack = slot.getItem();
-                    if (slot.isActive()) {
-                        PoseStack posestack = RenderSystem.getModelViewStack();
-                        posestack.translate(0.0D, 0.0D, 32.0D);
-                        RenderSystem.applyModelViewMatrix();
-                        guiGraphics.pose().pushPose();
-                        guiGraphics.pose().translate(0, 0, blitOffset);
-                        net.minecraft.client.gui.Font font = IClientItemExtensions.of(pStack).getFont(pStack, IClientItemExtensions.FontContext.ITEM_COUNT);
-                        if (font == null) font = this.font;
-                        guiGraphics.renderItem(pStack, xSlot, ySlot, 0, 500);
-                        guiGraphics.renderItemDecorations(font, pStack, xSlot, ySlot, null);
-                        guiGraphics.pose().popPose();
-                    }
-                }
-                guiGraphics.pose().popPose();
+                guiGraphics.blit(INV, 176, y, 0, 0, 18, 19, 18, 38);
             }
         }
+
+        if (s.buildify$lineOfSlots() != -1) {
+            int blitOffset = 500;
+            int y1 = 83 + s.buildify$lineOfSlots() * 18 - 1;
+            if (s.buildify$lineOfSlots() == 3) {
+                y1 = 140;
+            }
+            int x = (pMouseX - i) - 176 - 2;
+            int y = (pMouseY - j) - y1 - 8;
+            y += y1;
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(0, 0, blitOffset);
+            RenderSystem.setShaderTexture(0, INVENTORY_LOCATION);
+            guiGraphics.blit(INVENTORY_LOCATION, 7, y1 + 1, 162, 18, 3, 83, 4, 18, 256, 256);
+
+            RenderSystem.setShaderTexture(0, INV);
+            guiGraphics.blit(INV, x + 169, y, 0, 19, 18, 19, 18, 38);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderTexture(0, INVENTORY_LOCATION);
+            guiGraphics.blit(INVENTORY_LOCATION, x + 7, y, 7, 83, 162, 18, 256, 256);
+            guiGraphics.fill(x + 7, y + 18, x + 169, y + 18 + 1, -16777216);
+
+            y -= y1;
+            for (Slot slot : s.buildify$hoveredSlots()) {
+                int xSlot = slot.x + x;
+                int ySlot = slot.y + y;
+                ItemStack pStack = slot.getItem();
+                if (slot.isActive()) {
+                    PoseStack posestack = RenderSystem.getModelViewStack();
+                    posestack.translate(0.0D, 0.0D, 32.0D);
+                    RenderSystem.applyModelViewMatrix();
+                    guiGraphics.pose().pushPose();
+                    guiGraphics.pose().translate(0, 0, blitOffset);
+                    net.minecraft.client.gui.Font font = IClientItemExtensions.of(pStack).getFont(pStack, IClientItemExtensions.FontContext.ITEM_COUNT);
+                    if (font == null) font = this.font;
+                    guiGraphics.renderItem(pStack, xSlot, ySlot, 0, 500);
+                    guiGraphics.renderItemDecorations(font, pStack, xSlot, ySlot, null);
+                    guiGraphics.pose().popPose();
+                }
+            }
+            guiGraphics.pose().popPose();
+        }
+
     }
 
     @ModifyExpressionValue(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/Slot;isActive()Z"))
@@ -131,35 +132,42 @@ public abstract class AbstractContainerScreenMixin<T extends AbstractContainerMe
     @Inject(method = "init", at = @At("RETURN"))
     public void mixin$init(CallbackInfo ci) {
         boolean displaySortingButtons = ClientConfigs.DISPLAY_SORTING_BUTTONS.get();
-        if (displaySortingButtons) {
-            AbstractContainerScreen<?> screen = (AbstractContainerScreen<?>) (Object) this;
-            int x = this.leftPos + this.imageWidth - 5;
-            for (int i = 0; i < 2; i++) {
-                boolean playerOnly = this.menu instanceof InventoryMenu || screen instanceof CreativeModeInventoryScreen;
-                boolean alphabet = i == 0;
-                x -= 13;
-                int menuY = this.topPos + (playerOnly ? (this.imageHeight - 98) : 6);
+        if (!displaySortingButtons) {
+            return;
+        }
+        AbstractContainerScreen<?> screen = (AbstractContainerScreen<?>) (Object) this;
+        // Check if the screen is either a ChestMenu or a Player Inventory (excluding creative).
+        if (!(screen.getMenu() instanceof ChestMenu) && !(screen.getMenu() instanceof InventoryMenu)) {
+            return;
+        }
 
-                if (this.menu instanceof ChestMenu) {
-                    menuY -= 1;
-                }
-                this.buildify$sortingButtonList.add(this.addRenderableWidget(new SortingButton(screen, x, menuY, playerOnly, alphabet)));
+        int x = this.leftPos + this.imageWidth - 5;
+        for (int i = 0; i < 2; i++) {
+            boolean playerOnly = this.menu instanceof InventoryMenu || screen instanceof CreativeModeInventoryScreen;
+            boolean alphabet = i == 0;
+            x -= 13;
+            int menuY = this.topPos + (playerOnly ? (this.imageHeight - 98) : 6);
 
-                if (!playerOnly) {
-                    int y = 0;
-                    if (!this.menu.slots.isEmpty()) {
-                        y = this.menu.getSlot(this.menu.slots.size() - 36).y - 13;
-                    }
-                    this.buildify$sortingButtonList.add(this.addRenderableWidget(new SortingButton(screen, x, this.topPos + y, true, alphabet)));
-                }
+            if (this.menu instanceof ChestMenu) {
+                menuY -= 1;
             }
-            if (screen instanceof CreativeModeInventoryScreen s) {
-                for (SortingButton button : this.buildify$sortingButtonList) {
-                    button.visible = s.isInventoryOpen();
+            this.buildify$sortingButtonList.add(this.addRenderableWidget(new SortingButton(screen, x, menuY, playerOnly, alphabet)));
+
+            if (!playerOnly) {
+                int y = 0;
+                if (!this.menu.slots.isEmpty()) {
+                    y = this.menu.getSlot(this.menu.slots.size() - 36).y - 13;
                 }
+                this.buildify$sortingButtonList.add(this.addRenderableWidget(new SortingButton(screen, x, this.topPos + y, true, alphabet)));
+            }
+        }
+        if (screen instanceof CreativeModeInventoryScreen s) {
+            for (SortingButton button : this.buildify$sortingButtonList) {
+                button.visible = s.isInventoryOpen();
             }
         }
     }
+
 
     @Inject(method = "render", at = @At("HEAD"))
     public void mixin$render(CallbackInfo ci) {

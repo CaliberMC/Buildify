@@ -24,7 +24,6 @@ public abstract class LevelMixin {
 
     @Shadow protected abstract LevelEntityGetter<Entity> getEntities();
 
-
     @Inject(method = "tickBlockEntities", at = @At("TAIL"))
     public void mixin$tick(CallbackInfo ci) {
         Level level = (Level) (Object) this;
