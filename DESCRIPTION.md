@@ -30,42 +30,17 @@ The Block Picker was inspired by Conquest Reforged but I have made it available 
 
 ![Block Picker](https://cdn.modrinth.com/data/cached_images/4202a7bd81262f2a7d27e88c244cd583e6e34c1d.png)
 
-### Time Command _(op only)_:
-Use this command to set the server time to various settings.  This command will affect the time for entire server.
-- **/time**
+### OP Commands:
+- **/time** | Use this command to set the server time to various settings.  This command will affect the time for entire server.
+- **/ptime** | Use this command to change the time to any number of settings or set it back to server time.  This only affects the player.
+- **/pweather** | Use this command to change the weather or set it back to server weather.  This only affects the player. 
+- **/gm** | Use this command to change your gamemode without having to type gamemode.  Just type /gm 0,1,2,3 intead!
+- **/repair** | Use this command to repair the item currently held in your hand.  This command will repair the item to full durability.
+- **/heal** | Use this command to heal yourself or the specified player.  This command will heal the player and max out their food saturation as well.
+- **/fly** | Use this command to toggle flying on or off.  This command will allow the player to fly in survival mode.
+- **/tpall** | Use this command to teleport all players to the specified player.  This command will teleport all players to the player specified.
 
-### Player Time Command _(op only)_:
-Use this command to change the time to any number of settings or set it back to server time.  This only affects the player.  If used on a server other players will not have their time changed.
-- **/ptime**
-
-### Weather Command _(op only)_:
-Use this command to change the weather.  This command will affect the weather for the entire server.
-- **/weather**
-
-### Player Weather Command _(op only)_:
-Use this command to change the weather or set it back to server weather.  This only affects the player.  If used on a server other players will not have their weather changed.
-- **/pweather**
-
-### Player GameMode Command _(op only)_:
-Use this command to change your gamemode without having to type gamemode.  Just type /gm intead!  
-- **/gm**
-
-### Repair Item Command _(op only)_:
-Use this command to repair the item currently held in your hand.  This command will repair the item to full durability.
-- **/repair**
-
-### Heal Command _(op only)_:
-Use this command to heal yourself or the specified player.  This command will heal the player and max out their food saturation as well.
-- **/heal**
-
-### Fly Command _(op only)_:
-Use this command to toggle flying on or off.  This command will allow the player to fly in survival mode.
-- **/fly**
-
-### TP All Command _(op only)_:
-Use this command to teleport all players to the specified player.  This command will teleport all players to the player specified.
-
-ALL COMMANDS ARE OP ONLY.  ALL COMMANDS CAN BE DISABLED IN THE COMMON-CONFIG IF DESIRED.
+**_ALL COMMANDS ARE OP ONLY AND THEY CAN BE DISABLED IN THE COMMON-CONFIG IF DESIRED._**
 
 ## **INSTALLATION**
 - **Server and Client** installation are required to use this mod

@@ -4,9 +4,7 @@ import com.calibermc.buildify.util.player.IPlayerExtended;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -18,10 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.calibermc.buildify.config.CommonConfigs.COMMAND_SERVER_LOGGING;
 
@@ -60,13 +54,6 @@ public class BuildifyCommands {
                         .then(Commands.argument("time", TimeArgument.time())
                                 .executes(context -> setPlayerTime(context.getSource(), IntegerArgumentType.getInteger(context, "time"), false))))
         );
-
-        // Weather Command
-        dispatcher.register(Commands.literal("weather")
-                .requires(source -> source.hasPermission(2))
-                .then(Commands.literal("clear").executes(context -> setServerWeather(context.getSource(), WeatherType.CLEAR)))
-                .then(Commands.literal("rain").executes(context -> setServerWeather(context.getSource(), WeatherType.RAIN)))
-                .then(Commands.literal("thunder").executes(context -> setServerWeather(context.getSource(), WeatherType.THUNDER))));
 
 
         // Player Weather Command
@@ -227,25 +214,6 @@ public class BuildifyCommands {
         CLEAR, RAIN, THUNDER;
     }
 
-    private static int setServerWeather(CommandSourceStack source, WeatherType type) {
-        ServerLevel world = source.getServer().overworld(); // Assuming you want to change the weather in the overworld
-
-        switch (type) {
-            case CLEAR:
-                world.setWeatherParameters(12000, 0, false, false); // Set clear weather
-                source.sendSuccess(() -> Component.literal("Weather changed to clear."), true);
-                break;
-            case RAIN:
-                world.setWeatherParameters(0, 12000, true, false); // Set rain
-                source.sendSuccess(() -> Component.literal("Weather changed to rain."), true);
-                break;
-            case THUNDER:
-                world.setWeatherParameters(0, 12000, true, true); // Set thunderstorm
-                source.sendSuccess(() -> Component.literal("Weather changed to thunder."), true);
-                break;
-        }
-        return Command.SINGLE_SUCCESS;
-    }
 
     private static int getDayTime(ServerPlayer serverPlayer) {
         if (serverPlayer instanceof IPlayerExtended ex) {
