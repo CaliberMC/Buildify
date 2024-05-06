@@ -1,15 +1,15 @@
 package com.calibermc.buildify.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class CommonConfigs {
-    public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-    public static final ForgeConfigSpec SPEC;
-    public static final ForgeConfigSpec.BooleanValue USE_CUSTOM_CREATIVE_TABS;
-    public static final ForgeConfigSpec.BooleanValue REMOVE_VANILLA_TABS;
-    public static final ForgeConfigSpec.BooleanValue USE_VANILLA_BLOCK_FAMILIES;
-    public static final ForgeConfigSpec.BooleanValue DISABLE_ALL_ADDED_OP_COMMANDS;
-    public static final ForgeConfigSpec.BooleanValue COMMAND_SERVER_LOGGING;
+    public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    public static final ModConfigSpec SPEC;
+    public static final ModConfigSpec.BooleanValue USE_CUSTOM_CREATIVE_TABS;
+    public static final ModConfigSpec.BooleanValue REMOVE_VANILLA_TABS;
+    public static final ModConfigSpec.BooleanValue USE_VANILLA_BLOCK_FAMILIES;
+    public static final ModConfigSpec.BooleanValue DISABLE_ALL_ADDED_OP_COMMANDS;
+    public static final ModConfigSpec.BooleanValue COMMAND_SERVER_LOGGING;
 
 
     static {

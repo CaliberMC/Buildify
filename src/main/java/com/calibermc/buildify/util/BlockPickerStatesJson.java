@@ -2,26 +2,24 @@ package com.calibermc.buildify.util;
 
 import com.calibermc.buildify.Buildify;
 import com.calibermc.buildify.config.CommonConfigs;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -40,20 +38,25 @@ public class BlockPickerStatesJson extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager iResourceManager, ProfilerFiller iProfiler) {
         for (Map.Entry<ResourceLocation, JsonElement> entry : map.entrySet()) {
             ResourceLocation resourcelocation = entry.getKey();
+
             try {
-                JsonObject o = entry.getValue().getAsJsonObject();
-                Block block = ForgeRegistries.BLOCKS.getHolder(new ResourceLocation(o.get("main_block").getAsString())).orElseThrow().value();
+                JsonObject object = entry.getValue().getAsJsonObject();
+                ResourceKey<Block> mainBlockKey = ResourceKey.create(BuiltInRegistries.BLOCK.key(), new ResourceLocation(object.get("main_block").getAsString()));
+                Optional<Holder.Reference<Block>> mainBlockHolder = BuiltInRegistries.BLOCK.getHolder(mainBlockKey);
+                Block block = mainBlockHolder.map(Holder.Reference::value).orElse(Blocks.AIR);
                 List<ItemStack> itemStacks = new ArrayList<>();
-                for (JsonElement blocks : o.getAsJsonArray("blocks")) {
+
+                for (JsonElement blocks : object.getAsJsonArray("blocks")) {
                     if (blocks.isJsonObject()) {
                         itemStacks.add(ItemStack.CODEC.parse(JsonOps.INSTANCE, blocks).getOrThrow(false, errMessage -> {}));
                     } else {
-                        itemStacks.add(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(blocks.getAsString()))));
+                        itemStacks.add(new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(blocks.getAsString()))));
                     }
                 }
                 this.registeredBlockStates.put(block, () -> itemStacks);
-            } catch (Exception e) {
-                Buildify.LOGGER.error("Parsing error loading blockstates for {}", resourcelocation, e);
+
+            } catch (Exception exception) {
+                Buildify.LOGGER.error("Parsing error loading blockstates for {}", resourcelocation, exception);
             }
         }
         Buildify.LOGGER.info("Loaded {} custom blockstates for block-picker", this.registeredBlockStates.size());

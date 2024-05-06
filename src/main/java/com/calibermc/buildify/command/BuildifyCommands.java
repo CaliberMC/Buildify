@@ -57,10 +57,10 @@ public class BuildifyCommands {
 
 
         // Player Weather Command
-        dispatcher.register(net.minecraft.commands.Commands.literal("pweather").requires((context) -> context.hasPermission(2))
-                .then(net.minecraft.commands.Commands.literal("server").executes((context) -> setServerVal(context.getSource(), true)))
-                .then(net.minecraft.commands.Commands.literal("clear").executes((context) -> setPlayerWeather(context.getSource(), false)))
-                .then(net.minecraft.commands.Commands.literal("rain").executes((context) -> setPlayerWeather(context.getSource(), true)))
+        dispatcher.register(Commands.literal("pweather").requires((context) -> context.hasPermission(2))
+                .then(Commands.literal("server").executes((context) -> setServerVal(context.getSource(), true)))
+                .then(Commands.literal("clear").executes((context) -> setPlayerWeather(context.getSource(), false)))
+                .then(Commands.literal("rain").executes((context) -> setPlayerWeather(context.getSource(), true)))
         );
 
         // GameMode Command

@@ -7,7 +7,6 @@ import com.calibermc.buildify.world.inventory.BlockPickerMenu;
 import com.calibermc.buildify.world.inventory.BlockPickerSlot;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -540,11 +539,12 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         this.hasClickedOutside = this.hasClickedOutside(pMouseX, pMouseY, this.leftPos, this.topPos);
+        ResourceLocation WIDGETS_LOCATION = new ResourceLocation("textures/gui/widgets.png");
 
         int width = this.width / 2;
         int height = this.height / 2;
 
-        this.renderBackground(guiGraphics);
+        this.renderBackground(guiGraphics, pMouseX, pMouseY, pPartialTick);
 
         // Rendering hotbar
         RenderSystem.enableBlend();
@@ -552,7 +552,7 @@ public class BlockPickerScreen extends Screen implements MenuAccess<BlockPickerM
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(0, 0, 90);
-        guiGraphics.blit(AbstractWidget.WIDGETS_LOCATION, width - 91, this.height - 22, 0, 0, 182, 22);
+        guiGraphics.blit(WIDGETS_LOCATION, width - 91, this.height - 22, 0, 0, 182, 22);
         guiGraphics.pose().popPose();
 
         // Rendering image

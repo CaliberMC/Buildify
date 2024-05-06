@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "com.calibermc.buildify.mixin",
-  "refmap": "mixins.buildify.refmap.json",
-  "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
+  "package": "com.calibermc.buildify.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "Buildify.refmap.json",
   "client": [
     "AbstractContainerScreenMixin",
     "ClientLevelDataMixin",

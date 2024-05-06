@@ -1,14 +1,14 @@
 package com.calibermc.buildify.event;
 
 import com.calibermc.buildify.Buildify;
-
+import com.calibermc.buildify.client.BlockPickerScreen;
 import com.calibermc.buildify.command.BuildifyCommands;
 import com.calibermc.buildify.config.CommonConfigs;
 import com.calibermc.buildify.util.BlockPickerStatesJson;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,14 +16,16 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
+
+import static com.calibermc.buildify.world.inventory.ModMenuTypes.BLOCK_TYPE;
 
 @Mod.EventBusSubscriber(modid = Buildify.MOD_ID)
 public class ModEventBus {
@@ -32,7 +34,7 @@ public class ModEventBus {
     public static void hammerInteraction(CompoundTag tag, ServerPlayer pPlayer, BlockState pStateClicked, LevelAccessor pAccessor, BlockPos pPos, boolean pShouldCycleState) {
         Block block = pStateClicked.getBlock();
         Collection<Property<?>> collection = block.getStateDefinition().getProperties();
-        ResourceLocation key = ForgeRegistries.BLOCKS.getKey(block);
+        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block);
         assert key != null;
         String s = "block.%s.%s".formatted(key.getNamespace(), key.getPath());
         if (collection.isEmpty()) {
@@ -80,5 +82,11 @@ public class ModEventBus {
     @SubscribeEvent
     public static void addReloadListener(AddReloadListenerEvent event) {
         event.addListener(new BlockPickerStatesJson());
+    }
+
+    // TODO: Work on this ModMenuTypes.java ModClientEventBus and BlockPickerScreen.java
+    @SubscribeEvent
+    private void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(BLOCK_TYPE.get(), BlockPickerMenu::new);
     }
 }

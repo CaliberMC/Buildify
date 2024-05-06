@@ -1,9 +1,8 @@
 package com.calibermc.buildify.mixin;
 
-import com.calibermc.buildify.config.CommonConfigs;
 import com.calibermc.buildify.item.ModCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.common.CreativeModeTabRegistry;
+import net.neoforged.neoforge.common.CreativeModeTabRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -1,19 +1,33 @@
 # Change Log
 
+### 0.3.0 (in progress)
+#### Features
+- Updated to Minecraft 1.20.4
+- We have changed from Forge to NeoForge.  _(This will allow us to better support the latest versions of Minecraft going forward.)_
+- Lots of refactoring and cleanup
 
-### 0.2.5 (in progress)
+#### Bugfixes
+
+### 0.2.6 
+#### Features
+- 
+
+#### Bugfixes
+
+---
+### 0.2.5
 #### Features
 - Adjusted sorting of Flowers tab
 - Removed Infested Blocks from creative tabs
 - Added Missing Blocks from BOP and RU to custom tabs
 - Added Mod Compatibility for custom tabs to include Create blocks
 - Refined Creative Tabs Tags
-- Added Config Option to Disable Survival Inventory Hot Swap Feature
+- Added Config Option to disable Survival Inventory Hot Swap Feature
 - Added Config Option for logging commands to server console
+- Added Config Option to disable custom OP commands
 - Added /gm command to change GameMode
 - Added /repair command to repair items
 - Added /time command to change server time
-- Added /weather command to change player time
 - Added /fly command to toggle flying
 - Added /heal command to heal player
 - Added /tpall command to teleport all players to specified player

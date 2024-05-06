@@ -1,7 +1,7 @@
 package com.calibermc.buildify.util.compat;
 
-import com.calibermc.caliber.Caliber;
-import net.minecraftforge.fml.ModList;
+
+import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.Arrays;

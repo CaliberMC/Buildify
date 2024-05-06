@@ -1,22 +1,22 @@
 package com.calibermc.buildify.datagen;
 
-import biomesoplenty.common.block.*;
+import biomesoplenty.block.FlowerBlockBOP;
 import com.calibermc.buildify.datagen.properties.*;
 import com.calibermc.buildify.item.custom.Hammer;
 import com.calibermc.buildify.util.ModTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.regions_unexplored.world.level.block.leaves.*;
-import net.regions_unexplored.world.level.block.wood.*;
+
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagProvider extends ItemTagsProvider {
@@ -33,15 +33,15 @@ public class ModItemTagProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
 
         // Block Item Tags
-        ForgeRegistries.BLOCKS.getValues().stream()
+        BuiltInRegistries.BLOCK.stream()
                 .filter(block -> {
-                    ResourceLocation registryName = ForgeRegistries.BLOCKS.getKey(block);
+                    ResourceLocation registryName = BuiltInRegistries.BLOCK.getKey(block);
                     return registryName != null && registryName.getNamespace().equals(this.modid);
                 })
-                .sorted(Comparator.comparing(block -> (ForgeRegistries.BLOCKS.getKey(block)).getPath()))
+                .sorted(Comparator.comparing(block -> (BuiltInRegistries.BLOCK.getKey(block)).getPath()))
                 .forEach(block -> {
-                    String itemName = (ForgeRegistries.BLOCKS.getKey(block)).getPath();
-                    String fullItemName = ForgeRegistries.BLOCKS.getKey(block).toString();
+                    String itemName = (BuiltInRegistries.BLOCK.getKey(block)).getPath();
+                    String fullItemName = BuiltInRegistries.BLOCK.getKey(block).toString();
 
                     if (       !itemName.contains("arch")           && !itemName.contains("arrowslit")
                             && !itemName.contains("balustrade")     && !itemName.contains("beam")
@@ -57,7 +57,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             && !itemName.contains("trapdoor")       && !itemName.contains("wall")
                             && !itemName.contains("window")) {
 
-                        if (       block instanceof FlowerBlock        || block instanceof FlowerBlockBOP      || block instanceof CoralBlock
+                        if (       block instanceof FlowerBlock        || block instanceof FlowerBlockBOP || block instanceof CoralBlock
                                 || block instanceof CoralFanBlock      || block instanceof SeaPickleBlock      || block instanceof SaplingBlock
                                 || block instanceof MushroomBlock      || block instanceof NetherWartBlock     || block instanceof CactusBlock
                                 || block instanceof SugarCaneBlock     || block instanceof KelpBlock           || block instanceof ChorusPlantBlock
@@ -74,20 +74,20 @@ public class ModItemTagProvider extends ItemTagsProvider {
                         if (block instanceof BedBlock) {
                             this.tag(ModTags.Items.furnitureTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
-
-                        if (       block instanceof LeavesBlock             || block instanceof BrambleLeavesBlock           || block instanceof JacarandaLeavesBlock
+                                                                            // FIXME: Regions Unexplored not available for 1.20.4 atm
+                        if (       block instanceof LeavesBlock            /* || block instanceof BrambleLeavesBlock           || block instanceof JacarandaLeavesBlock
                                 || block instanceof MapleLeavesBlock        || block instanceof OrangeAutumnLeavesBlock      || block instanceof SnowblossomLeavesBlock
                                 || block instanceof YellowAutumnLeavesBlock || block instanceof AppleLeavesBlock             || block instanceof BlueMagnoliaLeavesBlock
                                 || block instanceof CherryLeavesBlock       || block instanceof BrimwoodLeavesBlock          || block instanceof EnchantedBirchLeavesBlock
                                 || block instanceof JoshuaLeavesBlock       || block instanceof MauveLeavesBlock             || block instanceof PalmLeavesBlock
                                 || block instanceof OrangeMapleLeavesBlock  || block instanceof PinkMagnoliaLeavesBlock      || block instanceof RedMapleLeavesBlock
-                                || block instanceof SilverBirchLeavesBlock  || block instanceof WhiteMagnoliaLeavesBlock) {
+                                || block instanceof SilverBirchLeavesBlock  || block instanceof WhiteMagnoliaLeavesBlock*/) {
                             this.tag(ModTags.Items.leavesTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
-
-                        if (      (block instanceof AspenLogBlock       || block instanceof BambooLogBlock   || block instanceof MagmaLogBlock
+                                    // FIXME: Regions Unexplored not available for 1.20.4 atm
+                        if (      (/*block instanceof AspenLogBlock       || block instanceof BambooLogBlock   || block instanceof MagmaLogBlock
                                 || block instanceof PineLogBlock || block instanceof SmallOakLogBlock || block instanceof StrippedBambooLogBlock
-                                || itemName.contains("log")      || itemName.contains("stripped_log") || itemName.contains("stem")) && !itemName.contains("lever")) {
+                                ||*/ itemName.contains("log")      || itemName.contains("stripped_log") || itemName.contains("stem")) && !itemName.contains("lever")) {
                             this.tag(ModTags.Items.logsTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 
@@ -104,7 +104,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                             this.tag(ModTags.Items.redstoneTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
 
-                        if (       block instanceof GravelBlock || block instanceof SandBlock || itemName.contains("gravel")
+                        if (       block instanceof ColoredFallingBlock || itemName.contains("gravel")
                                 || itemName.contains("clay") || itemName.contains("suspicious")) {
                             this.tag(ModTags.Items.sandGravelTab).addOptional(new ResourceLocation(this.modid, itemName));
                         }
@@ -131,7 +131,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                     }
 
                     if ((Arrays.stream(GlassWindowTypes.values()).anyMatch(p -> fullItemName.equals(p.getName()))
-                            || block instanceof GlassBlock || block instanceof StainedGlassBlock || block instanceof StainedGlassPaneBlock
+                            || block instanceof StainedGlassBlock || block instanceof StainedGlassPaneBlock
                             || itemName.contains("glass")  || itemName.contains("pane"))) {
                         this.tag(ModTags.Items.glassWindowsTab).addOptional(new ResourceLocation(this.modid, itemName));
                     }
@@ -158,14 +158,14 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 });
 
         // Item Tags
-        ForgeRegistries.ITEMS.getValues().stream()
+        BuiltInRegistries.ITEM.stream()
                 .filter(item -> {
-                    ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(item);
+                    ResourceLocation registryName = BuiltInRegistries.ITEM.getKey(item);
                     return registryName != null && registryName.getNamespace().equals(this.modid);
                 })
-                .sorted(Comparator.comparing(item -> (ForgeRegistries.ITEMS.getKey(item)).getPath()))
+                .sorted(Comparator.comparing(item -> (BuiltInRegistries.ITEM.getKey(item)).getPath()))
                 .forEach(item -> {
-                    String itemName = (ForgeRegistries.ITEMS.getKey(item)).getPath();
+                    String itemName = (BuiltInRegistries.ITEM.getKey(item)).getPath();
 
                     if (item instanceof ArmorItem || item instanceof HorseArmorItem) {
                         this.tag(ModTags.Items.armorTab).addOptional(new ResourceLocation(this.modid, itemName));

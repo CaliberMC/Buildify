@@ -1,15 +1,15 @@
 package com.calibermc.buildify.util;
 
 import com.calibermc.buildify.Buildify;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.*;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ModTags {
@@ -68,7 +68,7 @@ public class ModTags {
     }
 
     public static Set<TagKey<Item>> getCreativeTabTags() {
-        return ForgeRegistries.ITEMS.getValues().stream()
+        return BuiltInRegistries.ITEM.stream()
                 // FlatMap to get all distinct tags of items
                 .flatMap(item -> item.builtInRegistryHolder().tags().toList().stream())
                 // Filter tags by a specific path segment (e.g., starts with 'creative_tabs/')

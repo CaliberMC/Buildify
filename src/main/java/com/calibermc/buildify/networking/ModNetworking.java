@@ -2,10 +2,12 @@ package com.calibermc.buildify.networking;
 
 import com.calibermc.buildify.Buildify;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
+import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
 
 public class ModNetworking {
+
 
     public static SimpleChannel INSTANCE;
     private static int id = 0;

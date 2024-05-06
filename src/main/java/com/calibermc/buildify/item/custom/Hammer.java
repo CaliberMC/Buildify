@@ -2,9 +2,7 @@ package com.calibermc.buildify.item.custom;
 
 import com.calibermc.buildify.event.ModEventBus;
 import com.calibermc.buildify.item.ModItems;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;

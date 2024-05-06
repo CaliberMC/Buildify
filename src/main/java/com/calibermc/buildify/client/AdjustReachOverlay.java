@@ -10,14 +10,15 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import net.minecraftforge.common.ForgeMod;
+import net.neoforged.neoforge.client.gui.overlay.ExtendedGui;
+import net.neoforged.neoforge.client.gui.overlay.IGuiOverlay;
+import net.neoforged.neoforge.common.NeoForgeMod;
+
 
 public class AdjustReachOverlay implements IGuiOverlay {
 
     @Override
-    public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int width, int height) {
+    public void render(ExtendedGui gui, GuiGraphics guiGraphics, float partialTick, int width, int height) {
         Minecraft mc = Minecraft.getInstance();
         if (!(mc.getCameraEntity() instanceof Player player) || !player.isCreative() || mc.screen != null) return;
         if (ModClientEventBus.ADJUST_REACH.isDown()) {
@@ -29,7 +30,7 @@ public class AdjustReachOverlay implements IGuiOverlay {
             distance = Math.max(Math.ceil(distance), 2);
 
             boolean sendPacket = true;
-            AttributeInstance attributeInstance = player.getAttribute(ForgeMod.BLOCK_REACH.get());
+            AttributeInstance attributeInstance = player.getAttribute(NeoForgeMod.BLOCK_REACH.value());
             if (attributeInstance != null) {
                 AttributeModifier modifier = attributeInstance.getModifier(ServerAdjustReach.MODIFIER_UUID);
                 if (modifier != null) {
@@ -49,4 +50,5 @@ public class AdjustReachOverlay implements IGuiOverlay {
             }
         }*/
     }
+
 }
