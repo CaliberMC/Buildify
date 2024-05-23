@@ -1,6 +1,15 @@
 # Change Log
 
+### 1.0.0 (in progress)
+#### Features
+- Complete overhaul for Multi-loader support
+- Added support for Fabric Mod Loader
+- Buildify now requires CaliberLib dependency
 
+#### Bugfixes
+- 
+
+___
 ### 0.2.5 (in progress)
 #### Features
 - Adjusted sorting of Flowers tab
@@ -13,7 +22,6 @@
 - Added /gm command to change GameMode
 - Added /repair command to repair items
 - Added /time command to change server time
-- Added /weather command to change player time
 - Added /fly command to toggle flying
 - Added /heal command to heal player
 - Added /tpall command to teleport all players to specified player

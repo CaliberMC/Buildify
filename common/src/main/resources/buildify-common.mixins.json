@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "package": "com.calibermc.buildify.mixin",
+
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8",
+  "client": [
+    "AbstractContainerScreenMixin",
+    "ClientLevelDataMixin",
+    "GuiMixin",
+    "InventoryScreenMixin",
+    "KeyboardHandlerMixin",
+    "MouseHandlerMixin"
+  ],
+  "mixins": [
+    "LevelMixin",
+    "PlayerListMixin",
+    "PlayerMixin",
+    "ServerPlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
