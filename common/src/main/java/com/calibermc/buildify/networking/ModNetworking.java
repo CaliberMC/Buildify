@@ -23,8 +23,6 @@ public class ModNetworking {
                     ClientSetTime.class, ClientSetTime::new)
             .register(NetworkDir.PLAY_TO_CLIENT,
                     ClientSetRaining.class, ClientSetRaining::new)
-
-
             .build();
 
     public static void init() {

@@ -15,10 +15,10 @@ These slider allow players to move entire rows of their survival inventory.  Thi
 Yet another sorting solution for your inventory.  These buttons allow the player to sort their inventory by category (based on the custom creative tabs) or alphabetically.  This feature can be disabled in the _buildify-client.toml_ configuration file.
 
 ### Custom Creative Inventory _(creative only)_:
-The creative inventory has been reorganized!  I made custom tabs that sort the blocks in a fashion that is more useful for creative builders.  Mod developers and players alike can add compatibility with new mods by just adding tags to _buildify/tags/items/creative_tabs/tag_name_.  I have included several popular mod's blocks already but I encourage mod devs to add these tags to their mods.  This feature can be disabled in the _buildify-common.toml_ configuration file.
+The creative inventory has been reorganized!  I made custom tabs that sort the blocks in a fashion that is more useful for creative builders.  Mod developers and players alike can add compatibility with new mods by just adding tags to _buildify/tags/items/creative_tabs/tag_name_.  I have included several popular mod's blocks already, but I encourage mod devs to add these tags to their mods.  This feature can be disabled in the _buildify-common.toml_ configuration file.
 
 ### Copy Block _(creative only)_:
-Use the Copy Block feature to copy the targeted block and it's current block state exactly as it is in that moment.  **(CTRL+Middle-Click)** is hard coded but you can also asign another hotkey if you'd like **(B)** by default.  This feature is very useful for placing long stretches of roofing, stairs, etc as you can copy the block and move to an easier position for placement.
+Use the Copy Block feature to copy the targeted block, and it's current block state exactly as it is at that moment.  **(CTRL+Middle-Click)** is hard coded, but you can also asign another hotkey if you'd like **(B)** by default.  This feature is very useful for placing long stretches of roofing, stairs, etc as you can copy the block and move to an easier position for placement.
 
 ### Reach Distance Modifier _(creative only)_:
 Use the configurable reach distance modifier key **(N)** by default, to change the reach distance while in creative mode.  This is very useful during creative building allowing you to place and break blocks from any distance.  The max distance is configurable in the _buildify-common.toml_ configuration file.  Just target the block you want to change your distance to and press **(N)**, the distance will be displayed on screen.
@@ -26,7 +26,7 @@ Use the configurable reach distance modifier key **(N)** by default, to change t
 ### Block Picker _(creative only)_:
 The crown jewel and original purpose of the mod.  The Block Picker allows for easy selection of all related blocks to the one you are currently holding.  The vanilla block families are used by default but if installed with a compatible mod, like [Caliber Mod](https://modrinth.com/mod/caliber-mod), it will display a wide range of block shapes that are of the same type in a nice radial GUI.  Just press **(V)** by default to access the Block Picker while holding any block in creative mode.
 
-The Block Picker was inspired by Conquest Reforged but I have made it available for anyone to use and have made it easy for other mods to include compatibility with their mods too.  Players can also customize the their own Block Picker lists using data packs.  Check out the wiki on github for more info.
+The Block Picker was inspired by Conquest Reforged, but I have made it available for anyone to use and have made it easy for other mods to include compatibility with their mods too.  Players can also customize their own Block Picker lists using data packs.  Check out the wiki on GitHub for more info.
 
 ![Block Picker](https://cdn.modrinth.com/data/cached_images/4202a7bd81262f2a7d27e88c244cd583e6e34c1d.png)
 

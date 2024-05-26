@@ -7,10 +7,9 @@
 - Buildify now requires CaliberLib dependency
 
 #### Bugfixes
-- 
 
 ___
-### 0.2.5 (in progress)
+### 0.2.5 
 #### Features
 - Adjusted sorting of Flowers tab
 - Removed Infested Blocks from creative tabs
