@@ -1,0 +1,356 @@
+{
+  "values": [
+    {
+      "id": "minecraft:acacia_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:acacia_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:bamboo_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:bamboo_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:birch_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:birch_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:cherry_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:cherry_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:crimson_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:crimson_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:dark_oak_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:dark_oak_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:iron_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:iron_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:jungle_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:jungle_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:mangrove_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:mangrove_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:oak_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:oak_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:spruce_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:spruce_trapdoor",
+      "required": false
+    },
+    {
+      "id": "minecraft:warped_door",
+      "required": false
+    },
+    {
+      "id": "minecraft:warped_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:dead_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:dead_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:fir_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:fir_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:hellbark_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:hellbark_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:jacaranda_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:jacaranda_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:magic_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:magic_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:mahogany_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:mahogany_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:palm_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:palm_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:redwood_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:redwood_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:umbran_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:umbran_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:willow_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:willow_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:baobab_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:baobab_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blackwood_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blackwood_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blue_bioshroom_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:blue_bioshroom_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:brimwood_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:brimwood_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:cobalt_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:cobalt_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:cypress_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:cypress_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:dead_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:dead_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:eucalyptus_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:eucalyptus_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:green_bioshroom_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:green_bioshroom_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:joshua_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:joshua_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:kapok_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:kapok_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:larch_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:larch_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:magnolia_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:magnolia_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:maple_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:maple_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:mauve_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:mauve_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:palm_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:palm_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pine_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pine_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pink_bioshroom_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pink_bioshroom_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:redwood_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:redwood_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:socotra_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:socotra_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:willow_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:willow_trapdoor",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:yellow_bioshroom_door",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:yellow_bioshroom_trapdoor",
+      "required": false
+    }
+  ]
+}
