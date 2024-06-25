@@ -119,7 +119,7 @@ allprojects {
 
     group = rootProject.mod_group_id
 
-    def generatedResources = file("src/generated")
+    def generatedResources = file("src/main/generated/resources")
 
     sourceSets {
         main {
