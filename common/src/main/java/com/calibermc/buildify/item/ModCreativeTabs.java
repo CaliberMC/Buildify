@@ -41,13 +41,6 @@ public class ModCreativeTabs {
     public static void init() {
     }
 
-    // ------------------------------------------------------
-    // Sorting thing
-    // ------------------------------------------------------
-
-
-    // TODO: Add back Brewing and Misc Tabs
-
     static {
         //boolean loadedCaliber = ModList.get().isLoaded("caliber");
         BiFunction<String, Block, Supplier<ItemStack>> caliberBlocks = (s, b) -> () -> new ItemStack(BuiltInRegistries.BLOCK.get(
@@ -230,11 +223,43 @@ public class ModCreativeTabs {
         });
 
         beforeTab = createTab(beforeTab, "concrete_plaster_stucco", () -> new ItemStack(Blocks.WHITE_CONCRETE_POWDER), (pParameters, pOutput) -> {
-            for (Item item : getSortedItems()) {
-                if (contains(item, ModTags.Items.concretePlasterStuccoTab)) {
-                    pOutput.accept(new ItemStack(item));
-                }
+            List<Item> items = new ArrayList<>();
+            for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ModTags.Items.concretePlasterStuccoTab)) {
+                items.add(item.value());
             }
+
+            Map<String, List<Item>> groupedItems = items.stream()
+                    .collect(Collectors.groupingBy(item -> {
+                        ItemStack itemStack = new ItemStack(item);
+                        String itemName = itemStack.getItem().getName(itemStack).toString();
+                        if (itemName.contains("carpet")) {
+                            return "carpet";
+                        } else if (itemName.contains("concrete")) {
+                            return "concrete";
+                        } else if (itemName.contains("plaster")) {
+                            return "plaster";
+                        } else if (itemName.contains("terracotta")) {
+                            return "terracotta";
+                        } else if (itemName.contains("stucco")) {
+                            return "stucco";
+                        } else {
+                            return itemName;
+                        }
+                    }));
+
+            groupedItems.entrySet().stream()
+                    // Sort groups alphabetically by key
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(entry -> {
+                        entry.getValue().stream()
+                                // Sort based on itemName within groups
+                                .sorted(Comparator.comparing(item -> {
+                                    ItemStack itemStack = new ItemStack(item);
+                                    return itemStack.getItem().getName(itemStack).getString();
+                                }))
+                                // Add sorted items to the tab
+                                .forEach(item -> pOutput.accept(new ItemStack(item)));
+                    });
         });
 
         beforeTab = createTab(beforeTab, "half_timbered_walls", caliberBlocks.apply("tudor_acacia_beige_plaster_left", Blocks.WHITE_TERRACOTTA), (pParameters, pOutput) -> {
@@ -246,11 +271,39 @@ public class ModCreativeTabs {
         });
 
         beforeTab = createTab(beforeTab, "tiles_flooring", () -> new ItemStack(Blocks.BROWN_GLAZED_TERRACOTTA), (pParameters, pOutput) -> {
-            for (Item item : getSortedItems()) {
-                if (contains(item, ModTags.Items.tilesFlooringTab)) {
-                    pOutput.accept(new ItemStack(item));
-                }
+            List<Item> items = new ArrayList<>();
+            for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ModTags.Items.tilesFlooringTab)) {
+                items.add(item.value());
             }
+
+            Map<String, List<Item>> groupedItems = items.stream()
+                    .collect(Collectors.groupingBy(item -> {
+                        ItemStack itemStack = new ItemStack(item);
+                        String itemName = itemStack.getItem().getName(itemStack).toString();
+                        if (itemName.contains("carpet")) {
+                            return "carpet";
+                        } else if (itemName.contains("terracotta")) {
+                            return "terracotta";
+                        } else if (itemName.contains("tile")) {
+                            return "tile";
+                        } else {
+                            return itemName;
+                        }
+                    }));
+
+            groupedItems.entrySet().stream()
+                    // Sort groups alphabetically by key
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(entry -> {
+                        entry.getValue().stream()
+                                // Sort based on itemName within groups
+                                .sorted(Comparator.comparing(item -> {
+                                    ItemStack itemStack = new ItemStack(item);
+                                    return itemStack.getItem().getName(itemStack).getString();
+                                }))
+                                // Add sorted items to the tab
+                                .forEach(item -> pOutput.accept(new ItemStack(item)));
+                    });
         });
 
         beforeTab = createTab(beforeTab, "glass_windows", () -> new ItemStack(Blocks.GLASS), (pParameters, pOutput) -> {
@@ -287,10 +340,10 @@ public class ModCreativeTabs {
                             return "spruce";
                         } else if (itemName.contains("warped")) {
                             return "warped";
-                        } else if (itemName.contains("stained")) {
-                            return "xstained";
-                        } else if (itemName.contains("tinted")) {
-                            return "xtinted";
+                        } else if (itemName.contains("pane")) {
+                            return "xpane";
+                        } else if (itemName.contains("glass")) {
+                            return "xglass";
                         } else {
                             return itemName;
                         }
@@ -437,11 +490,37 @@ public class ModCreativeTabs {
         });
 
         beforeTab = createTab(beforeTab, "grass_dirt", () -> new ItemStack(Blocks.GRASS_BLOCK), (pParameters, pOutput) -> {
-            for (Item item : getSortedItems()) {
-                if (contains(item, ModTags.Items.grassDirtTab)) {
-                    pOutput.accept(new ItemStack(item));
-                }
+            List<Item> items = new ArrayList<>();
+            for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ModTags.Items.grassDirtTab)) {
+                items.add(item.value());
             }
+
+            Map<String, List<Item>> groupedItems = items.stream()
+                    .collect(Collectors.groupingBy(item -> {
+                        ItemStack itemStack = new ItemStack(item);
+                        String itemName = itemStack.getItem().getName(itemStack).toString();
+                        if (itemName.contains("grass")) {
+                            return "grass";
+                        } else if (itemName.contains("path")) {
+                            return "xpath";
+                        } else {
+                            return itemName;
+                        }
+                    }));
+
+            groupedItems.entrySet().stream()
+                    // Sort groups alphabetically by key
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(entry -> {
+                        entry.getValue().stream()
+                                // Sort based on itemName within groups
+                                .sorted(Comparator.comparing(item -> {
+                                    ItemStack itemStack = new ItemStack(item);
+                                    return itemStack.getItem().getName(itemStack).getString();
+                                }))
+                                // Add sorted items to the tab
+                                .forEach(item -> pOutput.accept(new ItemStack(item)));
+                    });
         });
 
         beforeTab = createTab(beforeTab, "metals_ores", () -> new ItemStack(Blocks.GOLD_ORE), (pParameters, pOutput) -> {
@@ -724,131 +803,6 @@ public class ModCreativeTabs {
                                 .forEach(item -> pOutput.accept(new ItemStack(item)));
                     });
         });
-
-//        beforeTab = createTab(beforeTab, "redstone", () -> new ItemStack(Items.REDSTONE), (pParameters, pOutput) -> {
-//            List<Item> items = new ArrayList<>();
-//            for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ModTags.Items.redstoneTab)) {
-//                items.add(item.value());
-//            }
-//
-//            Map<String, List<Item>> groupedItems = items.stream()
-//                    .collect(Collectors.groupingBy(item -> {
-//                        ItemStack itemStack = new ItemStack(item);
-//                        String itemName = itemStack.getItem().getName(itemStack).toString();
-//                        if (itemName.contains("command_block")) {
-//                            return "command_block";
-//                        } else if (itemName.contains("piston")) {
-//                            return "piston";
-//                        } else if (itemName.contains("rail")) {
-//                            return "rail";
-//                        } else if (itemName.contains("redstone")) {
-//                            return "redstone";
-//                        } else if (itemName.contains("lever")) {
-//                            return "lever";
-//                        } else {
-//                            return itemName;
-//                        }
-//                    }));
-//
-//            groupedItems.entrySet().stream()
-//                    // Sort groups alphabetically by key
-//                    .sorted(Map.Entry.comparingByKey())
-//                    .forEach(entry -> {
-//                        entry.getValue().stream()
-//                                // Sort based on itemName within groups
-//                                .sorted(Comparator.comparing(item -> {
-//                                    ItemStack itemStack = new ItemStack(item);
-//                                    return itemStack.getItem().getName(itemStack).getString();
-//                                }))
-//                                // Add sorted items to the tab
-//                                .forEach(item -> pOutput.accept(new ItemStack(item)));
-//                    });
-//        });
-//
-//        beforeTab = createTab(beforeTab, "food", () -> new ItemStack(Items.APPLE), (pParameters, pOutput) -> {
-//            for (Item item : getSortedItems()) {
-//                if (contains(item, ModTags.Items.foodTab)) {
-//                    pOutput.accept(new ItemStack(item));
-//                }
-//            }
-//        });
-
-//        beforeTab = createTab(beforeTab, "tools_weapons", () -> new ItemStack(Items.IRON_SWORD), (pParameters, pOutput) -> {
-//            List<Item> items = new ArrayList<>();
-//            for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(ModTags.Items.toolsWeaponsTab)) {
-//                items.add(item.value());
-//            }
-//
-//            Map<String, List<Item>> groupedItems = items.stream()
-//                    .collect(Collectors.groupingBy(item -> {
-//                        ItemStack itemStack = new ItemStack(item);
-//                        String itemName = itemStack.getItem().getName(itemStack).toString();
-//                        if (itemName.contains("sword")
-//                                || itemName.contains("axe")
-//                                || itemName.contains("pickaxe")
-//                                || itemName.contains("shovel")
-//                                || itemName.contains("hoe")) {
-//                            return "wtools";
-//                        } else if (itemName.contains("trident")) {
-//                            return "xtrident";
-//                        } else if (itemName.contains("shield")) {
-//                            return "xshields";
-//                        } else if (itemName.contains("bow")) {
-//                            return "ybows";
-//                        } else if (itemName.contains("arrow")) {
-//                            return "zarrow";
-//                        } else if (itemName.contains("bucket")) {
-//                            return "zbucket";
-//                        } else if (itemName.contains("lead")
-//                                || itemName.contains("name_tag")
-//                                || itemName.contains("compass")
-//                                || itemName.contains("clock")
-//                                || itemName.contains("fishing_rod")
-//                                || itemName.contains("shears")
-//                                || itemName.contains("spyglass")
-//                                || itemName.contains("hammer")
-//                                || itemName.contains("nails")
-//                                || itemName.contains("flint_and_steel")
-//                                || itemName.contains("fire_charge")
-//                                || itemName.contains("firework")
-//                                || itemName.contains("elytra")
-//                                || itemName.contains("carrot_on_a_stick")) {
-//                            return "zmisc";
-//                        } else {
-//                            return itemName;
-//                        }
-//                    }));
-//
-//            groupedItems.entrySet().stream()
-//                    // Sort groups alphabetically by key
-//                    .sorted(Map.Entry.comparingByKey())
-//                    .forEach(entry -> {
-//                        entry.getValue().stream()
-//                                // Sort based on itemName within groups
-//                                .sorted(Comparator.comparing(item -> {
-//                                    ItemStack itemStack = new ItemStack(item);
-//                                    return itemStack.getItem().getName(itemStack).getString();
-//                                }))
-//                                // Add sorted items to the tab
-//                                .forEach(item -> pOutput.accept(new ItemStack(item)));
-//                    });
-//        });
-
-//        beforeTab = createTab(beforeTab, "armor", () -> new ItemStack(Items.IRON_CHESTPLATE), (pParameters, pOutput) -> {
-//            for (Item item : getSortedItems()) {
-//                if (contains(item, ModTags.Items.armorTab)) {
-//                    pOutput.accept(new ItemStack(item));
-//                }
-//            }
-//        });
-
-//        beforeTab = createTab(beforeTab, "spawn_eggs", () -> new ItemStack(Items.SPIDER_SPAWN_EGG), (pParameters, pOutput) -> {
-//            for (Item item : getSortedItems()) {
-//                if (contains(item, ModTags.Items.spawnEggTab)) {
-//                    pOutput.accept(new ItemStack(item));
-//                }
-//            }
-//        });
     }
 
     public static List<Item> getItems() {
@@ -953,55 +907,6 @@ public class ModCreativeTabs {
 
         return tabs;
     }
-
-//    public static List<CreativeModeTab> setupCreativeTabs(List<CreativeModeTab> tabsOld) {
-//        boolean displayCustomTabs, removeMCTabs;
-//
-//        try {
-//            displayCustomTabs = CommonConfigs.USE_CUSTOM_CREATIVE_TABS.get();
-//            removeMCTabs = CommonConfigs.REMOVE_VANILLA_TABS.get();
-//        } catch (Throwable e) {
-//            displayCustomTabs = true;
-//            removeMCTabs = false;
-//        }
-//
-//        boolean finalDisplayCustomTabs = displayCustomTabs;
-//        List<CreativeModeTab> tabs = tabsOld.stream().filter(tab -> {
-//            boolean baseTabs = BuiltInRegistries.CREATIVE_MODE_TAB.stream().filter(p -> BuiltInRegistries.CREATIVE_MODE_TAB.getKey(p).getNamespace().equals("minecraft")).anyMatch(t -> t == tab);
-//            ResourceLocation name = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
-//            if (name != null && finalDisplayCustomTabs) {
-//                return name.getNamespace().equals("buildify")
-//                        && !name.getPath().equals("buildify") || baseTabs; // copy default mc tabs and our buildify tag tabs
-//            }
-//            return baseTabs;
-//        }).collect(Collectors.toList());
-//
-//        for (CreativeModeTab tab : tabsOld) {
-//            ResourceLocation name = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
-//            if (name != null && BuiltInRegistries.CREATIVE_MODE_TAB.stream().filter(p -> BuiltInRegistries.CREATIVE_MODE_TAB.getKey(p).getNamespace().equals("minecraft")).noneMatch(t -> t == tab)) {
-//                // copy mc tabs
-//                if (name.getNamespace().equals("minecraft")) {
-//                    if (!removeMCTabs) {
-//                        tabs.add(tab);
-//                    }
-//                } else {
-//                    // copy other tabs
-//                    if (!name.getNamespace().equals("buildify") || name.getPath().equals("buildify")) {
-//                        tabs.add(tab);
-//                    }
-//                }
-//            }
-//        }
-//
-//        for (CreativeModeTab tab : Lists.newArrayList(tabs)) {
-//            ResourceLocation name = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
-//            if (name != null && name.getNamespace().equals("buildify") && tab.getDisplayItems().isEmpty()) {
-//                tabs.remove(tab); // remove buildify tabs that are empty
-//            }
-//        }
-//
-//        return tabs;
-//    }
 
     public static ResourceLocation createTab(ResourceLocation key, String label, Supplier<ItemStack> iconStack, CreativeModeTab.DisplayItemsGenerator displayItems) {
         return RegHelper.registerCreativeModeTab(new ResourceLocation(Buildify.MOD_ID, label), (b) -> b
