@@ -115,6 +115,34 @@
     {
       "id": "minecraft:redstone_ore",
       "required": false
+    },
+    {
+      "id": "create:andesite_alloy_block",
+      "required": false
+    },
+    {
+      "id": "create:brass_block",
+      "required": false
+    },
+    {
+      "id": "create:deepslate_zinc_ore",
+      "required": false
+    },
+    {
+      "id": "create:industrial_iron_block",
+      "required": false
+    },
+    {
+      "id": "create:raw_zinc_block",
+      "required": false
+    },
+    {
+      "id": "create:zinc_block",
+      "required": false
+    },
+    {
+      "id": "create:zinc_ore",
+      "required": false
     }
   ]
 }

@@ -135,6 +135,14 @@
     {
       "id": "biomesoplenty:glowing_moss_carpet",
       "required": false
+    },
+    {
+      "id": "create:rose_quartz_tiles",
+      "required": false
+    },
+    {
+      "id": "create:small_rose_quartz_tiles",
+      "required": false
     }
   ]
 }

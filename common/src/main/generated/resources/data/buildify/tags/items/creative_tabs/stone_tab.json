@@ -65,6 +65,38 @@
       "required": false
     },
     {
+      "id": "create:asurine",
+      "required": false
+    },
+    {
+      "id": "create:crimsite",
+      "required": false
+    },
+    {
+      "id": "create:limestone",
+      "required": false
+    },
+    {
+      "id": "create:ochrum",
+      "required": false
+    },
+    {
+      "id": "create:rose_quartz_block",
+      "required": false
+    },
+    {
+      "id": "create:scorchia",
+      "required": false
+    },
+    {
+      "id": "create:scoria",
+      "required": false
+    },
+    {
+      "id": "create:veridium",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:argillite",
       "required": false
     },

@@ -127,6 +127,22 @@
     {
       "id": "minecraft:redstone",
       "required": false
+    },
+    {
+      "id": "create:chute",
+      "required": false
+    },
+    {
+      "id": "create:redstone_contact",
+      "required": false
+    },
+    {
+      "id": "create:redstone_link",
+      "required": false
+    },
+    {
+      "id": "create:smart_chute",
+      "required": false
     }
   ]
 }
