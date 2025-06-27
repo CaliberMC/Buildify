@@ -165,6 +165,10 @@
       "required": false
     },
     {
+      "id": "create:builders_tea",
+      "required": false
+    },
+    {
       "id": "create:chocolate_glazed_berries",
       "required": false
     },

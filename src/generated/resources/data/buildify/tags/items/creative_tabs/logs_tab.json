@@ -109,6 +109,10 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:empyreal_log",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:fir_log",
       "required": false
     },
@@ -129,7 +133,15 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:maple_log",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:palm_log",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:pine_log",
       "required": false
     },
     {
@@ -138,6 +150,10 @@
     },
     {
       "id": "biomesoplenty:stripped_dead_log",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_empyreal_log",
       "required": false
     },
     {
@@ -161,7 +177,15 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:stripped_maple_log",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:stripped_palm_log",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_pine_log",
       "required": false
     },
     {

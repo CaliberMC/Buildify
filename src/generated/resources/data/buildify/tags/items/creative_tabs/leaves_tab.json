@@ -45,7 +45,15 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:cypress_leaves",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:dead_leaves",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:empyreal_leaves",
       "required": false
     },
     {
@@ -73,11 +81,11 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:maple_leaves",
+      "id": "biomesoplenty:null_leaves",
       "required": false
     },
     {
-      "id": "biomesoplenty:orange_autumn_leaves",
+      "id": "biomesoplenty:orange_maple_leaves",
       "required": false
     },
     {
@@ -89,7 +97,15 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:pine_leaves",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:rainbow_birch_leaves",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:red_maple_leaves",
       "required": false
     },
     {
@@ -109,7 +125,7 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:yellow_autumn_leaves",
+      "id": "biomesoplenty:yellow_maple_leaves",
       "required": false
     },
     {

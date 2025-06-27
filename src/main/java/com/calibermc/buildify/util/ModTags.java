@@ -16,8 +16,6 @@ public class ModTags {
 
 
     public static class Blocks {
-
-
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(Buildify.MOD_ID, name));
         }

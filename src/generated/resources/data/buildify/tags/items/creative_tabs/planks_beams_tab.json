@@ -89,6 +89,10 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:empyreal_planks",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:fir_planks",
       "required": false
     },
@@ -109,7 +113,15 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:maple_planks",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:palm_planks",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:pine_planks",
       "required": false
     },
     {
@@ -118,6 +130,10 @@
     },
     {
       "id": "biomesoplenty:stripped_dead_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_empyreal_wood",
       "required": false
     },
     {
@@ -141,7 +157,15 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:stripped_maple_wood",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:stripped_palm_wood",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:stripped_pine_wood",
       "required": false
     },
     {

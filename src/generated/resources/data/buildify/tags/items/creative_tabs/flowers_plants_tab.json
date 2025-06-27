@@ -421,7 +421,19 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:cypress_sapling",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:dead_sapling",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:empyreal_sapling",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:endbloom",
       "required": false
     },
     {
@@ -465,15 +477,11 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:maple_sapling",
-      "required": false
-    },
-    {
-      "id": "biomesoplenty:orange_autumn_sapling",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:orange_cosmos",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:orange_maple_sapling",
       "required": false
     },
     {
@@ -485,6 +493,10 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:pine_sapling",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:pink_daffodil",
       "required": false
     },
@@ -493,7 +505,15 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:potted_cypress_sapling",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:potted_dead_sapling",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:potted_empyreal_sapling",
       "required": false
     },
     {
@@ -525,11 +545,7 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:potted_maple_sapling",
-      "required": false
-    },
-    {
-      "id": "biomesoplenty:potted_orange_autumn_sapling",
+      "id": "biomesoplenty:potted_orange_maple_sapling",
       "required": false
     },
     {
@@ -541,7 +557,15 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:potted_pine_sapling",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:potted_rainbow_birch_sapling",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:potted_red_maple_sapling",
       "required": false
     },
     {
@@ -553,11 +577,11 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:potted_umbran_sapling",
+      "id": "biomesoplenty:potted_tiny_cactus",
       "required": false
     },
     {
-      "id": "biomesoplenty:potted_wildflower",
+      "id": "biomesoplenty:potted_umbran_sapling",
       "required": false
     },
     {
@@ -565,11 +589,15 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:potted_yellow_autumn_sapling",
+      "id": "biomesoplenty:potted_yellow_maple_sapling",
       "required": false
     },
     {
       "id": "biomesoplenty:rainbow_birch_sapling",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:red_maple_sapling",
       "required": false
     },
     {
@@ -582,6 +610,10 @@
     },
     {
       "id": "biomesoplenty:snowblossom_sapling",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:tiny_cactus",
       "required": false
     },
     {
@@ -601,6 +633,10 @@
       "required": false
     },
     {
+      "id": "biomesoplenty:white_lavender",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:wildflower",
       "required": false
     },
@@ -617,7 +653,7 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:yellow_autumn_sapling",
+      "id": "biomesoplenty:yellow_maple_sapling",
       "required": false
     },
     {

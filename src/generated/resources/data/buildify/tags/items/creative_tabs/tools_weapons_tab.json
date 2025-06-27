@@ -205,11 +205,11 @@
       "required": false
     },
     {
-      "id": "buildify:hammer",
+      "id": "biomesoplenty:liquid_null_bucket",
       "required": false
     },
     {
-      "id": "buildify:nails",
+      "id": "create:cardboard_sword",
       "required": false
     },
     {

@@ -23,22 +23,6 @@
     {
       "id": "minecraft:suspicious_sand",
       "required": false
-    },
-    {
-      "id": "biomesoplenty:black_sand",
-      "required": false
-    },
-    {
-      "id": "biomesoplenty:mossy_black_sand",
-      "required": false
-    },
-    {
-      "id": "biomesoplenty:orange_sand",
-      "required": false
-    },
-    {
-      "id": "biomesoplenty:white_sand",
-      "required": false
     }
   ]
 }

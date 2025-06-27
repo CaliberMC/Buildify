@@ -25,8 +25,8 @@ public class Buildify {
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public Buildify() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public Buildify(FMLJavaModLoadingContext context) {
+        IEventBus eventBus = context.getModEventBus();
 
         ModItems.register(eventBus);
         ModMenuTypes.register(eventBus);

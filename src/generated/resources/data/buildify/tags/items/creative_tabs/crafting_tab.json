@@ -63,10 +63,6 @@
     {
       "id": "minecraft:stonecutter",
       "required": false
-    },
-    {
-      "id": "caliber:woodcutter",
-      "required": false
     }
   ]
 }

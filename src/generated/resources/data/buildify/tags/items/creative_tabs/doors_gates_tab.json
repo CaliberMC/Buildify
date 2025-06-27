@@ -101,19 +101,19 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:dead_tall_door",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:dead_trapdoor",
       "required": false
     },
     {
-      "id": "biomesoplenty:fir_door",
+      "id": "biomesoplenty:empyreal_door",
       "required": false
     },
     {
-      "id": "biomesoplenty:fir_tall_door",
+      "id": "biomesoplenty:empyreal_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:fir_door",
       "required": false
     },
     {
@@ -125,19 +125,11 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:hellbark_tall_door",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:hellbark_trapdoor",
       "required": false
     },
     {
       "id": "biomesoplenty:jacaranda_door",
-      "required": false
-    },
-    {
-      "id": "biomesoplenty:jacaranda_tall_door",
       "required": false
     },
     {
@@ -149,10 +141,6 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:magic_tall_door",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:magic_trapdoor",
       "required": false
     },
@@ -161,11 +149,15 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:mahogany_tall_door",
+      "id": "biomesoplenty:mahogany_trapdoor",
       "required": false
     },
     {
-      "id": "biomesoplenty:mahogany_trapdoor",
+      "id": "biomesoplenty:maple_door",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:maple_trapdoor",
       "required": false
     },
     {
@@ -173,19 +165,19 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:palm_tall_door",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:palm_trapdoor",
       "required": false
     },
     {
-      "id": "biomesoplenty:redwood_door",
+      "id": "biomesoplenty:pine_door",
       "required": false
     },
     {
-      "id": "biomesoplenty:redwood_tall_door",
+      "id": "biomesoplenty:pine_trapdoor",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:redwood_door",
       "required": false
     },
     {
@@ -197,10 +189,6 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:umbran_tall_door",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:umbran_trapdoor",
       "required": false
     },
@@ -209,55 +197,7 @@
       "required": false
     },
     {
-      "id": "biomesoplenty:willow_tall_door",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:willow_trapdoor",
-      "required": false
-    },
-    {
-      "id": "caliber:acacia_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:bamboo_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:birch_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:cherry_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:crimson_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:dark_oak_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:jungle_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:mangrove_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:oak_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:spruce_tall_door",
-      "required": false
-    },
-    {
-      "id": "caliber:warped_tall_door",
       "required": false
     },
     {
@@ -285,19 +225,11 @@
       "required": false
     },
     {
-      "id": "regions_unexplored:baobab_tall_door",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:baobab_trapdoor",
       "required": false
     },
     {
       "id": "regions_unexplored:blackwood_door",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:blackwood_tall_door",
       "required": false
     },
     {
@@ -317,10 +249,6 @@
       "required": false
     },
     {
-      "id": "regions_unexplored:brimwood_tall_door",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:brimwood_trapdoor",
       "required": false
     },
@@ -337,10 +265,6 @@
       "required": false
     },
     {
-      "id": "regions_unexplored:cypress_tall_door",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:cypress_trapdoor",
       "required": false
     },
@@ -349,19 +273,11 @@
       "required": false
     },
     {
-      "id": "regions_unexplored:dead_tall_door",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:dead_trapdoor",
       "required": false
     },
     {
       "id": "regions_unexplored:eucalyptus_door",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:eucalyptus_tall_door",
       "required": false
     },
     {
@@ -381,10 +297,6 @@
       "required": false
     },
     {
-      "id": "regions_unexplored:joshua_tall_door",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:joshua_trapdoor",
       "required": false
     },
@@ -398,10 +310,6 @@
     },
     {
       "id": "regions_unexplored:larch_door",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:larch_tall_door",
       "required": false
     },
     {
@@ -421,19 +329,11 @@
       "required": false
     },
     {
-      "id": "regions_unexplored:maple_tall_door",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:maple_trapdoor",
       "required": false
     },
     {
       "id": "regions_unexplored:mauve_door",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:mauve_tall_door",
       "required": false
     },
     {
@@ -445,19 +345,11 @@
       "required": false
     },
     {
-      "id": "regions_unexplored:palm_tall_door",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:palm_trapdoor",
       "required": false
     },
     {
       "id": "regions_unexplored:pine_door",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:pine_tall_door",
       "required": false
     },
     {
@@ -477,10 +369,6 @@
       "required": false
     },
     {
-      "id": "regions_unexplored:redwood_tall_door",
-      "required": false
-    },
-    {
       "id": "regions_unexplored:redwood_trapdoor",
       "required": false
     },
@@ -494,10 +382,6 @@
     },
     {
       "id": "regions_unexplored:willow_door",
-      "required": false
-    },
-    {
-      "id": "regions_unexplored:willow_tall_door",
       "required": false
     },
     {
